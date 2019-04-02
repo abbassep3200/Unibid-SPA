@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import url(assets/resources/css/variables.css);
+@import url(assets/resources/css/base.css);
+@import url(assets/cfnComponents/cfnAnimations.css);
+@import url(assets/cfnComponents/cfnText.css);
+@import url(assets/cfnComponents/cfnCheckbox.css);
+@import url(assets/cfnComponents/cfnButton.css);
+@import url(assets/cfnComponents/cfnValidation.css);
+@import url(assets/cfnComponents/cfnSearch.css);
+@import url(assets/cfnComponents/cfnLoader.css);
+@import url(assets/resources/fonts/Iransans/css/fontiran.css);
+/* @import url(assets/resources/fonts/roboto/css/roboto.css); */

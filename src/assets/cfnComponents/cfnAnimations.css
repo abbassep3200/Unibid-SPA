@@ -1,0 +1,38 @@
+/* Table of contents
+  -fadeInHoriz
+  -fadeIn
+*/
+
+/* =fadeInHoriz */
+@keyframes fadeInHoriz {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(25px);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.Animation-fadeInHoriz {
+  animation: fadeInHoriz 0.8s ease;
+}
+
+/* =fadeIn */
+@keyframes fadeIn {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.cfnAnimation-fadeIn {
+  animation: fadeIn 0.4s ease forwards;
+}
