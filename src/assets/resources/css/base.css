@@ -22,8 +22,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  justify-content: center;
-  align-items: center;
 }
 
 
@@ -144,4 +142,28 @@ body {
 
 .confirm-text > img {
   margin-left: 12px;
+}
+
+.heart {
+  height: 70px;
+  width: 70px;
+  background-image:url('../images/assets/png/twitterLike.png');
+  background-position: left;
+  background-repeat:no-repeat;
+  background-size:2900%;
+  margin-bottom: 9px;
+  margin-right: -25px;
+  cursor: pointer;
+  pointer-events: initial !important;
+}
+
+
+.is_animating {
+  animation: heart-burst .8s steps(28) 1;
+  background-position:right;
+}
+
+@keyframes heart-burst {
+  from {background-position:left;}
+  to { background-position:right;}
 }

@@ -36,3 +36,20 @@
 .cfnAnimation-fadeIn {
   animation: fadeIn 0.4s ease forwards;
 }
+
+.cfnAnimation-slideup {
+  animation: slideup .5s ease both;
+  display: block !important;
+}
+
+.cfnAnimation-slidedown {
+  animation: slidedown .5s ease both;
+}
+
+@keyframes slidedown {
+  to { opacity: 0; -webkit-transform: translateY(100%) rotateX(-90deg); transform: translateY(100%) rotateX(-90deg); }
+}
+
+@keyframes slideup {
+  from { opacity: 0; -webkit-transform: translateY(100%) rotateX(-90deg); transform: translateY(100%) rotateX(-90deg); }
+}

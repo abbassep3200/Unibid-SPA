@@ -52,6 +52,10 @@ export class VerificationComponent implements OnInit {
 
   }
 
+  onSubmit() {
+    
+  }
+
   resendActivationCodeClick(eventData) {
     eventData.stopPropagation();
     this.authenticationService.verifyPut().subscribe(result => {

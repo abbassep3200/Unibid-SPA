@@ -36,6 +36,7 @@ export class SigninComponent implements OnInit {
 
     this.authenticationService.login(this.formFields.username.value, this.formFields.password.value).subscribe(user => {
       localStorage.setItem('currentUser', JSON.stringify(user));
+      console.log(JSON.stringify(user));
       this.router.navigate(['/default']);
     },
     error => {

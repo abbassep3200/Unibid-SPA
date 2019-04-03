@@ -10,7 +10,7 @@ import { VerificationPut } from '../models/auth/verificationPut';
 export class AuthenticationService {
     // private currentUserSubject: BehaviorSubject<User>;
     // public currentUser: Observable<User>;
-    loginUrl = 'http://dev.unibid.ir/v2/api/login';
+    loginUrl = 'http://dev.unibid.ir/v2/api/auth/login';
     registerUrl = 'http://dev.unibid.ir/v2/api/auth/register';
     verificationUrl = 'http://dev.unibid.ir/v2/api/auth/verify';
 

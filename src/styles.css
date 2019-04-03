@@ -9,3 +9,9 @@
 @import url(assets/cfnComponents/cfnLoader.css);
 @import url(assets/resources/fonts/Iransans/css/fontiran.css);
 /* @import url(assets/resources/fonts/roboto/css/roboto.css); */
+
+app-default {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

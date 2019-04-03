@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { DefaultComponent } from './default/default.component';
 import { VerificationComponent } from './auth/verification/verification.component';
 
-const routerConfig: Routes = [
+const appRoutes: Routes = [
   {
       path: 'signin',
       component: SigninComponent
@@ -26,5 +26,4 @@ const routerConfig: Routes = [
     redirectTo: ''
   }
 ];
-
-export default routerConfig;
+export const routing = RouterModule.forRoot(appRoutes);
