@@ -27,14 +27,14 @@ export class AuthenticationService {
         return this.http.post(this.loginUrl, { username, password });
     }
 
-    register(username: string, password: string, c_password: string, mobile: string, invitor: string) {
+    register(username: string, password: string, confirmPassword: string, mobile: string, invitor: string) {
       mobile = '0' + mobile.toString();
       let registerObj;
       if (invitor !== '') {
         registerObj = {
           username,
           password,
-          c_password,
+          confirmPassword,
           mobile,
           invitor
         };
@@ -42,7 +42,7 @@ export class AuthenticationService {
         registerObj = {
           username,
           password,
-          c_password,
+          confirmPassword,
           mobile
         };
       }

@@ -14,7 +14,7 @@ const appRoutes: Routes = [
       component: SignupComponent
   },
   {
-    path: 'default',
+    path: '',
     component: DefaultComponent
   },
   {
@@ -22,8 +22,9 @@ const appRoutes: Routes = [
     component: VerificationComponent
   },
   {
-    path: '**',
-    redirectTo: ''
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/default'
   }
 ];
 export const routing = RouterModule.forRoot(appRoutes);

@@ -2,14 +2,14 @@
 /* =cart */
 .cart {
   flex: 1;
-  max-width: 380px;
+  max-width: 340px;
   max-height: 540px;
   min-width: 320px;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.08);
   margin: 15px;
-  margin-left: 30px;
+  margin-left: 10px;
   margin-right: 0;
   overflow: hidden;
   color: #212121;
@@ -46,7 +46,7 @@
   font-size: 13px;
   color: #fff;
   left: 5px;
-  transform: rotate(-45deg);
+  transform: rotate(-48deg);
   transform-origin: 0%;
   display: inline-block;
   width: 60px;
@@ -186,6 +186,7 @@
 .cart-footer-contributer  > img{
   border-radius: 50%;
   position: relative;
+  max-width: 42px;
 }
 
 .cart-footer-contributer  > img:nth-of-type(3){
@@ -196,7 +197,7 @@
   margin-left: -10px;
 }
 
-.registerAuction {
+.cart .registerAuction {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -206,6 +207,11 @@
   z-index: 1;
   padding: 0 23px;
   display: none;
+  pointer-events: all;
+}
+
+.cart .registerAuction * {
+  pointer-events: all;
 }
 
 .cart .registerAuctionTitle {
@@ -217,12 +223,12 @@
   position: relative;
 }
 
-.registerAuctionTitle-arrowDown {
+.cart .registerAuctionTitle-arrowDown {
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: initial !important;
+  cursor: pointer;
 }
 
 .cart .registerAuctionParag {
@@ -231,13 +237,14 @@
   margin-bottom: 24px;
 }
 
-.registerAuction-item {
+.cart .registerAuction-item {
   display: flex;
   align-items: center;
   padding: 16px;
   border-radius: 16px;
   border: solid 1px #ebebeb;
   margin-bottom: 16px;
+  cursor: pointer;
 }
 
 .registerAuction-item-active {

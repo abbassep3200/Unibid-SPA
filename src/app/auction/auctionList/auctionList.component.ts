@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
-import { Auction } from 'src/app/models/auction.model';
 import { GetAuctions } from 'src/app/models/service/getAuctions.model';
 
 @Component({
@@ -16,6 +15,7 @@ export class AuctionListComponent implements OnInit {
   ngOnInit() {
     this.mainService.GetAuctions().subscribe(result => {
       this.auctions = result;
+      console.log(this.auctions);
       this.loading = false;
     },
     error => {

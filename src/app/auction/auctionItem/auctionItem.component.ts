@@ -9,7 +9,8 @@ import { Auction } from 'src/app/models/auction.model';
 })
 export class AuctionItemComponent implements OnInit {
   toggleHeart = false;
-  toggleRegisterAuction = false;
+  showRegisterAuction = false;
+  hideRegisterAuction = false;
   @Input() auction: Auction;
   constructor() {
 
@@ -28,11 +29,16 @@ export class AuctionItemComponent implements OnInit {
   }
 
   RegisterAuctionSlideupClick() {
-    this.toggleRegisterAuction = true;
+    this.showRegisterAuction = true;
   }
 
-  RegisterAuctionSlideDownClick() {
-    this.toggleRegisterAuction = false;
+  RegisterAuctionSlideDownClick(eventData) {
+    this.hideRegisterAuction = true;
+    setTimeout(() => {
+      this.showRegisterAuction = false;
+      this.hideRegisterAuction = false;
+    }, 1000);
+    eventData.stopPropagation();
   }
 
 

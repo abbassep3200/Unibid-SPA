@@ -14,6 +14,8 @@ import { VerificationInputKeyupDirective } from './directives/verification-input
 import { routing } from './routerConfig';
 import { AuctionItemComponent } from './auction/auctionItem/auctionItem.component';
 import { AuctionListComponent } from './auction/auctionList/auctionList.component';
+import { SwiperModule } from 'angular2-useful-swiper';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +28,15 @@ import { AuctionListComponent } from './auction/auctionList/auctionList.componen
     SigninComponent,
     DefaultComponent,
     VerificationComponent,
-    VerificationInputKeyupDirective
+    VerificationInputKeyupDirective,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    routing
+    routing,
+    SwiperModule
   ],
 providers: [],
   bootstrap: [AppComponent]

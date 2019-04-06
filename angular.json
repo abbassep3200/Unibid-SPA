@@ -24,10 +24,11 @@
             ],
             "styles": [
               "./node_modules/normalize.css/normalize.css",
+              "node_modules/swiper/dist/css/swiper.min.css",
               "src/styles.css"
             ],
             "scripts": [
-              // "../node_modules/jquery/dist/jquery.min.js"
+              "node_modules/swiper/dist/js/swiper.min.js"
             ],
             "es5BrowserSupport": true
           },

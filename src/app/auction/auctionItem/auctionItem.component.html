@@ -1,40 +1,20 @@
 <div class="cart" (click)="RegisterAuctionSlideupClick()">
-  <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': (toggleRegisterAuction === true), 'cfnAnimation-slidedown': (toggleRegisterAuction === false)}">
+  <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
     <p class="registerAuctionTitle">
       ثبت نام در حراجی
-      <img (click)="RegisterAuctionSlideDownClick()" class="registerAuctionTitle-arrowDown" src="../../assets/resources/images/assets/svg/arrowDown.svg" alt="">
+      <img (click)="RegisterAuctionSlideDownClick($event)" class="registerAuctionTitle-arrowDown" src="../../assets/resources/images/assets/svg/arrowDown.svg" alt="">
     </p>
     <p class="registerAuctionParag">برای شرکت در حراجی بسته مورد نظر را انتخاب کنید.</p>
-    <div class="registerAuction-item registerAuction-item-active">
+    <div class="registerAuction-item" *ngFor="let coin of auction?.coins">
       <div class="registerAuction-item-image">
          <img src="../../assets/resources/images/assets/png/coins.png" alt="">
       </div>
       <div class="registerAuction-item-info">
-        <p><span>30 سکه</span> (30000 تومان)</p>
-        <p>13 عدد پیشنهاد</p>
-        <p>کوپن تخفیف 43500 تومانی</p>
+        <p><span>{{coin.bids}} سکه</span> ({{coin.price}} تومان)</p>
+        <p>{{coin.coinCount}} عدد پیشنهاد</p>
+        <p>کوپن تخفیف {{coin.discountCoupon}} تومانی</p>
       </div>
     </div>
-    <div class="registerAuction-item">
-        <div class="registerAuction-item-image">
-           <img src="../../assets/resources/images/assets/png/coins.png" alt="">
-        </div>
-        <div class="registerAuction-item-info">
-          <p><span>30 سکه</span> (30000 تومان)</p>
-          <p>13 عدد پیشنهاد</p>
-          <p>کوپن تخفیف 43500 تومانی</p>
-        </div>
-      </div>
-      <div class="registerAuction-item">
-          <div class="registerAuction-item-image">
-             <img src="../../assets/resources/images/assets/png/coins.png" alt="">
-          </div>
-          <div class="registerAuction-item-info">
-            <p><span>30 سکه</span> (30000 تومان)</p>
-            <p>13 عدد پیشنهاد</p>
-            <p>کوپن تخفیف 43500 تومانی</p>
-          </div>
-        </div>
     <div class="registerAuctionItem"></div>
     <div class="registerAuctionItem"></div>
   </div>
@@ -50,8 +30,8 @@
   <div class="cart-off">
       <span class="cart-off-percent">٪{{auction.discount}}</span>
     <div class="cart-off-info">
-        <p class="cart-off-after">شروع حراجی: {{auction.basePrice}} تومان</p>
-        <p class="cart-off-before">سقف حراجی: {{auction.maxPrice}} تومان</p>
+        <p class="cart-off-after">شروع حراجی: {{auction.basePrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان</p>
+        <p class="cart-off-before">سقف حراجی: {{auction.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان</p>
     </div>
   </div>
   <div class="cart-timer">
@@ -75,12 +55,10 @@
  <div class="cart-footer">
    <div class="cart-footer-rank">
       <img src="../../assets/resources/images/assets/png/star.png">
-      <span>۱۰ / ۴</span>
+      <span>{{auction.maxLevel}} / {{auction.level}}</span>
    </div>
    <div class="cart-footer-contributer" dir="ltr">
-      <img src="../../assets/resources/images/pics/pic4.jpg" alt="" class="">
-      <img src="../../assets/resources/images/pics/pic3.jpg" alt="" class="">
-      <img src="../../assets/resources/images/pics/pic2.jpg" alt="" class="">
+      <img *ngFor="let pic of auction.participants.icons" src="http://dev.unibid.ir/static/images/avatars/{{pic}}" alt="" class="">
      <span>شرکت کنندگان: ۱۲ از ۳۲</span>
    </div>
  </div>

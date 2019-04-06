@@ -1,5 +1,5 @@
 export class Coin {
-  count: number;
+  coinCount: number;
   price: number;
   bids: number;
   discountCoupon: number;

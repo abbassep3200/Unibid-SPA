@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
@@ -21,17 +21,22 @@ export class VerificationComponent implements OnInit {
   disabled = false;
   constructor(private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private renderer: Renderer2) {
     }
 
   ngOnInit() {
+
+    const wrapperElem: HTMLElement = document.getElementById('mainWrapper');
+    this.renderer.setStyle(wrapperElem, 'justify-content', 'center');
+    this.renderer.setStyle(wrapperElem, 'align-items', 'center');
+
     this.verificationForm = this.formBuilder.group({
       username: ['', Validators.required]
     });
 
     this.authenticationService.verifyGet().subscribe(result => {
       this.verficationGet = result;
-      this.verficationGet.verificationTTL = 10;
       this.timeoutId = setInterval(() => {
         this.verficationGet.verificationTTL--;
         if (this.verficationGet.verificationTTL === 0) {

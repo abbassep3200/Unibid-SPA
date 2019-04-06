@@ -15,13 +15,14 @@ export class HeaderComponent implements OnInit {
   }
 
   searchBoxBehaviour(event) {
-    if (event.target.className === 'search-toolbar-list-item') {
-     this.txtSearch.nativeElement.value = event.target.textContent;
-     this.txtSearch.nativeElement.focus();
-     this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
-    }
 
       this.searchToolbarSuggestion.nativeElement.classList.add('search-toolbar-suggestion-show');
+  }
+
+  searchItemClick(eventData) {
+    this.txtSearch.nativeElement.value = eventData.target.textContent + ' ';
+    this.txtSearch.nativeElement.focus();
+    this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
   }
 
 }

@@ -8,7 +8,7 @@
 <form [formGroup]="registerForm"  (ngSubmit)="onSubmit()">
   <input class="cfnText" [ngClass]="{'inputInvalid': this.submitted && this.formFields.username.errors}" formControlName="username" type="text" placeholder="نام کاربری">
   <input class="cfnText" [ngClass]="{'inputInvalid': this.submitted && this.formFields.password.errors}" formControlName="password" type="password" placeholder="رمز عبور">
-  <input class="cfnText" [ngClass]="{'inputInvalid': this.submitted && this.formFields.c_password.errors}" formControlName="c_password" type="password" placeholder="تکرار رمز عبور">
+  <input class="cfnText" [ngClass]="{'inputInvalid': this.submitted && this.formFields.confirmPassword.errors}" formControlName="confirmPassword" type="password" placeholder="تکرار رمز عبور">
   <input class="cfnText" [ngClass]="{'inputInvalid': this.submitted && this.formFields.mobile.errors}" formControlName="mobile"  type="number" min="0" max="99999999999" placeholder="شماره موبایل">
   <input class="cfnText" formControlName="invitor" type="number" placeholder="کد معرف">
   <button  href="" class="cfnButton cfnButton-primary">ثبت نام</button>
