@@ -14,6 +14,13 @@ export class VerificationInputKeyupDirective {
         nextSibling.focus();
       }
     }
+    else {
+      this.elRef.nativeElement.blur();
+    }
+  }
+
+  @HostListener('focus') focus() {
+    this.elRef.nativeElement.textContent = '';
   }
 
 }

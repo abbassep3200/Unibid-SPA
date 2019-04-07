@@ -15,7 +15,6 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
     this.mainService.GetSliderAuctions().subscribe(result => {
-      console.log(result);
       this.sliderAuctions = result;
       this.loading = false;
     },

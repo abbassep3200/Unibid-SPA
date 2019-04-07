@@ -8,14 +8,19 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @ViewChild('txtSearch') txtSearch: ElementRef;
   @ViewChild('searchToolbarSuggestion') searchToolbarSuggestion: ElementRef;
+  isLoggedIn = false;
 
-  constructor() { }
+  constructor() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.isLoggedIn = true;
+    }
+   }
 
   ngOnInit() {
   }
 
   searchBoxBehaviour(event) {
-
       this.searchToolbarSuggestion.nativeElement.classList.add('search-toolbar-suggestion-show');
   }
 

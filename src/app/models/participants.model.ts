@@ -1,4 +1,4 @@
 export class Participants {
-  icon: string[];
+  icons: string[];
   count: number;
 }

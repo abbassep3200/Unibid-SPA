@@ -50,6 +50,9 @@ export class SigninComponent implements OnInit {
     error => {
       this.errorObj = error;
       this.loading = false;
+      if (error.error.reason === 'verification') {
+        this.router.navigate(['/verification']);
+      }
       this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => {

@@ -126,3 +126,27 @@ header {
   align-items: center;
   position: absolute;
 }
+
+.header-content-unauthorized {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content-unauthorized > span {
+  cursor: pointer;
+  outline: none;
+}
+
+.header-content-unauthorized-register {
+  width: 100px;
+  height: 42px;
+  border-radius: 28px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ec407a;
+  margin-left: 16px;
+}

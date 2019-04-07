@@ -29,7 +29,7 @@
     </div>
     <img src="../../assets/resources/images/assets/svg/magnifying-glass-3.svg" class="cfnSearch-submit magnifying-glass-3">
   </div>
-  <div class="header-content-loginInfo" dir="ltr">
+  <div class="header-content-loginInfo" dir="ltr" *ngIf="isLoggedIn === true">
     <div class="header-content-loginInfo-pic">
         <img src="../../assets/resources/images/pics/pic1.jpg" alt="" class="">
         <span class="badge">2</span>
@@ -39,6 +39,10 @@
       <li><img src="../../assets/resources/images/assets/svg/Gem.svg" class="gem"><span>۴</span></li>
       <li><img src="../../assets/resources/images/assets/svg/Notification.svg" class="notification"><span>۱</span></li>
     </ul>
+  </div>
+  <div class="header-content-unauthorized" *ngIf="isLoggedIn === false">
+    <span routerLink = '/signup' class="header-content-unauthorized-register">ثبت نام</span>
+    <span routerLink = "/signin">ورود</span>
   </div>
   </div>
 </header>

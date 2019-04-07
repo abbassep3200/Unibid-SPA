@@ -46,13 +46,7 @@ export class VerificationComponent implements OnInit {
       }, 1000);
     },
     error => {
-      // this.errorObj = error;
-      // this.loading = false;
-      // this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      // clearTimeout(this.timeoutId);
-      // this.timeoutId = setTimeout(() => {
-      //   this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-      // }, 5000);
+      console.log(error);
     });
 
   }
@@ -74,13 +68,7 @@ export class VerificationComponent implements OnInit {
       }, 1000);
     },
     error => {
-      // this.errorObj = error;
-      // this.loading = false;
-      // this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      // clearTimeout(this.timeoutId);
-      // this.timeoutId = setTimeout(() => {
-      //   this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-      // }, 5000);
+      console.log(error);
     });
   }
 
