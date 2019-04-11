@@ -7,7 +7,7 @@
         <!-- <div class="cart-tag" *ngIf="slider.tag"></div> -->
         <!-- <span class="cart-tag-content" *ngIf="slider.tag">{{slider.tag}}</span> -->
       
-        <img class="swiper-slide-image" src="../../assets/resources/images/assets/png/slider@2x.png" />
+        <img class="swiper-slide-image" src="http://dev.unibid.ir/static/images/ads/{{slider.image}}" />
         <div class="swiper-slide-content">
           <div class="swiper-slide-content-info">
           <p class="swiper-slide-content-title">{{slider.title}}</p>
@@ -47,10 +47,8 @@
             <span>اشتراک با دوستان</span>
           </div>
             <div class="cart-footer-contributer" dir="ltr">
-                <img src="../../assets/resources/images/pics/pic4.jpg" alt="" class="">
-                <img src="../../assets/resources/images/pics/pic3.jpg" alt="" class="">
-                <img src="../../assets/resources/images/pics/pic2.jpg" alt="" class="">
-               <span>شرکت کنندگان: ۱۲ از {{slider.maxMembers}}</span>
+                <img *ngFor="let pic of slider.participants.icons" src="http://dev.unibid.ir/static/images/avatars/{{pic}}" alt="" class="">
+               <span>شرکت کنندگان: {{slider.participants.count}} از {{slider.maxMembers}}</span>
              </div>
         </div>
       </div>

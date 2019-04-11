@@ -15,7 +15,6 @@ export class AuctionListComponent implements OnInit {
   ngOnInit() {
     this.mainService.GetAuctions().subscribe(result => {
       this.auctions = result;
-      console.log(this.auctions);
       this.loading = false;
     },
     error => {

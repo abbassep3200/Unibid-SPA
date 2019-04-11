@@ -16,15 +16,7 @@
     <input type="search" (click)="searchBoxBehaviour($event)" #txtSearch  class="cfnSearch-input" autocomplete="false"  placeholder="کالای مورد نظر خود را جستجو کنید...">
     <div class="search-toolbar-suggestion" #searchToolbarSuggestion>
       <ul class="search-toolbar-list">
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search1.jpg">خانه و آشپزخانه</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search2.jpg">لوازم دیجیتالی جانبی</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search3.jpg">لوازم دیجیتال</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search4.jpg">آرایشی، بهداشتی و سلامت</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search5.jpg">سکه و ارز</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search6.jpg">کنسول بازی</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search7.jpg">خودرو و وسایل نقلیه</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search8.jpg">ورزش، سفر، سرگرمی</li>
-        <li (click)="searchItemClick($event)" class="search-toolbar-list-item"><img src="../../assets/resources/images/assets/png/search9.jpg">موبایل و تبلت</li>
+        <li (click)="searchItemClick($event)" *ngFor="let item of searchItems?.categories" class="search-toolbar-list-item"><img src="http://dev.unibid.ir/static/images/icons/category/{{item.icon}}">{{item.title}}</li>
       </ul>
     </div>
     <img src="../../assets/resources/images/assets/svg/magnifying-glass-3.svg" class="cfnSearch-submit magnifying-glass-3">

@@ -13,4 +13,8 @@ export class SliderAuction {
   basePrice: number;
   maxPrice: number;
   remainedTime: number;
+  day: number;
+  hour: number;
+  minute: number;
+  seconds: number;
 }

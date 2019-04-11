@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { SearchItems } from '../models/service/searchItems.model';
+import { MainServices } from '../_services/main.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +10,21 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @ViewChild('txtSearch') txtSearch: ElementRef;
   @ViewChild('searchToolbarSuggestion') searchToolbarSuggestion: ElementRef;
+  searchItems: SearchItems;
   isLoggedIn = false;
 
-  constructor() {
+  constructor(private service: MainServices) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       this.isLoggedIn = true;
     }
+
+    this.service.GetSearchItems().subscribe(items => {
+      this.searchItems = items;
+      console.log(this.searchItems);
+    },
+    error => {
+    });
    }
 
   ngOnInit() {

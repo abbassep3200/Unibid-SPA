@@ -59,7 +59,7 @@
    </div>
    <div class="cart-footer-contributer" dir="ltr">
       <img *ngFor="let pic of auction.participants.icons" src="http://dev.unibid.ir/static/images/avatars/{{pic}}" alt="" class="">
-     <span>شرکت کنندگان: ۱۲ از ۳۲</span>
+     <span>شرکت کنندگان: {{auction.participants.count}} از {{auction.maxMembers}}</span>
    </div>
  </div>
 </div>

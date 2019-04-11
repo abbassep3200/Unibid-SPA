@@ -129,6 +129,7 @@
 .cart-footer-contributer  > img{
   border-radius: 50%;
   position: relative;
+  max-width: 42px;
 }
 
 .cart-footer-contributer  > img:nth-of-type(3){

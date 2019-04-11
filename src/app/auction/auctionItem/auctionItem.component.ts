@@ -13,7 +13,7 @@ export class AuctionItemComponent implements OnInit {
   hideRegisterAuction = false;
   remainedTime;
   @Input() auction: Auction;
-  constructor() {
+  constructor(private service: MainServices) {
 
    }
 
@@ -33,8 +33,17 @@ export class AuctionItemComponent implements OnInit {
 
   toggleClick(eventData) {
     this.toggleHeart = !this.toggleHeart;
+    debugger;
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.service.likeAuction().subscribe(result => {
+      },
+      error => {
+      });
     eventData.stopPropagation();
+
   }
+}
 
   RegisterAuctionSlideupClick() {
     this.showRegisterAuction = true;
