@@ -1,0 +1,78 @@
+<div class="cfnLoaderWrapper" *ngIf="loading">
+  <div class="cfnLoader"></div>
+</div>
+<div class="shop-wrapper">
+  <div class="shop-container">
+    <div class="shop-header">
+      <span class="config-close">
+        &#10006;
+      </span>
+      <p class="shop-header-title">فروشگاه یونی‌بید</p>
+      <img src="../../assets/resources/images/assets/png/shopHeader.png" alt="" srcset="../../assets/resources/images/assets/png/shopHeader@2x.png 2x, ../../assets/resources/images/assets/png/shopHeader@3x.png 3x">
+    </div>
+    <ng-template [ngIf]="items?.chest">
+      <p class="shop-cart-title">پیشنهاد ویژه</p>
+      <div class="shop-banner">
+        <img src="http://127.0.0.1:9001/static/images/chests/{{items.chest.image}}" alt="">
+        <div class="shop-banner-info">
+          <p class="shop-banner-info-title">
+            {{items.chest.title}}
+          </p>
+          <p class="shop-banner-text">{{items.chest.description}}</p>
+          <span class="cfnButton cfnButton-primary" (click)="buyChest(items.chest.chestId)">خرید</span>
+        </div>
+        <div class="shop-banner-off">
+          <p>{{items.chest.discount | currency : ' ' : 'symbol' : '1.0-0'}}%</p>
+          <span>تخفیف</span>
+        </div>
+      </div>
+    </ng-template>
+    <p class="shop-cart-title">خرید بسته های سکه برای رقابت در حراجی...</p>
+    <div class="shop-cart-wrapper">
+      <div class="shop-cart-container" *ngFor="let coin of items?.coins">
+        <span class="shop-cart-oval">
+          <img src="../../assets/resources/images/assets/png/coins.png" alt="">
+        </span>
+        <p><span>{{coin.title}}</span><span>({{coin.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان)</span></p>
+        <p>{{coin.quantity}} عدد سکه به قیمت {{coin.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+        <span class="cfnButton cfnButton-primary" (click)="buyCoin(coin.coinId)">خرید</span>
+      </div>
+    </div>
+    <p class="shop-cart-title">خرید بسته های الماس یونی بید...</p>
+    <div class="shop-cart-wrapper">
+      <div class="shop-cart-container" *ngFor="let gem of items?.cheapGems">
+        <span class="shop-cart-oval shop-cart-oval-diamond">
+          <img src="../../assets/resources/images/assets/png/slot-machine@2x.png" alt="">
+        </span>
+        <p><span>{{gem.title}}</span><span>({{gem.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان)</span></p>
+        <p>{{gem.quantity}} عدد الماس به قیمت {{gem.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان با {{gem.discount | currency : ' ' : 'symbol' : '1.0-0'}} درصد تخفیف</p>
+        <span class="cfnButton cfnButton-primary" (click)="buyGem(gem.gemId)">خرید</span>
+      </div>
+
+    </div>
+    <div class="shop-cart-wrapper">
+      <div class="shop-cart-container" *ngFor="let gem of items?.expGems">
+        <span class="shop-cart-oval shop-cart-oval-diamond-red">
+          <img src="../../assets/resources/images/assets/png/slot-machine@2x.png" alt="">
+        </span>
+        <p><span>{{gem.title}}</span><span>({{gem.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان)</span></p>
+        <p>{{gem.quantity}} عدد الماس به قیمت {{gem.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان با {{gem.discount | currency : ' ' : 'symbol' : '1.0-0'}} درصد تخفیف</p>
+        <span class="cfnButton cfnButton-primary" (click)="buyGem(gem.gemId)">خرید</span>
+      </div>
+
+    </div>
+    <p class="shop-cart-title">پکیج آواتر یونی‌بید</p>
+    <div class="shop-cart-wrapper">
+
+      <div class="shop-cart-container" *ngFor="let avatar of items?.avatars">
+        <span class="shop-cart-oval shop-cart-oval-diamond-regular">
+          <img src="http://127.0.0.1:9001/static/images/avatars/{{avatar.image}}" alt="">
+        </span>
+        <p><span>{{avatar.title}}</span></p>
+        <p>با {{avatar.neededGems}} عدد الماس به ارزش {{avatar.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+        <span class="cfnButton cfnButton-primary" (click)="buyAvatar(avatar.avatarId)">خرید</span>
+      </div>
+
+    </div>
+  </div>
+</div>

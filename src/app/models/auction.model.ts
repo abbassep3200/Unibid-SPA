@@ -2,7 +2,6 @@ import { Charity } from './charity.model';
 import { Participants } from './participants.model';
 import { StartedAuction } from './startedAuction.model';
 import { Coin } from './coin.model';
-import { Deserializable } from '../core/deserializable.model';
 
 export class Auction {
   charity: Charity;

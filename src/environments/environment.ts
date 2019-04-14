@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  prefix:"http://127.0.0.1:9001",
+  // prefix:"http://dev.unibid.ir"
 };
 
 /*

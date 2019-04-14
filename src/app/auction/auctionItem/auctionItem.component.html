@@ -10,9 +10,9 @@
          <img src="../../assets/resources/images/assets/png/coins.png" alt="">
       </div>
       <div class="registerAuction-item-info">
-        <p><span>{{coin.bids}} سکه</span> ({{coin.price}} تومان)</p>
+        <p><span>{{coin.bids}} سکه</span> ({{coin.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان)</p>
         <p>{{coin.coinCount}} عدد پیشنهاد</p>
-        <p>کوپن تخفیف {{coin.discountCoupon}} تومانی</p>
+        <p>کوپن تخفیف {{coin.discountCoupon | currency : ' ' : 'symbol' : '1.0-0'}} تومانی</p>
       </div>
     </div>
     <div class="registerAuctionItem"></div>
@@ -59,7 +59,7 @@
    </div>
    <div class="cart-footer-contributer" dir="ltr">
       <img *ngFor="let pic of auction.participants.icons" src="http://dev.unibid.ir/static/images/avatars/{{pic}}" alt="" class="">
-     <span>شرکت کنندگان: {{auction.participants.count}} از {{auction.maxMembers}}</span>
+     <span>شرکت کنندگان: {{auction.participants.count }} از {{auction.maxMembers}}</span>
    </div>
  </div>
 </div>

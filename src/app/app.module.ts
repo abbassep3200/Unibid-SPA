@@ -16,6 +16,7 @@ import { AuctionItemComponent } from './auction/auctionItem/auctionItem.componen
 import { AuctionListComponent } from './auction/auctionList/auctionList.component';
 import { SwiperModule } from 'angular2-useful-swiper';
 import { SliderComponent } from './slider/slider.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SliderComponent } from './slider/slider.component';
     DefaultComponent,
     VerificationComponent,
     VerificationInputKeyupDirective,
-    SliderComponent
+    SliderComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,
