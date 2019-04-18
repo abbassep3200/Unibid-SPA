@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { Auction } from 'src/app/models/auction.model';
+import {Links} from 'src/app/links.component';
 
 @Component({
   selector: 'app-auctionItem',
@@ -11,16 +12,20 @@ export class AuctionItemComponent implements OnInit {
   toggleHeart = false;
   showRegisterAuction = false;
   hideRegisterAuction = false;
+  loading = false;
+  errorObj = null;
+  Link = Links;
+  
   remainedTime;
   @Input() auction: Auction;
+  @ViewChild('errorMessage') errorMessageElem: ElementRef;
   constructor(private service: MainServices) {
 
    }
 
   ngOnInit() {
-    if (this.auction.liked === true) {
-      this.toggleHeart = true;
-    }
+
+    this.toggleHeart = this.auction.liked;
     if (this.auction) {
       this.remainedTime = this.ConvertMS(this.auction.remainedTime);
       setInterval(() => {
@@ -32,17 +37,21 @@ export class AuctionItemComponent implements OnInit {
   }
 
   toggleClick(eventData) {
-    this.toggleHeart = !this.toggleHeart;
-    debugger;
-    const currentUser = localStorage.getItem('currentUser');
-    if (currentUser) {
+
+      this.loading = true;
       this.service.likeAuction().subscribe(result => {
+        this.toggleHeart = !this.toggleHeart;
       },
       error => {
+        this.errorObj = error;
+        this.loading = false;
+        this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
+        clearTimeout(this.timeoutId);
+        this.timeoutId = setTimeout(() => {
+          this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
+        }, 5000);
       });
-    eventData.stopPropagation();
-
-  }
+      eventData.stopPropagation();
 }
 
   RegisterAuctionSlideupClick() {

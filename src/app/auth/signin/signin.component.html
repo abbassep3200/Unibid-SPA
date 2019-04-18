@@ -30,6 +30,10 @@
   <div class="cfnLoader"></div>
 </div>
 
-<div *ngIf="errorObj" class="cfnError" #errorMessage>
-  {{errorObj.error.message}}
+<div class="cfnError" #errorMessage>
+  <ng-template [ngIf]="errorObj">
+  <div>
+    {{errorObj.error.message}}
+  </div>
+</ng-template>
 </div>

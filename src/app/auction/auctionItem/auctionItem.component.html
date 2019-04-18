@@ -25,7 +25,7 @@
       <img src="../../assets/resources/images/assets/png/share.png">
       <img *ngIf="auction.participated" class="cart-participated" src="../../assets/resources/images/assets/svg/tick.svg">
   </div>
-  <img src="http://dev.unibid.ir/static/images/products/{{auction.image}}" alt="" class="cart-image">
+  <img [src]="Link.product(auction.image)" alt="" class="cart-image">
   <p class="cart-title">{{auction.title}}</p>
   <div class="cart-off">
       <span class="cart-off-percent">٪{{auction.discount}}</span>
@@ -62,4 +62,16 @@
      <span>شرکت کنندگان: {{auction.participants.count }} از {{auction.maxMembers}}</span>
    </div>
  </div>
+</div>
+
+<div class="cfnLoaderWrapper" *ngIf="loading">
+  <div class="cfnLoader"></div>
+</div>
+
+<div class="cfnError" #errorMessage>
+  <ng-template [ngIf]="errorObj">
+  <div>
+    {{errorObj.error.message}}
+  </div>
+</ng-template>
 </div>

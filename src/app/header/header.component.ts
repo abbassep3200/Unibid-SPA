@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SearchItems } from '../models/service/searchItems.model';
 import { MainServices } from '../_services/main.service';
+import { Links } from 'src/app/links.component';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('searchToolbarSuggestion') searchToolbarSuggestion: ElementRef;
   searchItems: SearchItems;
   isLoggedIn = false;
+  Link = Links;
 
   constructor(private service: MainServices) {
     const currentUser = localStorage.getItem('currentUser');

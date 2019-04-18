@@ -67,14 +67,17 @@ export class MainServices {
   }
 
   likeAuction() {
-    const headers = new HttpHeaders();
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
-      headers.set('Authorization', token);
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        })
+      };
+      return this.http.post(this.likeUrl ,null,httpOptions);
+    }else{
+      return this.http.post(this.likeUrl);
     }
-    return this.http.post(this.likeUrl , {headers});
   }
-
-
 }

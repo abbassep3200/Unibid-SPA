@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { Shop } from 'src/app/models/shop/shop.model';
 import { Buy } from 'src/app/models/shop/buy.model';
-import {Links} from 'src/app/links.component';
+import { Links } from 'src/app/links.component';
 
 @Component({
   selector: 'app-shop',

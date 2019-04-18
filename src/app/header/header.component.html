@@ -16,7 +16,7 @@
     <input type="search" (click)="searchBoxBehaviour($event)" #txtSearch  class="cfnSearch-input" autocomplete="false"  placeholder="کالای مورد نظر خود را جستجو کنید...">
     <div class="search-toolbar-suggestion" #searchToolbarSuggestion>
       <ul class="search-toolbar-list">
-        <li (click)="searchItemClick($event)" *ngFor="let item of searchItems?.categories" class="search-toolbar-list-item"><img src="http://dev.unibid.ir/static/images/icons/category/{{item.icon}}">{{item.title}}</li>
+        <li (click)="searchItemClick($event)" *ngFor="let item of searchItems?.categories" class="search-toolbar-list-item"><img [src]="Link.category(item.icon)">{{item.title}}</li>
       </ul>
     </div>
     <img src="../../assets/resources/images/assets/svg/magnifying-glass-3.svg" class="cfnSearch-submit magnifying-glass-3">
