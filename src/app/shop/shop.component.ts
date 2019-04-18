@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { Shop } from 'src/app/models/shop/shop.model';
 import { Buy } from 'src/app/models/shop/buy.model';
+import {Links} from 'src/app/links.component';
 
 @Component({
   selector: 'app-shop',
@@ -10,11 +11,13 @@ import { Buy } from 'src/app/models/shop/buy.model';
 })
 export class ShopComponent implements OnInit {
   items : Shop;
-  buy =new Buy();
+  buy = new Buy();
   loading = true;
   dialog = false;
+  Link = Links;
 
   @Input() shop: Shop;
+  @ViewChild('shopWrapper') shopWrapperElem: ElementRef;
 
 
   constructor(private mainService: MainServices) { }
@@ -34,11 +37,15 @@ export class ShopComponent implements OnInit {
     this.buy.title = title;
     this.buy.picture = pic;
     this.buy.price = price;
+    const shopWrapper = this.shopWrapperElem.nativeElement as HTMLElement;
+    shopWrapper.style.filter = 'blur(3px)';
     this.dialog = true;
   }
 
-  buyGem(gemId){
-    alert(gemId);
+  close(){
+    const shopWrapper = this.shopWrapperElem.nativeElement as HTMLElement;
+    shopWrapper.style.filter = 'none';
+    this.dialog = false;
   }
 
   buyCoin(coinId){

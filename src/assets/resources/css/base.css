@@ -70,7 +70,7 @@ body {
   color: #959595;
 }
 
-.confirm-wrapper {
+/*.confirm-wrapper {
   z-index: 1000000;
   position: fixed;
   top:0;
@@ -142,7 +142,7 @@ body {
 
 .confirm-text > img {
   margin-left: 12px;
-}
+}*/
 
 .heart {
   height: 70px;

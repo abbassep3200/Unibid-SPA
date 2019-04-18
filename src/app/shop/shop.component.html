@@ -1,7 +1,7 @@
 <div class="cfnLoaderWrapper" *ngIf="loading">
   <div class="cfnLoader"></div>
 </div>
-<div class="shop-wrapper">
+<div class="shop-wrapper" #shopWrapper>
   <div class="shop-container">
     <div class="shop-header">
       <span class="config-close">
@@ -13,14 +13,14 @@
     <ng-template [ngIf]="items?.chest">
       <p class="shop-cart-title">پیشنهاد ویژه</p>
       <div class="shop-banner">
-        <img src="http://127.0.0.1:9001/static/images/chests/{{items.chest.image}}" alt="">
+        <img [src]="Link.chest(items.chest.image)" alt="">
         <div class="shop-banner-info">
           <p class="shop-banner-info-title">
             {{items.chest.title}}
           </p>
           <p class="shop-banner-text">{{items.chest.description}}</p>
           <span class="cfnButton cfnButton-primary"
-          (click)='buyItem(items.chest.chestId,"chest",items.chest.title,"http://127.0.0.1:9001/static/images/chests/"+items.chest.image,items.chest.price)'>
+          (click)='buyItem(items.chest.chestId,"chest",items.chest.title,Link.chest(items.chest.image),items.chest.price)'>
 
           خرید</span>
         </div>
@@ -75,12 +75,12 @@
 
       <div class="shop-cart-container" *ngFor="let avatar of items?.avatars">
         <span class="shop-cart-oval shop-cart-oval-diamond-regular">
-          <img src="http://127.0.0.1:9001/static/images/avatars/{{avatar.image}}" alt="">
+          <img [src]="Link.avatar(avatar.image)" alt="">
         </span>
         <p><span>{{avatar.title}}</span></p>
         <p>با {{avatar.neededGems}} عدد الماس به ارزش {{avatar.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
         <span class="cfnButton cfnButton-primary"
-        (click)='buyItem(avatar.avatarId,"avatar",avatar.title,"http://127.0.0.1:9001/static/images/avatars/"+avatar.image,avatar.neededGems)'>
+        (click)='buyItem(avatar.avatarId,"avatar",avatar.title,Link.avatar(avatar.image),avatar.neededGems)'>
         خرید</span>
       </div>
 
@@ -90,7 +90,7 @@
 
 <div class="confirm-wrapper" *ngIf="dialog">
     <div class="confirm-box">
-      <span class="config-close" (click)="dialog = false;">
+      <span class="config-close" (click)="close()">
         &#10006;
       </span>
       <img src="{{buy.picture}}" alt="">
