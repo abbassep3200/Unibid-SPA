@@ -76,6 +76,8 @@ export class MainServices {
         })
       };
       return this.http.post(this.likeUrl ,auction,httpOptions);
+    }else{
+      return this.http.post(this.likeUrl ,auction);
     }
   }
 }

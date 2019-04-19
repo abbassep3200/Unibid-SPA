@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
 import {Links} from 'src/app/links.component';
 
@@ -20,7 +21,7 @@ export class AuctionItemComponent implements OnInit {
 
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
-  constructor(private service: MainServices) {
+  constructor(private service: MainServices,private authService:AuthenticationService) {
 
    }
 
@@ -45,6 +46,8 @@ export class AuctionItemComponent implements OnInit {
         this.loading = false;
       },
       error => {
+        this.authService.logout();
+
         this.errorObj = error;
         this.loading = false;
         this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');

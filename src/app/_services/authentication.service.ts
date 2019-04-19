@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VerificationGet } from '../models/auth/verificationGet';
@@ -13,6 +13,7 @@ export class AuthenticationService {
     // public currentUser: Observable<User>;
     loginUrl = environment.prefix+'/v2/api/auth/login';
     registerUrl = environment.prefix+'/v2/api/auth/register';
+    logoutUrl = environment.prefix+'/v2/api/auth/logout';
     verificationUrl = environment.prefix+'/v2/api/auth/verify';
 
     constructor(private http: HttpClient) {
@@ -60,9 +61,19 @@ export class AuthenticationService {
       }
       return this.http.put<VerificationPut>(this.verificationUrl, JSON.stringify(verifyPutObj));
     }
-    // logout() {
-    //     // remove user from local storage to log user out
-    //     localStorage.removeItem('currentUser');
-    //     this.currentUserSubject.next(null);
-    // }
+
+    logout() {
+
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+          const token = JSON.parse(currentUser)['accessToken'];
+          const httpOptions = {
+            headers: new HttpHeaders({
+              'Authorization':`Bearer ${token}`
+            })
+          };
+          localStorage.removeItem('currentUser');
+          return this.http.post(this.logoutUrl ,httpOptions);
+        }
+    }
 }
