@@ -4,15 +4,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VerificationGet } from '../models/auth/verificationGet';
 import { VerificationPut } from '../models/auth/verificationPut';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     // private currentUserSubject: BehaviorSubject<User>;
     // public currentUser: Observable<User>;
-    loginUrl = 'http://dev.unibid.ir/v2/api/auth/login';
-    registerUrl = 'http://dev.unibid.ir/v2/api/auth/register';
-    verificationUrl = 'http://dev.unibid.ir/v2/api/auth/verify';
+    loginUrl = environment.prefix+'/v2/api/auth/login';
+    registerUrl = environment.prefix+'/v2/api/auth/register';
+    verificationUrl = environment.prefix+'/v2/api/auth/verify';
 
     constructor(private http: HttpClient) {
         // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));

@@ -18,7 +18,7 @@ export class SigninComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
               private router: Router,
-              private renderer: Renderer2) { 
+              private renderer: Renderer2) {
                 const currentUser = localStorage.getItem('currentUser');
                 if (currentUser) {
                   this.router.navigate(['/']);

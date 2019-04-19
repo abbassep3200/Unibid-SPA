@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { Auction } from 'src/app/models/auction.model';
 import {Links} from 'src/app/links.component';
@@ -15,8 +15,9 @@ export class AuctionItemComponent implements OnInit {
   loading = false;
   errorObj = null;
   Link = Links;
-  
   remainedTime;
+  timeoutId = 0;
+
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
   constructor(private service: MainServices) {
@@ -36,11 +37,12 @@ export class AuctionItemComponent implements OnInit {
     // $('body').css('{backgroundColor: red}');
   }
 
-  toggleClick(eventData) {
+  toggleClick(eventData, auctionId) {
 
       this.loading = true;
-      this.service.likeAuction().subscribe(result => {
+      this.service.likeAuction({auctionId:auctionId}).subscribe(result => {
         this.toggleHeart = !this.toggleHeart;
+        this.loading = false;
       },
       error => {
         this.errorObj = error;

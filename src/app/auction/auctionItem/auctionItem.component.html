@@ -21,7 +21,7 @@
   <div class="cart-tag" *ngIf="auction.tag"></div>
   <span class="cart-tag-content" *ngIf="auction.tag">{{auction.tag}}</span>
   <div class="cart-share-fav">
-      <div class="heart" [ngClass]="{'is_animating': toggleHeart || (toggleHeart && auction.liked)}" (click)="toggleClick($event)"></div>
+      <div class="heart" [ngClass]="{'is_animating': toggleHeart || (toggleHeart && auction.liked)}" (click)="toggleClick($event,auction.auctionId)"></div>
       <img src="../../assets/resources/images/assets/png/share.png">
       <img *ngIf="auction.participated" class="cart-participated" src="../../assets/resources/images/assets/svg/tick.svg">
   </div>
@@ -70,8 +70,6 @@
 
 <div class="cfnError" #errorMessage>
   <ng-template [ngIf]="errorObj">
-  <div>
     {{errorObj.error.message}}
-  </div>
 </ng-template>
 </div>

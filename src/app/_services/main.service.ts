@@ -66,18 +66,16 @@ export class MainServices {
     return this.http.get<SearchItems>(this.searchItemsUrl);
   }
 
-  likeAuction() {
+  likeAuction(auction) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization': `Bearer ${token}`
+          'Authorization':`Bearer ${token}`
         })
       };
-      return this.http.post(this.likeUrl ,null,httpOptions);
-    }else{
-      return this.http.post(this.likeUrl);
+      return this.http.post(this.likeUrl ,auction,httpOptions);
     }
   }
 }
