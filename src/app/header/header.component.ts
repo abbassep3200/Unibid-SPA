@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
 
     this.service.GetSearchItems().subscribe(items => {
       this.searchItems = items;
-      console.log(this.searchItems);
     },
     error => {
     });

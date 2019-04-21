@@ -4,6 +4,7 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { Auction } from 'src/app/models/auction.model';
 import { Links } from 'src/app/links.component';
 import { ParticipationResult } from 'src/app/models/participationResult.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auctionItem',
@@ -24,7 +25,7 @@ export class AuctionItemComponent implements OnInit {
 
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
-  constructor(private service: MainServices,private authService:AuthenticationService) {
+  constructor(private service: MainServices,private authService:AuthenticationService,private router: Router) {
 
    }
 
@@ -49,15 +50,18 @@ export class AuctionItemComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        this.authService.logout();
 
         this.errorObj = error;
         this.loading = false;
         this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
         clearTimeout(this.timeoutId);
         this.timeoutId = setTimeout(() => {
+          if(error.status==401){
+            this.authService.logout();
+            this.router.navigate(['/signin']);
+          }
           this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-        }, 5000);
+        }, 2000);
       });
       eventData.stopPropagation();
 }
@@ -100,6 +104,8 @@ export class AuctionItemComponent implements OnInit {
     this.loading = true;
     this.service.registerByCoin({auctionId:auctionId,planId:planId}).subscribe(result => {
       this.loading = false;
+      this.participationResult = result.details;
+      this.coinState = 'confirmed';
     },
     error => {
       if(error.error.reason==="coins"){
@@ -115,8 +121,9 @@ export class AuctionItemComponent implements OnInit {
         this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
         if(error.status==401){
           this.authService.logout();
+          this.router.navigate(['/signin']);
         }
-      }, 3000);
+      }, 2000);
     });
     eventData.stopPropagation();
   }
@@ -140,10 +147,11 @@ export class AuctionItemComponent implements OnInit {
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => {
         this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-        if(error.status==401){
+        if(error.status===401){
           this.authService.logout();
+          this.router.navigate(['/signin']);
         }
-      }, 3000);
+      }, 2000);
     });
 
   }

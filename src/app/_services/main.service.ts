@@ -5,17 +5,17 @@ import { GetAuctions } from '../models/service/getAuctions.model';
 import { Shop } from '../models/shop/shop.model';
 import { GetSliderAuctions } from '../models/service/sliderAuctions.model';
 import { SearchItems } from '../models/service/searchItems.model';
-import { environment } from '../../environments/environment';
+import { Links } from '../links.component';
 
 @Injectable({ providedIn: 'root' })
 export class MainServices {
-  getAuctionsUrl = environment.prefix+'/v2/api/site/last/auctions';
-  getShopUrl = environment.prefix+'/v2/api/shop';
-  sliderAuctionUrl = environment.prefix+'/v2/api/site/slider/auctions';
-  searchItemsUrl =  environment.prefix+'/v2/api/site/categories';
-  likeUrl = environment.prefix+'/v2/api/auction/like';
-  participationByCoin = environment.prefix+'/v2/api/auction/coin/registeration';
-  participationByGem = environment.prefix+'/v2/api/auction/gem/registeration';
+  getAuctionsUrl = Links.prefix+'/v2/api/site/last/auctions';
+  getShopUrl = Links.prefix+'/v2/api/shop';
+  sliderAuctionUrl = Links.prefix+'/v2/api/site/slider/auctions';
+  searchItemsUrl =  Links.prefix+'/v2/api/site/categories';
+  likeUrl = Links.prefix+'/v2/api/auction/like';
+  participationByCoin = Links.prefix+'/v2/api/auction/coin/registeration';
+  participationByGem = Links.prefix+'/v2/api/auction/gem/registeration';
 
   constructor(private http: HttpClient) {
 

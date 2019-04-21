@@ -4,17 +4,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VerificationGet } from '../models/auth/verificationGet';
 import { VerificationPut } from '../models/auth/verificationPut';
-import { environment } from '../../environments/environment';
+import { Links } from '../links.component';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     // private currentUserSubject: BehaviorSubject<User>;
     // public currentUser: Observable<User>;
-    loginUrl = environment.prefix+'/v2/api/auth/login';
-    registerUrl = environment.prefix+'/v2/api/auth/register';
-    logoutUrl = environment.prefix+'/v2/api/auth/logout';
-    verificationUrl = environment.prefix+'/v2/api/auth/verify';
+    loginUrl = Links.prefix+'/v2/api/auth/login';
+    registerUrl = Links.prefix+'/v2/api/auth/register';
+    logoutUrl = Links.prefix+'/v2/api/auth/logout';
+    verificationUrl = Links.prefix+'/v2/api/auth/verify';
 
     constructor(private http: HttpClient) {
         // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));

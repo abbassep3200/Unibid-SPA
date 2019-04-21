@@ -1,5 +1,6 @@
 <div class="cart" (click)="RegisterAuctionSlideupClick()">
-    <div *ngIf="coinState=='pallet'">
+
+    <div *ngIf="coinState=='pallet' && !auction.participated">
       <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
         <p class="registerAuctionTitle">
           ثبت نام در حراجی
@@ -21,7 +22,7 @@
       </div>
     </div>
 
-    <div *ngIf="coinState=='gems'">
+    <div *ngIf="coinState=='gems' && !auction.participated">
       <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
         <div class="hoveredAuction">
             <p class="hoveredAuctionTitle">
@@ -41,6 +42,44 @@
 
             <a class="cfnButton cfnButton-primary" (click)="registerByGem($event,auction.auctionId,participationResult.planId)">تایید</a>
           </div>
+      </div>
+    </div>
+
+    <div *ngIf="coinState=='confirmed'">
+      <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+        <div class="hoveredAuction">
+            <p class="hoveredAuctionTitle">
+              ثبت نام در حراجی
+              <img (click)="RegisterAuctionSlideDownClick($event)" class="registerAuctionTitle-arrowDown" src="../../assets/resources/images/assets/svg/arrowDown.svg" alt="">
+            </p>
+            <div class="hoveredAuctionContent">
+              <div class="hoveredAuction-imageWrapper">
+                <img src="../../assets/resources/images/assets/png/coins@2x.png"/>
+                <img src="../../assets/resources/images/assets/png/check.png" class="hoveredAuction-check"/>
+              </div>
+              <p class="hoveredAuctionContent-title">{{participationResult.coinsNeeded}} سکه</p>
+              <p class="hoveredAuctionContent-parag"> تعداد {{participationResult.coinsNeeded}} جهت شرکت شما در {{participationResult.auction}} کسر شد.</p>
+              </div>
+            </div>
+      </div>
+    </div>
+
+    <div *ngIf="auction.participated">
+      <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+        <div class="hoveredAuction">
+            <p class="hoveredAuctionTitle">
+              شرکت در حراجی
+              <img (click)="RegisterAuctionSlideDownClick($event)" class="registerAuctionTitle-arrowDown" src="../../assets/resources/images/assets/svg/arrowDown.svg" alt="">
+            </p>
+            <div class="hoveredAuctionContent">
+              <div class="hoveredAuction-imageWrapper">
+                <img src="../../assets/resources/images/assets/png/coins@2x.png"/>
+                <img src="../../assets/resources/images/assets/png/check.png" class="hoveredAuction-check"/>
+              </div>
+              <p class="hoveredAuctionContent-title">{{auction.plan.bids}} پیشنهاد با پلن {{auction.plan.title}}</p>
+              <p class="hoveredAuctionContent-parag">شما {{auction.plan.coins}} سکه جهت شرکت در {{auction.title}} پرداخت کرده اید.</p>
+              </div>
+            </div>
       </div>
     </div>
 
@@ -84,7 +123,7 @@
       <span>{{auction.maxLevel}} / {{auction.level}}</span>
    </div>
    <div class="cart-footer-contributer" dir="ltr">
-      <img *ngFor="let pic of auction.participants.icons" src="Link.avatar(pic)" alt="" class="">
+      <img *ngFor="let pic of auction.participants.icons" [src]="Link.avatar(pic)" alt="" class="">
      <span>شرکت کنندگان: {{auction.participants.count }} از {{auction.maxMembers}}</span>
    </div>
  </div>
