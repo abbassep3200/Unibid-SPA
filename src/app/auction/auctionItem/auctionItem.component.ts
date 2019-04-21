@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
-import {Links} from 'src/app/links.component';
+import { Links } from 'src/app/links.component';
+import { ParticipationResult } from 'src/app/models/participationResult.model';
 
 @Component({
   selector: 'app-auctionItem',
@@ -15,6 +16,8 @@ export class AuctionItemComponent implements OnInit {
   hideRegisterAuction = false;
   loading = false;
   errorObj = null;
+  coinState = 'pallet';
+  participationResult = ParticipationResult;
   Link = Links;
   remainedTime;
   timeoutId = 0;
@@ -66,6 +69,7 @@ export class AuctionItemComponent implements OnInit {
   RegisterAuctionSlideDownClick(eventData) {
     this.hideRegisterAuction = true;
     setTimeout(() => {
+      this.coinState = 'pallet';
       this.showRegisterAuction = false;
       this.hideRegisterAuction = false;
     }, 1000);
@@ -98,14 +102,49 @@ export class AuctionItemComponent implements OnInit {
       this.loading = false;
     },
     error => {
+      if(error.error.reason==="coins"){
+        this.participationResult = error.error.details;
+        this.coinState = 'gems';
+      }
+
       this.errorObj = error;
       this.loading = false;
       this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => {
         this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-      }, 5000);
+        if(error.status==401){
+          this.authService.logout();
+        }
+      }, 3000);
     });
     eventData.stopPropagation();
+  }
+
+  registerByGem(eventData,auctionId,planId){
+    eventData.stopPropagation();
+
+    this.loading = true;
+    this.service.registerByGem({auctionId:auctionId,planId:planId}).subscribe(result => {
+      this.loading = false;
+    },
+    error => {
+      if(error.error.reason==="coins"){
+        this.participationResult = error.error.details;
+        this.coinState = 'gems';
+      }
+
+      this.errorObj = error;
+      this.loading = false;
+      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
+        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
+        if(error.status==401){
+          this.authService.logout();
+        }
+      }, 3000);
+    });
+
   }
 }

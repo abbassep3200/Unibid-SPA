@@ -98,4 +98,19 @@ export class MainServices {
       return this.http.post(this.participationByCoin ,participationObject);
     }
   }
+
+  registerByGem(participationObject) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':`Bearer ${token}`
+        })
+      };
+      return this.http.post(this.participationByGem ,participationObject,httpOptions);
+    }else{
+      return this.http.post(this.participationByGem ,participationObject);
+    }
+  }
 }
