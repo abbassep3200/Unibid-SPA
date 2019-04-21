@@ -9,7 +9,7 @@ export class Auction {
   participants: Participants;
   startedAuction: StartedAuction;
   coins: Coin[];
-  id: number;
+  auctionId: number;
   level: number;
   maxLevel: number;
   maxMembers: number;

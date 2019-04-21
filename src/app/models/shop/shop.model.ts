@@ -8,6 +8,6 @@ export class Shop {
   coins: Coin[];
   cheapGems: CheapGem[];
   expGems: ExpGem[];
-  chests: Chest[];
+  chest: Chest;
   avatars: Avatar[];
 }

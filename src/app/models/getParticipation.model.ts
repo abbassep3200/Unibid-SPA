@@ -5,5 +5,7 @@ export class GetParticipation {
     requiredGems: number;
     planId: number;
     auction: string;
+    paidGems : number;
+    coinsFraction : number;
   }
 }

@@ -20,6 +20,7 @@ export class AuctionItemComponent implements OnInit {
   errorObj = null;
   coinState = 'pallet';
   GetParticipation = GetParticipation;
+  participated = false;
   Link = Links;
   remainedTime;
   timeoutId = 0;
@@ -74,7 +75,7 @@ export class AuctionItemComponent implements OnInit {
   RegisterAuctionSlideDownClick(eventData) {
     this.hideRegisterAuction = true;
     setTimeout(() => {
-      this.coinState = 'pallet';
+      // this.coinState = 'pallet';
       this.showRegisterAuction = false;
       this.hideRegisterAuction = false;
     }, 1000);
@@ -107,6 +108,7 @@ export class AuctionItemComponent implements OnInit {
       this.loading = false;
       this.GetParticipation = <any>result;
       this.coinState = 'confirmed';
+      this.participated = true;
     },
     error => {
       if(error.error.reason==="coins"){
@@ -137,6 +139,7 @@ export class AuctionItemComponent implements OnInit {
       this.loading = false;
       this.GetParticipation = <any>result;
       this.coinState = 'confirmed';
+      this.participated = true;
     },
     error => {
       if(error.error.reason==="coins"){
