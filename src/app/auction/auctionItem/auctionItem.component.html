@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 
   <div class="cart-tag" *ngIf="auction.tag"></div>
@@ -62,7 +62,7 @@
       <span>{{auction.maxLevel}} / {{auction.level}}</span>
    </div>
    <div class="cart-footer-contributer" dir="ltr">
-      <img *ngFor="let pic of auction.participants.icons" src="http://dev.unibid.ir/static/images/avatars/{{pic}}" alt="" class="">
+      <img *ngFor="let pic of auction.participants.icons" src="Link.avatar(pic)" alt="" class="">
      <span>شرکت کنندگان: {{auction.participants.count }} از {{auction.maxMembers}}</span>
    </div>
  </div>

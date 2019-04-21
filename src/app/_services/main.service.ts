@@ -14,6 +14,9 @@ export class MainServices {
   sliderAuctionUrl = environment.prefix+'/v2/api/site/slider/auctions';
   searchItemsUrl =  environment.prefix+'/v2/api/site/categories';
   likeUrl = environment.prefix+'/v2/api/auction/like';
+  participationByCoin = environment.prefix+'/v2/api/auction/coin/registeration';
+  participationByGem = environment.prefix+'/v2/api/auction/gem/registeration';
+
   constructor(private http: HttpClient) {
 
   }
@@ -78,6 +81,21 @@ export class MainServices {
       return this.http.post(this.likeUrl ,auction,httpOptions);
     }else{
       return this.http.post(this.likeUrl ,auction);
+    }
+  }
+
+  registerByCoin(participationObject) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':`Bearer ${token}`
+        })
+      };
+      return this.http.post(this.participationByCoin ,participationObject,httpOptions);
+    }else{
+      return this.http.post(this.participationByCoin ,participationObject);
     }
   }
 }

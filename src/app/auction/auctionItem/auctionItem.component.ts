@@ -93,7 +93,19 @@ export class AuctionItemComponent implements OnInit {
   }
 
   registerByCoin(eventData,auctionId,planId){
-    console.log(auctionId + " "+ planId);
+    this.loading = true;
+    this.service.registerByCoin({auctionId:auctionId,planId:planId}).subscribe(result => {
+      this.loading = false;
+    },
+    error => {
+      this.errorObj = error;
+      this.loading = false;
+      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
+        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
+      }, 5000);
+    });
     eventData.stopPropagation();
   }
 }
