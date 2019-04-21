@@ -3,14 +3,15 @@ import { MainServices } from 'src/app/_services/main.service';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
 import { Links } from 'src/app/links.component';
-import { ParticipationResult } from 'src/app/models/participationResult.model';
 import { Router } from '@angular/router';
+import { GetParticipation } from 'src/app/models/getParticipation.model';
 
 @Component({
   selector: 'app-auctionItem',
   templateUrl: './auctionItem.component.html',
   styleUrls: ['./auctionItem.component.css']
 })
+
 export class AuctionItemComponent implements OnInit {
   toggleHeart = false;
   showRegisterAuction = false;
@@ -18,7 +19,7 @@ export class AuctionItemComponent implements OnInit {
   loading = false;
   errorObj = null;
   coinState = 'pallet';
-  participationResult = ParticipationResult;
+  GetParticipation = GetParticipation;
   Link = Links;
   remainedTime;
   timeoutId = 0;
@@ -104,12 +105,12 @@ export class AuctionItemComponent implements OnInit {
     this.loading = true;
     this.service.registerByCoin({auctionId:auctionId,planId:planId}).subscribe(result => {
       this.loading = false;
-      this.participationResult = result.details;
+      this.GetParticipation = <any>result;
       this.coinState = 'confirmed';
     },
     error => {
       if(error.error.reason==="coins"){
-        this.participationResult = error.error.details;
+        this.GetParticipation = error.error;
         this.coinState = 'gems';
       }
 
@@ -134,10 +135,12 @@ export class AuctionItemComponent implements OnInit {
     this.loading = true;
     this.service.registerByGem({auctionId:auctionId,planId:planId}).subscribe(result => {
       this.loading = false;
+      this.GetParticipation = <any>result;
+      this.coinState = 'confirmed';
     },
     error => {
       if(error.error.reason==="coins"){
-        this.participationResult = error.error.details;
+        this.GetParticipation = error.error;
         this.coinState = 'gems';
       }
 
