@@ -55,11 +55,12 @@ export class AuthenticationService {
       return this.http.get<VerificationGet>(this.verificationUrl);
     }
 
-    verifyPut() {
-      const verifyPutObj = {
-        resend: true
-      }
-      return this.http.put<VerificationPut>(this.verificationUrl, JSON.stringify(verifyPutObj));
+    verifyPut(verifyPutObj) {
+      return this.http.put<VerificationPut>(this.verificationUrl, verifyPutObj);
+    }
+
+    verifyPost(verifyPostObj) {
+      return this.http.post(this.verificationUrl, verifyPostObj);
     }
 
     logout() {
