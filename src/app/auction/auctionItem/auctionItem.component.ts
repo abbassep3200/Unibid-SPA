@@ -91,4 +91,9 @@ export class AuctionItemComponent implements OnInit {
         seconds: seconds
     };
   }
+
+  registerByCoin(eventData,auctionId,planId){
+    console.log(auctionId + " "+ planId);
+    eventData.stopPropagation();
+  }
 }

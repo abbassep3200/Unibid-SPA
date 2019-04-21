@@ -1,23 +1,27 @@
 <div class="cart" (click)="RegisterAuctionSlideupClick()">
+
   <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+
     <p class="registerAuctionTitle">
       ثبت نام در حراجی
       <img (click)="RegisterAuctionSlideDownClick($event)" class="registerAuctionTitle-arrowDown" src="../../assets/resources/images/assets/svg/arrowDown.svg" alt="">
     </p>
     <p class="registerAuctionParag">برای شرکت در حراجی بسته مورد نظر را انتخاب کنید.</p>
-    <div class="registerAuction-item" *ngFor="let coin of auction?.coins">
-      <div class="registerAuction-item-image">
-         <img src="../../assets/resources/images/assets/png/coins.png" alt="">
-      </div>
-      <div class="registerAuction-item-info">
-        <p><span>{{coin.bids}} سکه</span> ({{coin.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان)</p>
-        <p>{{coin.coinCount}} عدد پیشنهاد</p>
-        <p>کوپن تخفیف {{coin.discountCoupon | currency : ' ' : 'symbol' : '1.0-0'}} تومانی</p>
+    <div *ngFor="let coin of auction?.coins">
+      <div class="registerAuction-item" (click) = "registerByCoin($event,auction.auctionId,coin.planId)">
+        <div class="registerAuction-item-image">
+           <img src="../../assets/resources/images/assets/png/coins.png" alt="">
+        </div>
+        <div class="registerAuction-item-info">
+          <p><span>{{coin.bids}} سکه</span> ({{coin.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان)</p>
+          <p>{{coin.coinCount}} عدد پیشنهاد</p>
+          <p>کوپن تخفیف {{coin.discountCoupon | currency : ' ' : 'symbol' : '1.0-0'}} تومانی</p>
+        </div>
       </div>
     </div>
-    <div class="registerAuctionItem"></div>
-    <div class="registerAuctionItem"></div>
+    
   </div>
+
   <div class="cart-tag" *ngIf="auction.tag"></div>
   <span class="cart-tag-content" *ngIf="auction.tag">{{auction.tag}}</span>
   <div class="cart-share-fav">
