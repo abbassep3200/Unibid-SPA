@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChildren, ElementRef, QueryList, Input,Renderer2 } from '@angular/core';
+import { Component, OnInit,ViewChildren, ElementRef, QueryList, Input,Renderer2 ,Injectable} from '@angular/core';
 
 @Component({
   selector: 'app-progress',
@@ -6,6 +6,7 @@ import { Component, OnInit,ViewChildren, ElementRef, QueryList, Input,Renderer2 
   styleUrls: ['./progress.component.css']
 })
 
+@Injectable({ providedIn: 'root' })
 export class ProgressComponent implements OnInit {
 
   @Input() current: number;
@@ -14,19 +15,14 @@ export class ProgressComponent implements OnInit {
 
   timer;
   time;
-
   numbers;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {
+  constructor(private el: ElementRef) {
 
   }
 
   ngOnInit() {
     this.numbers = Array.apply(null, {length: this.total}).map(Number.call, Number);
-    // console.log(this.el.nativeElement.getElementsByClassName('progressItem'));
-    // console.log(document);
-    // console.log(this.el.nativeElement.querySelector('.progressItem-empty'));
-    console.log(this.el.nativeElement.getElementsByClassName('progressItem'));
   }
 
   update() {
@@ -58,19 +54,20 @@ export class ProgressComponent implements OnInit {
     this.update();
   }
 
-  ngAfterViewInit(){
-
+  init(){
     for(var i = this.progresses.length -1 ; i >= this.current; i--)
     {
       this.progresses.toArray()[i].nativeElement.classList.replace('progressItem','progressItemNone');
     }
 
     this.time = this.current+1;
+  }
+
+  ngAfterViewInit(){
+
+    this.init();
 
     this.timer =  setInterval(()=> {
-
-      console.log(this.time);
-
       this.time -= 1;
       if(this.time===0){
         console.log('auction finished');

@@ -5,6 +5,7 @@ import { Auction } from 'src/app/models/auction.model';
 import { Links } from 'src/app/links.component';
 import { Router } from '@angular/router';
 import { GetParticipation } from 'src/app/models/getParticipation.model';
+import { ProgressComponent } from 'src/app/progress/progress.component';
 
 
 @Component({
@@ -28,12 +29,17 @@ export class AuctionItemComponent implements OnInit {
 
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
+  @ViewChild(ProgressComponent) progress;
 
   currentTime = Math.floor(Math.random() * (10 - 4)) + 4;
   totalSegments = 10 ;
 
-  constructor(private service: MainServices,private authService:AuthenticationService,private router: Router) {
-
+  constructor(
+    private service: MainServices,
+    private authService:AuthenticationService,
+    private router: Router
+  )
+  {
   }
 
   ngOnInit() {
@@ -52,9 +58,12 @@ export class AuctionItemComponent implements OnInit {
     }
     // $('body').css('{backgroundColor: red}');
   }
+  ngAfterViewInit() {
+
+   }
 
   toggleClick(eventData, auctionId) {
-
+    
       this.loading = true;
       this.service.likeAuction({auctionId:auctionId}).subscribe(result => {
         this.toggleHeart = !this.toggleHeart;
