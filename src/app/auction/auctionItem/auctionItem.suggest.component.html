@@ -1,4 +1,4 @@
-<div class="cart" (click)="RegisterAuctionSlideupClick()">
+<div class="cart cart-suggest">
 
     <div *ngIf="coinState=='pallet' && !auction.participated">
       <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
@@ -99,36 +99,19 @@
         <p class="cart-off-before">سقف حراجی: {{auction.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان</p>
     </div>
   </div>
-  <app-progress [current]="currentTime" [total]="totalSegments" ></app-progress>
-  <div class="cart-timer">
-      <div class="cart-timer-part">
-        <span class="cart-time">{{remainedTime.seconds}}</span>
-        <span class="cart-time-text">ثانیه</span>
-      </div>
-      <div class="cart-timer-part">
-          <span class="cart-time">{{remainedTime.minute}}</span>
-          <span class="cart-time-text">دقیقه</span>
-      </div>
-      <div class="cart-timer-part">
-          <span class="cart-time">{{remainedTime.hour}}</span>
-          <span class="cart-time-text">ساعت</span>
-      </div>
-      <div class="cart-timer-part">
-          <span class="cart-time">{{remainedTime.day}}</span>
-          <span class="cart-time-text">روز</span>
-      </div>
- </div>
- <div class="cart-footer">
-   <div class="cart-footer-rank">
-      <img src="../../assets/resources/images/assets/png/star.png">
-      <span>{{auction.maxLevel}} / {{auction.level}}</span>
-   </div>
-   <div class="cart-footer-contributer" dir="ltr">
-      <img *ngFor="let pic of auction.participants.icons" [src]="Link.avatar(pic)" alt="" class="">
-     <span>شرکت کنندگان: {{auction.participants.count }} از {{auction.maxMembers}}</span>
-   </div>
- </div>
-</div>
+
+  <a href="" class="cfnButton cfnButton-primary">۲۴ پیشنهاد</a>
+            
+
+            <div class="cart-footer">
+              <p>آخرین پیشنهاد: ۱,۳۵۰,۰۰۰ تومان</p>
+              <div class="cart-footer-contributer" dir="ltr">
+                <span>جواد صالح</span>
+                <img src="resources/images/pics/pic4.jpg" alt="" class="">
+                <span>نفر اول</span>
+              </div>
+            </div>
+
 
 <div class="cfnLoaderWrapper" *ngIf="loading">
   <div class="cfnLoader"></div>

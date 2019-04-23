@@ -359,3 +359,23 @@
   bottom: 50px;
   position: absolute;
 }
+
+.cart .progress {
+  margin-top: 36px;
+}
+
+.cart-suggest .cart-footer {
+  border: none;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.cart-suggest .cart-footer-contributer > * {
+  margin: 0 5px;
+}
+
+.cart-suggest .cart-footer-contributer > span:first-of-type {
+  color: #707070;
+}
+
+/* =progress */

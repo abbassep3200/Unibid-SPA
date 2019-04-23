@@ -17,6 +17,10 @@ import { AuctionListComponent } from './auction/auctionList/auctionList.componen
 import { SwiperModule } from 'angular2-useful-swiper';
 import { SliderComponent } from './slider/slider.component';
 import { ShopComponent } from './shop/shop.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ProgressComponent } from './progress/progress.component';
+
+const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {} };
 
 @NgModule({
   declarations: [
@@ -31,14 +35,16 @@ import { ShopComponent } from './shop/shop.component';
     VerificationComponent,
     VerificationInputKeyupDirective,
     SliderComponent,
-    ShopComponent
+    ShopComponent,
+    ProgressComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     routing,
-    SwiperModule
+    SwiperModule,
+    SocketIoModule.forRoot(config)
   ],
 providers: [],
   bootstrap: [AppComponent]

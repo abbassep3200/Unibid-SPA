@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryList} from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
 import { Links } from 'src/app/links.component';
 import { Router } from '@angular/router';
 import { GetParticipation } from 'src/app/models/getParticipation.model';
+
 
 @Component({
   selector: 'app-auctionItem',
@@ -27,18 +28,26 @@ export class AuctionItemComponent implements OnInit {
 
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
+
+  currentTime = 10;
+  totalSegments = 10 ;
+
   constructor(private service: MainServices,private authService:AuthenticationService,private router: Router) {
 
-   }
+  }
 
   ngOnInit() {
 
+
+    console.log('auction component');
     this.toggleHeart = this.auction.liked;
+
     if (this.auction) {
       this.remainedTime = this.ConvertMS(this.auction.remainedTime);
       setInterval(() => {
         this.auction.remainedTime = this.auction.remainedTime - 1000;
         this.remainedTime = this.ConvertMS(this.auction.remainedTime);
+
       }, 1000);
     }
     // $('body').css('{backgroundColor: red}');
