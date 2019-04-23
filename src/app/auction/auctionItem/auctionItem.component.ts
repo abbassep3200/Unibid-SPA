@@ -29,7 +29,7 @@ export class AuctionItemComponent implements OnInit {
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
 
-  currentTime = 10;
+  currentTime = Math.floor(Math.random() * (10 - 4)) + 4;
   totalSegments = 10 ;
 
   constructor(private service: MainServices,private authService:AuthenticationService,private router: Router) {
