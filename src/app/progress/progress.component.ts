@@ -79,14 +79,14 @@ export class ProgressComponent implements OnInit {
         if(current_element){
           current_element.previousElementSibling.classList.add('progressItem-empty');
         }else{
-          current_element = this.el.nativeElement.getElementsByClassName('progressItem')[this.current-1];
+          current_element = this.el.nativeElement.getElementsByClassName('progressItem')[this.current];
           if(current_element){
             current_element.classList.add('progressItem-empty');
           }else{
             this.progresses.toArray()[this.progresses.length-1].nativeElement.classList.add('progressItem-empty');
           }
         }
-    }
+      }
     }, 1000);
 
   }

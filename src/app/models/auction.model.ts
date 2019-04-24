@@ -3,6 +3,7 @@ import { Participants } from './participants.model';
 import { StartedAuction } from './startedAuction.model';
 import { Coin } from './coin.model';
 import { AuctionPlan } from './auctionPlan.model';
+import { StartedAuction } from './startedAuction.model';
 
 export class Auction {
   charity: Charity;
@@ -18,6 +19,7 @@ export class Auction {
   likeCount: number;
   participated: boolean;
   plan: AuctionPlan;
+  started: StartedAuction;
   tag: string;
   title: string;
   basePrice: number;

@@ -56,14 +56,24 @@ export class AuctionItemComponent implements OnInit {
 
       }, 1000);
     }
-    // $('body').css('{backgroundColor: red}');
+
   }
   ngAfterViewInit() {
 
-   }
+  }
+
+  tryParseInt(number){
+    return parseInt(Math.floor(number));
+  }
+
+  resetProgress(eventData){
+    console.log('reset');
+    // this.progresses.reset();
+    // eventData.stopPropagation();
+  }
 
   toggleClick(eventData, auctionId) {
-    
+
       this.loading = true;
       this.service.likeAuction({auctionId:auctionId}).subscribe(result => {
         this.toggleHeart = !this.toggleHeart;

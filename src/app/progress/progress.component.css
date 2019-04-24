@@ -3,6 +3,7 @@
 .progress  {
   display: flex;
   direction: ltr;
+  margin-top: 36px;
 }
 .progressItem {
   height: 2px;
