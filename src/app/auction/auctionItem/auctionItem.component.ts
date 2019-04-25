@@ -64,7 +64,7 @@ export class AuctionItemComponent implements OnInit {
 
   ngDoCheck(){
     // this.auction.started = new StartedAuction();
-    if(this.auction.remainedTime <= 121162000 && !this.joined){
+    if(this.auction.remainedTime <= 60000 && !this.joined){
       console.log('joining started auctions');
       this.joined = true;
       this.auctionSocket.join(this.auction.auctionId);
@@ -89,11 +89,21 @@ export class AuctionItemComponent implements OnInit {
     this.auctionSocket.started.subscribe(result => {
       console.log(result);
       this.auction.started = result;
-
     });
 
-    this.auctionSocket.failed.pipe().subscribe(result => {
+    this.auctionSocket.accepted.subscribe(result => {
       console.log(result);
+      this.auctionSocket.start(this.auction.auctionId);
+    });
+
+    this.auctionSocket.failed.subscribe(result => {
+      this.errorObj = result;
+      this.loading = false;
+      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
+        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
+      }, 2000);
     });
 
   }
@@ -102,17 +112,20 @@ export class AuctionItemComponent implements OnInit {
     return parseInt(Math.floor(number).toString());
   }
 
-  resetProgress(eventData,auctionId){
-    console.log('reset');
-  }
-
   handleBid(eventData,auctionId){
+    console.log('try bid for : ',auctionId);
 
-    if (this.auction.remainedTime<10000){
-      this.auction.remainedTime = 10000;
-      this.progress.reset();
-    }
-    console.log('bid for : ',auctionId);
+    this.auctionSocket.offerBid(auctionId);
+
+    // if (this.auction.remainedTime < 10000){
+    //
+    //   this.auction.remainedTime = 10000;
+    //   this.progress.reset();
+    //
+    // }else{
+    //
+    // }
+
     eventData.stopPropagation();
   }
 

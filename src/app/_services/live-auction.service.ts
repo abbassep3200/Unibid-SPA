@@ -15,6 +15,7 @@ export class LiveAuctionService {
   leaved = this.socket.fromEvent<string>('leaved');
   failed = this.socket.fromEvent<FailMessage>('failed');
   succeed = this.socket.fromEvent<SuccessMessage>('succeed');
+  accepted = this.socket.fromEvent<string>('accepted');
 
   constructor(private socket: Socket) {
   }
@@ -40,6 +41,15 @@ export class LiveAuctionService {
       this.socket.emit('start',{'auctionId':auctionId,'authorization':token});
     }
   }
+
+  offerBid(auctionId){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('bid',{'auctionId':auctionId,'authorization':token});
+    }
+  }
+
   disconnect(){
     this.socket.disconnect();
   }
