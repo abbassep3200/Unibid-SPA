@@ -40,5 +40,8 @@ export class LiveAuctionService {
       this.socket.emit('start',{'auctionId':auctionId,'authorization':token});
     }
   }
+  disconnect(){
+    this.socket.disconnect();
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryList, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryList} from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
@@ -6,9 +6,8 @@ import { StartedAuction } from 'src/app/models/startedAuction.model';
 import { Links } from 'src/app/links.component';
 import { Router } from '@angular/router';
 import { GetParticipation } from 'src/app/models/getParticipation.model';
-import { ProgressComponent } from 'src/app/progress/progress.component';
 import { LiveAuctionService } from 'src/app/_services/live-auction.service';
-import { Subscription } from 'rxjs';
+import { ProgressComponent } from 'src/app/progress/progress.component';
 
 @Component({
   selector: 'app-auctionItem',
@@ -30,11 +29,10 @@ export class AuctionItemComponent implements OnInit {
   timer;
   joined = false;
   timeoutId = 0;
-  private auctionSubscription: Subscription;
 
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
-  @ViewChild(ProgressComponent) progress;
+  @ViewChild(ProgressComponent ) progress: ProgressComponent ;
 
   currentTime = Math.floor(Math.random() * (10 - 4)) + 4;
   totalSegments = 10 ;
@@ -44,7 +42,6 @@ export class AuctionItemComponent implements OnInit {
     private authService:AuthenticationService,
     private router: Router,
     private auctionSocket:LiveAuctionService,
-    private cdRef: ChangeDetectorRef,
   )
   {
 
@@ -77,6 +74,7 @@ export class AuctionItemComponent implements OnInit {
 
   ngOnDestroy() {
     // this.auctionSubscription.unsubscribe();
+    this.auctionSocket.disconnect();
     clearInterval(this.timer);
   }
 
@@ -104,8 +102,18 @@ export class AuctionItemComponent implements OnInit {
     return parseInt(Math.floor(number).toString());
   }
 
-  resetProgress(eventData){
+  resetProgress(eventData,auctionId){
     console.log('reset');
+  }
+
+  handleBid(eventData,auctionId){
+
+    if (this.auction.remainedTime<10000){
+      this.auction.remainedTime = 10000;
+      this.progress.reset();
+    }
+    console.log('bid for : ',auctionId);
+    eventData.stopPropagation();
   }
 
   toggleClick(eventData, auctionId) {

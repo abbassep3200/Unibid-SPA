@@ -25,33 +25,17 @@ export class ProgressComponent implements OnInit {
     this.numbers = Array.apply(null, {length: this.total}).map(Number.call, Number);
   }
 
-  update() {
-    this.progresses.forEach(progressItem => {
-      progressItem.nativeElement.classList.remove('progressItem-empty');
-      progressItem.nativeElement.classList.replace('progressItemNone','progressItem');
-    });
-  }
-
   reset() {
+    this.stop();
 
-    if(this.progresses.length>10)
-      this.progresses.toArray()[this.progresses.length-1].nativeElement.remove();
-
-    if(this.time===0){
-      console.log('auction finished');
-      clearInterval(this.timer);
-      return;
-    }
-
-    this.current = this.progresses.length;
-    this.time = this.current+1;
+    this.time = 11;
 
     this.progresses.forEach(progressItem => {
-      progressItem.nativeElement.classList.replace('progressItemNone','progressItem');
       progressItem.nativeElement.classList.remove('progressItem-empty');
+      progressItem.nativeElement.classList.replace('progressItemNone','progressItem');
     });
-
-    this.update();
+    
+    this.start();
   }
 
   init(){
@@ -67,14 +51,17 @@ export class ProgressComponent implements OnInit {
 
     this.init();
 
+    this.start();
+  }
+  start(){
     this.timer =  setInterval(()=> {
+
       this.time -= 1;
       if(this.time===0){
         console.log('auction finished');
-        clearInterval(this.timer);
+        this.stop();
       }
       else{
-        // debugger;
         var current_element = this.el.nativeElement.getElementsByClassName('progressItem-empty')[0];
         if(current_element){
           current_element.previousElementSibling.classList.add('progressItem-empty');
@@ -87,12 +74,18 @@ export class ProgressComponent implements OnInit {
           }
         }
       }
+
       if(this.time>10){
         this.el.nativeElement.getElementsByClassName('progressItem-empty')[0].remove();
       }
 
     }, 1000);
   }
+
+  stop(){
+    clearInterval(this.timer);
+  }
+
   ngOnDestroy() {
     clearInterval(this.timer);
   }

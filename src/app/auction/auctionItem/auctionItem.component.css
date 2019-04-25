@@ -266,7 +266,7 @@
   height: 85px;
   background-color: rgba(255, 217, 73, 0.3);
   border-radius: 50%;
-  z-index: 99999999;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -369,6 +369,10 @@
   border: none;
   white-space: nowrap;
   font-size: 12px;
+}
+.cart-suggest  > a{
+  cursor: pointer;
+  pointer-events: initial !important;
 }
 
 .cart-suggest .cart-footer-contributer > * {
