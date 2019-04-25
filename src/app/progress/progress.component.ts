@@ -87,8 +87,14 @@ export class ProgressComponent implements OnInit {
           }
         }
       }
-    }, 1000);
+      if(this.time>10){
+        this.el.nativeElement.getElementsByClassName('progressItem-empty')[0].remove();
+      }
 
+    }, 1000);
+  }
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 
 }

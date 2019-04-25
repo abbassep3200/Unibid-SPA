@@ -20,7 +20,7 @@ import { ShopComponent } from './shop/shop.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ProgressComponent } from './progress/progress.component';
 
-const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {} };
+const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
 
 @NgModule({
   declarations: [

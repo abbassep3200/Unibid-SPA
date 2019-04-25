@@ -1,9 +1,9 @@
 import { Charity } from './charity.model';
 import { Participants } from './participants.model';
-import { StartedAuction } from './startedAuction.model';
 import { Coin } from './coin.model';
 import { AuctionPlan } from './auctionPlan.model';
 import { StartedAuction } from './startedAuction.model';
+
 
 export class Auction {
   charity: Charity;

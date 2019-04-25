@@ -152,7 +152,12 @@
         </div>
       </div>
       <a [routerLink]="" (click)="toggleClick($event,auction.auctionId)" class="cfnButton cfnButton-primary"> {{auction.started.remainedBids}} پیشنهاد </a>
-      <app-progress [current]="tryParseInt(auction.remainedTime/1000)" [total]="tryParseInt(auction.remainedTime/1000)" ></app-progress>
+      <div *ngIf="auction.remainedTime < 11000">
+        <app-progress [current]="tryParseInt(auction.remainedTime/1000)" [total]="10" ></app-progress>
+      </div>
+      <div *ngIf="auction.remainedTime >= 11000">
+        <app-progress [current]="tryParseInt(auction.remainedTime/1000)" [total]="tryParseInt(auction.remainedTime/1000)" ></app-progress>
+      </div>
 
      <div class="cart-footer">
        <p>آخرین پیشنهاد : {{auction.started.lastBidPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>

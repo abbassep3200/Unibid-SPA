@@ -1,12 +1,14 @@
-import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryList} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryList, ChangeDetectorRef} from '@angular/core';
 import { MainServices } from 'src/app/_services/main.service';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
+import { StartedAuction } from 'src/app/models/startedAuction.model';
 import { Links } from 'src/app/links.component';
 import { Router } from '@angular/router';
 import { GetParticipation } from 'src/app/models/getParticipation.model';
 import { ProgressComponent } from 'src/app/progress/progress.component';
-
+import { LiveAuctionService } from 'src/app/_services/live-auction.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auctionItem',
@@ -25,7 +27,10 @@ export class AuctionItemComponent implements OnInit {
   participated = false;
   Link = Links;
   remainedTime;
+  timer;
+  joined = false;
   timeoutId = 0;
+  private auctionSubscription: Subscription;
 
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
@@ -37,39 +42,66 @@ export class AuctionItemComponent implements OnInit {
   constructor(
     private service: MainServices,
     private authService:AuthenticationService,
-    private router: Router
+    private router: Router,
+    private auctionSocket:LiveAuctionService,
+    private cdRef: ChangeDetectorRef,
   )
   {
+
   }
 
   ngOnInit() {
-
-
-    console.log('auction component');
+    // this.auctionSocket.connect();
+    // this.auctionSubscription = this.auctionSocket.connect.pipe().subscribe(result => console.log(result));
     this.toggleHeart = this.auction.liked;
 
     if (this.auction) {
       this.remainedTime = this.ConvertMS(this.auction.remainedTime);
-      setInterval(() => {
+      this.timer = setInterval(() => {
         this.auction.remainedTime = this.auction.remainedTime - 1000;
         this.remainedTime = this.ConvertMS(this.auction.remainedTime);
-
       }, 1000);
     }
 
   }
+
+  ngDoCheck(){
+    // this.auction.started = new StartedAuction();
+    if(this.auction.remainedTime <= 121162000 && !this.joined){
+      console.log('joining started auctions');
+      this.joined = true;
+      this.auctionSocket.join(this.auction.auctionId);
+    }
+
+  }
+
+  ngOnDestroy() {
+    // this.auctionSubscription.unsubscribe();
+    clearInterval(this.timer);
+  }
+
   ngAfterViewInit() {
+    this.auctionSocket.connect.pipe().subscribe(result => console.log(result));
+
+    this.auctionSocket.joined.pipe().subscribe(result => {
+      console.log(result);
+      this.auctionSocket.start(this.auction.auctionId);
+    });
+
+    this.auctionSocket.started.subscribe(result => this.auction.started = result);
+
+    this.auctionSocket.failed.pipe().subscribe(result => {
+      console.log(result);
+    });
 
   }
 
   tryParseInt(number){
-    return parseInt(Math.floor(number));
+    return parseInt(Math.floor(number).toString());
   }
 
   resetProgress(eventData){
     console.log('reset');
-    // this.progresses.reset();
-    // eventData.stopPropagation();
   }
 
   toggleClick(eventData, auctionId) {
@@ -94,7 +126,7 @@ export class AuctionItemComponent implements OnInit {
         }, 2000);
       });
       eventData.stopPropagation();
-}
+    }
 
   RegisterAuctionSlideupClick() {
     this.showRegisterAuction = true;
