@@ -2,12 +2,12 @@ import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryLis
 import { MainServices } from 'src/app/_services/main.service';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
-import { StartedAuction } from 'src/app/models/startedAuction.model';
 import { Links } from 'src/app/links.component';
 import { Router } from '@angular/router';
 import { GetParticipation } from 'src/app/models/getParticipation.model';
 import { LiveAuctionService } from 'src/app/_services/live-auction.service';
 import { ProgressComponent } from 'src/app/progress/progress.component';
+import { AuctionStatus } from 'src/app/models/auctionStatus.model';
 
 @Component({
   selector: 'app-auctionItem',
@@ -65,7 +65,6 @@ export class AuctionItemComponent implements OnInit {
   ngDoCheck(){
     // this.auction.started = new StartedAuction();
     if(this.auction.remainedTime <= 60000 && !this.joined){
-      console.log('joining started auctions');
       this.joined = true;
       this.auctionSocket.join(this.auction.auctionId);
     }
@@ -79,21 +78,30 @@ export class AuctionItemComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.auctionSocket.connect.pipe().subscribe(result => console.log(result));
 
-    this.auctionSocket.joined.pipe().subscribe(result => {
+    this.auctionSocket.connect.subscribe(result => console.log(result));
+
+    this.auctionSocket.joined.subscribe(result => {
       console.log(result);
-      this.auctionSocket.start(this.auction.auctionId);
+      this.auctionSocket.getStatus(this.auction.auctionId);
     });
 
-    this.auctionSocket.started.subscribe(result => {
-      console.log(result);
-      this.auction.started = result;
+    this.auctionSocket.bids.subscribe(result => {
+      this.auction.bids = parseInt(result);
     });
 
     this.auctionSocket.accepted.subscribe(result => {
+      var remainingTime = parseInt(result);
+      this.auction.remainedTime = remainingTime;
+      if (this.auction.remainedTime <= 11000){
+        this.progress.reset();
+      }
+      this.auctionSocket.getStatus(this.auction.auctionId);
+    });
+
+    this.auctionSocket.status.subscribe(result => {
       console.log(result);
-      this.auctionSocket.start(this.auction.auctionId);
+      this.auction.status = result;
     });
 
     this.auctionSocket.failed.subscribe(result => {
@@ -116,15 +124,6 @@ export class AuctionItemComponent implements OnInit {
     console.log('try bid for : ',auctionId);
 
     this.auctionSocket.offerBid(auctionId);
-
-    // if (this.auction.remainedTime < 10000){
-    //
-    //   this.auction.remainedTime = 10000;
-    //   this.progress.reset();
-    //
-    // }else{
-    //
-    // }
 
     eventData.stopPropagation();
   }

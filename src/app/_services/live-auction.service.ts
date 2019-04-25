@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { StartedAuction } from '../models/startedAuction.model';
+import { AuctionStatus } from '../models/auctionStatus.model';
 import { FailMessage } from '../models/fail.message.model';
 import { SuccessMessage } from '../models/success.message.model';
 
@@ -10,12 +10,13 @@ import { SuccessMessage } from '../models/success.message.model';
 })
 export class LiveAuctionService {
   connect = this.socket.fromEvent<string>('connect');
-  started = this.socket.fromEvent<StartedAuction>('started');
+  status = this.socket.fromEvent<AuctionStatus>('status');
   joined = this.socket.fromEvent<string>('joined');
   leaved = this.socket.fromEvent<string>('leaved');
   failed = this.socket.fromEvent<FailMessage>('failed');
   succeed = this.socket.fromEvent<SuccessMessage>('succeed');
   accepted = this.socket.fromEvent<string>('accepted');
+  bids = this.socket.fromEvent<string>('remainBids');
 
   constructor(private socket: Socket) {
   }
@@ -34,12 +35,8 @@ export class LiveAuctionService {
     }
   }
 
-  start(auctionId){
-    const currentUser = localStorage.getItem('currentUser');
-    if (currentUser) {
-      const token = JSON.parse(currentUser)['accessToken'];
-      this.socket.emit('start',{'auctionId':auctionId,'authorization':token});
-    }
+  getStatus(auctionId){
+    this.socket.emit('getStatus',{'auctionId':auctionId});
   }
 
   offerBid(auctionId){
