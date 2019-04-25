@@ -151,7 +151,7 @@
             <p class="cart-off-before">سقف حراجی: {{auction.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان</p>
         </div>
       </div>
-      <a [routerLink]="" (click)="toggleClick($event,auction.auctionId)" class="cfnButton cfnButton-primary"> {{auction.started.remainedBids}} پیشنهاد </a>
+      <a [routerLink]="" (click)="toggleClick($event,auction.auctionId)" class="cfnButton cfnButton-primary"> {{auction.started?.remainedBids}} پیشنهاد </a>
       <div *ngIf="auction.remainedTime < 11000">
         <app-progress [current]="tryParseInt(auction.remainedTime/1000)" [total]="10" ></app-progress>
       </div>
@@ -160,10 +160,10 @@
       </div>
 
      <div class="cart-footer">
-       <p>آخرین پیشنهاد : {{auction.started.lastBidPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+       <p>آخرین پیشنهاد : {{auction.started?.lastBidPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
        <div class="cart-footer-contributer" dir="ltr">
-         <span>{{auction.started.winnerName}}</span>
-          <img [src]="Link.avatar(auction.started.winnerAvatar)" alt="" class="">
+         <span>{{auction.started?.winnerName}}</span>
+          <img [src]="Link.avatar(auction.started?.winnerAvatar)" alt="" class="">
           <span>نفر اول</span>
        </div>
      </div>

@@ -88,7 +88,11 @@ export class AuctionItemComponent implements OnInit {
       this.auctionSocket.start(this.auction.auctionId);
     });
 
-    this.auctionSocket.started.subscribe(result => this.auction.started = result);
+    this.auctionSocket.started.subscribe(result => {
+      console.log(result);
+      this.auction.started = result;
+
+    });
 
     this.auctionSocket.failed.pipe().subscribe(result => {
       console.log(result);
