@@ -1,0 +1,23 @@
+import { Charity } from './../charity.model';
+import { Participant } from './participant.model';
+
+
+export class BaseAuction {
+  charity: Charity;
+  auctionId: number;
+  images : string[];
+  level: number;
+  maxLevel: number;
+  likeCount: number;
+  participants: Participant[];
+  maxMembers: number;
+  liked: boolean;
+  participated: boolean;
+  bids : number;
+  tag: string;
+  title: string;
+  basePrice: number;
+  maxPrice: number;
+  remainedTime: number;
+  discount: number;
+}

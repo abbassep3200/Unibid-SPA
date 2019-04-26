@@ -8,7 +8,7 @@ import { VerificationComponent } from './auth/verification/verification.componen
 
 const appRoutes: Routes = [
   {
-      path: 'auction',
+      path: 'auction/:id',
       component: AuctionComponent
   },
   {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { BaseAuction } from 'src/app/models/auction/baseAuction.model';
 
 @Component({
   selector: 'app-auction-participants',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auction-participants.component.css']
 })
 export class AuctionParticipantsComponent implements OnInit {
+  @Input() auction: BaseAuction;
 
   constructor() { }
 

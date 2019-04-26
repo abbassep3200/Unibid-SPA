@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Auction } from '../models/auction.model';
 import { GetAuctions } from '../models/service/getAuctions.model';
+import { GetAuction } from '../models/service/getAuction.model';
 import { Shop } from '../models/shop/shop.model';
 import { GetSliderAuctions } from '../models/service/sliderAuctions.model';
 import { SearchItems } from '../models/service/searchItems.model';
@@ -14,6 +15,7 @@ export class MainServices {
   sliderAuctionUrl = Links.prefix+'/v2/api/site/slider/auctions';
   searchItemsUrl =  Links.prefix+'/v2/api/site/categories';
   likeUrl = Links.prefix+'/v2/api/auction/like';
+  getAuctionUrl = Links.prefix+'/v2/api/auction/';
   participationByCoin = Links.prefix+'/v2/api/auction/coin/registeration';
   participationByGem = Links.prefix+'/v2/api/auction/gem/registeration';
 
@@ -81,6 +83,21 @@ export class MainServices {
       return this.http.post(this.likeUrl ,auction,httpOptions);
     }else{
       return this.http.post(this.likeUrl ,auction);
+    }
+  }
+
+  GetAuction(auctionId) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':`Bearer ${token}`
+        })
+      };
+      return this.http.get<GetAuction>(this.getAuctionUrl+auctionId,httpOptions);
+    }else{
+      return this.http.get<GetAuction>(this.getAuctionUrl+auctionId);
     }
   }
 

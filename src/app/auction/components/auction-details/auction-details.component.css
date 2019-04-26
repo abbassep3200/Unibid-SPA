@@ -16,7 +16,6 @@
   align-items: center;
 }
 
-
 .details-cart-off-after {
   color: #ec407a;
 }
@@ -25,13 +24,14 @@
   margin-left: 20px;
   width: 42px;
   height: 42px;
-  background: url('/../images/assets/png/path.png') no-repeat center center;
+  background: url(/../../../assets/resources/images/assets/png/path.png) no-repeat center center;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 13px;
 }
+
 .cart-time {
   width: 52px;
   height: 52px;
