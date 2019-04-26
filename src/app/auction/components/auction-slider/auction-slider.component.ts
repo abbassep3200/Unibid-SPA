@@ -16,7 +16,9 @@ export class AuctionSliderComponent implements OnInit {
   constructor(private auctionSocket:LiveAuctionService) { }
 
   ngOnInit() {
-    this.auctionSocket.status.subscribe(result => this.status = status)
+    this.auctionSocket.status.subscribe(result =>{
+      this.status = result;
+    });
   }
 
 }

@@ -38,52 +38,21 @@
 <ng-template #other_content>
   <div class="details-auction-wrapper">
     <div class="details-auction-right">
-      <p class="details-auction-right-title">لپ تاپ 13 اینچی اپل مدل MacBook Air </p>
+      <p class="details-auction-right-title">{{auction?.title}}</p>
       <div class="details-cart-off">
-        <span class="details-cart-off-percent">٪۲۰</span>
+        <span class="details-cart-off-percent">٪{{auction?.discount}}</span>
         <div class="details-cart-off-info">
-          <p class="details-cart-off-after">شروع حراجی: ۷,۵۰۰,۰۰۰ تومان</p>
-          <p class="details-cart-off-before">سقف حراجی: ۱۲۰,۰۰۰,۰۰۰ تومان</p>
+          <p class="details-cart-off-after">شروع حراجی : {{auction?.basePrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+          <p class="details-cart-off-before">سقف حراجی : {{auction?.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
         </div>
       </div>
     </div>
     <div class="details-auction-left">
-      <p style="font-size: 13px; margin-bottom: 0; text-align: center;">آخرین پیشنهاد: ۳,۲۰۰,۰۰۰۰</p>
-      <a href="" class="cfnButton cfnButton-primary">۲۴ پیشنهاد</a>
+      <p style="font-size: 13px; margin-bottom: 0; text-align: center;">آخرین پیشنهاد : {{auction?.status?.bidPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+
+      <a (click)="handleBid($event,auction.auctionId)" class="cfnButton cfnButton-primary"> {{auction?.bids}} پیشنهاد </a>
     </div>
   </div>
-  <!-- <div class="progress" >
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem">
-      <span></span>
-    </span>
-    <span class="progressItem  progressItem-empty">
-      <span></span>
-    </span>
-  </div> -->
   <div *ngIf="auction?.remainedTime < 11000">
     <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="10" style="margin: 60px 0;"></app-progress>
   </div>
@@ -92,3 +61,9 @@
   </div>
 
 </ng-template>
+
+<div class="cfnError" #errorMessage>
+  <ng-template [ngIf]="errorObj">
+    {{errorObj.error.message}}
+</ng-template>
+</div>
