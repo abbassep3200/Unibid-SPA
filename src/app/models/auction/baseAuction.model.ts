@@ -1,5 +1,6 @@
 import { Charity } from './../charity.model';
 import { Participant } from './participant.model';
+import { Product } from './product.model';
 
 
 export class BaseAuction {
@@ -20,4 +21,6 @@ export class BaseAuction {
   maxPrice: number;
   remainedTime: number;
   discount: number;
+  product:Product;
+  started:boolean;
 }

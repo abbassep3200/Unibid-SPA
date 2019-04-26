@@ -12,5 +12,6 @@ export class AuctionFooterComponent implements OnInit {
 
   ngOnInit() {
   }
+  
 
 }

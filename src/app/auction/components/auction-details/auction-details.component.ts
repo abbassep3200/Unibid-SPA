@@ -34,6 +34,10 @@ export class AuctionDetailsComponent implements OnInit {
     clearInterval(this.timer);
   }
 
+  tryParseInt(number){
+    return parseInt(Math.floor(number).toString());
+  }
+
   ConvertMS(ms) {
     let day,
         hour,

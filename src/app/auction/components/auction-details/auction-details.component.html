@@ -1,31 +1,94 @@
-<div class="details-auction-wrapper">
-        <div class="details-auction-right">
-          <p class="details-auction-right-title">{{auction?.title}}</p>
-          <div class="details-cart-off">
-              <span class="details-cart-off-percent">٪{{auction?.discount}}</span>
-            <div class="details-cart-off-info">
-                <p class="details-cart-off-after">شروع حراجی : {{auction?.basePrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
-                <p class="details-cart-off-before">سقف حراجی : {{auction?.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
-            </div>
-          </div>
+<div *ngIf="auction?.remainedTime > 60000;then content else other_content"></div>
+
+<ng-template #content>
+
+  <div class="details-auction-wrapper">
+    <div class="details-auction-right">
+      <p class="details-auction-right-title">{{auction?.title}}</p>
+      <div class="details-cart-off">
+        <span class="details-cart-off-percent">٪{{auction?.discount}}</span>
+        <div class="details-cart-off-info">
+          <p class="details-cart-off-after">شروع حراجی : {{auction?.basePrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+          <p class="details-cart-off-before">سقف حراجی : {{auction?.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
         </div>
-        <div class="cart-timer">
-            <div class="cart-timer-part">
-              <span class="cart-time">{{remainedTime?.seconds}}</span>
-              <span class="cart-time-text">ثانیه</span>
-            </div>
-            <div class="cart-timer-part">
-                <span class="cart-time">{{remainedTime?.minute}}</span>
-                <span class="cart-time-text">دقیقه</span>
-            </div>
-            <div class="cart-timer-part">
-                <span class="cart-time">{{remainedTime?.hour}}</span>
-                <span class="cart-time-text">ساعت</span>
-            </div>
-            <div class="cart-timer-part">
-                <span class="cart-time">{{remainedTime?.day}}</span>
-                <span class="cart-time-text">روز</span>
-            </div>
-          </div>
       </div>
-      <div class="cart-timer-border"></div>
+    </div>
+    <div class="cart-timer">
+      <div class="cart-timer-part">
+        <span class="cart-time">{{remainedTime?.seconds}}</span>
+        <span class="cart-time-text">ثانیه</span>
+      </div>
+      <div class="cart-timer-part">
+        <span class="cart-time">{{remainedTime?.minute}}</span>
+        <span class="cart-time-text">دقیقه</span>
+      </div>
+      <div class="cart-timer-part">
+        <span class="cart-time">{{remainedTime?.hour}}</span>
+        <span class="cart-time-text">ساعت</span>
+      </div>
+      <div class="cart-timer-part">
+        <span class="cart-time">{{remainedTime?.day}}</span>
+        <span class="cart-time-text">روز</span>
+      </div>
+    </div>
+  </div>
+  <div class="cart-timer-border"></div>
+</ng-template>
+
+<ng-template #other_content>
+  <div class="details-auction-wrapper">
+    <div class="details-auction-right">
+      <p class="details-auction-right-title">لپ تاپ 13 اینچی اپل مدل MacBook Air </p>
+      <div class="details-cart-off">
+        <span class="details-cart-off-percent">٪۲۰</span>
+        <div class="details-cart-off-info">
+          <p class="details-cart-off-after">شروع حراجی: ۷,۵۰۰,۰۰۰ تومان</p>
+          <p class="details-cart-off-before">سقف حراجی: ۱۲۰,۰۰۰,۰۰۰ تومان</p>
+        </div>
+      </div>
+    </div>
+    <div class="details-auction-left">
+      <p style="font-size: 13px; margin-bottom: 0; text-align: center;">آخرین پیشنهاد: ۳,۲۰۰,۰۰۰۰</p>
+      <a href="" class="cfnButton cfnButton-primary">۲۴ پیشنهاد</a>
+    </div>
+  </div>
+  <!-- <div class="progress" >
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem">
+      <span></span>
+    </span>
+    <span class="progressItem  progressItem-empty">
+      <span></span>
+    </span>
+  </div> -->
+  <div *ngIf="auction?.remainedTime < 11000">
+    <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="10" style="margin: 60px 0;"></app-progress>
+  </div>
+  <div *ngIf="auction?.remainedTime >= 11000">
+    <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="tryParseInt(auction?.remainedTime/1000)" style="margin: 60px 0;"></app-progress>
+  </div>
+
+</ng-template>

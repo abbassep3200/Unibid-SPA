@@ -1,77 +1,16 @@
 <div class="contributer-wrapper">
-          <p class="contributer-title">شرکت کنندگان: <span>۱۲ / ۹</span></p>
-          <div class="contributer-item-warpper">
-            <div class="contributer">
-              <div class="contributer-image-wrapper">
-                <img src="resources/images/pics/Details1.jpg"/>
-                <span class="contributer-badge">۸</span>
-              </div>
-              <p class="contributer-item-name">استیو جابز</p>
-              <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-            </div>
-            <div class="contributer">
-                <div class="contributer-image-wrapper">
-                  <img src="resources/images/pics/Details2.jpg"/>
-                  <span class="contributer-badge">۸</span>
-                </div>
-                <p class="contributer-item-name">جواد چیتگر رحیمی</p>
-                <p class="contributer-item-follower">۲,۲۰۰,۰۰۰۰</p>
-              </div>
-              <div class="contributer">
-                  <div class="contributer-image-wrapper">
-                    <img src="resources/images/pics/Details3.jpg"/>
-                    <span class="contributer-badge">۸</span>
-                  </div>
-                  <p class="contributer-item-name">استیو جابز</p>
-                  <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                </div>
-                <div class="contributer">
-                    <div class="contributer-image-wrapper">
-                      <img src="resources/images/pics/Details4.jpg"/>
-                      <span class="contributer-badge">۸</span>
-                    </div>
-                    <p class="contributer-item-name">دیوید گیلمور</p>
-                    <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                  </div>
-                  <div class="contributer">
-                      <div class="contributer-image-wrapper">
-                        <img src="resources/images/pics/Details5.jpg"/>
-                        <span class="contributer-badge">۸</span>
-                      </div>
-                      <p class="contributer-item-name">استیو جابز</p>
-                      <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                    </div>
-                    <div class="contributer">
-                        <div class="contributer-image-wrapper">
-                          <img src="resources/images/pics/Details6.jpg"/>
-                          <span class="contributer-badge">۸</span>
-                        </div>
-                        <p class="contributer-item-name">دیوید گیلمور</p>
-                        <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                      </div>
-                      <div class="contributer">
-                          <div class="contributer-image-wrapper">
-                            <img src="resources/images/pics/Details7.jpg"/>
-                            <span class="contributer-badge">۸</span>
-                          </div>
-                          <p class="contributer-item-name">استیو جابز</p>
-                          <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                        </div>
-                        <div class="contributer">
-                            <div class="contributer-image-wrapper">
-                              <img src="resources/images/pics/Details8.jpg"/>
-                              <span class="contributer-badge">۸</span>
-                            </div>
-                            <p class="contributer-item-name">استیو جابز</p>
-                            <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                          </div>
-                          <div class="contributer">
-                              <div class="contributer-image-wrapper">
-                                <img src="resources/images/pics/Details9.jpg"/>
-                                <span class="contributer-badge">۸</span>
-                              </div>
-                              <p class="contributer-item-name">استیو جابز</p>
-                              <p class="contributer-item-follower">۱,۹۰۰,۰۰۰۰</p>
-                            </div>
-          </div>
+  <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
+  <div class="contributer-item-warpper">
+    <div *ngFor="let participant of participants">
+      <div class="contributer">
+        <div class="contributer-image-wrapper">
+          <img [src]="Link.avatar(participant.avatar)"/>
+          <span class="contributer-badge">{{participant.row}}</span>
         </div>
+        <p class="contributer-item-name">{{participant.name}}</p>
+        <p class="contributer-item-follower">{{participant.bidPrice}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

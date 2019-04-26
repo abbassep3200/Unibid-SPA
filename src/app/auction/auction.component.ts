@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MainServices } from 'src/app/_services/main.service';
 import { GetAuction } from 'src/app/models/service/getAuction.model';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auction',
@@ -14,7 +14,8 @@ export class AuctionComponent implements OnInit {
   loading = true;
   constructor(
     private route: ActivatedRoute,
-    private mainService: MainServices
+    private mainService: MainServices,
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -22,14 +23,14 @@ export class AuctionComponent implements OnInit {
 
         this.mainService.GetAuction(params['id']).subscribe(result => {
           this.auction = result;
-          console.log(result);
           this.loading = false;
         },
         error => {
+          this.router.navigate(['/']);
         });
 
     });
-
+    
   }
 
 }
