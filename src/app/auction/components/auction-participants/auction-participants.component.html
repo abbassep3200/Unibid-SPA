@@ -1,16 +1,39 @@
-<div class="contributer-wrapper">
-  <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
-  <div class="contributer-item-warpper">
-    <div *ngFor="let participant of participants">
-      <div class="contributer">
-        <div class="contributer-image-wrapper">
-          <img [src]="Link.avatar(participant.avatar)"/>
-          <span class="contributer-badge">{{participant.row}}</span>
+<div *ngIf="auction?.remainedTime > 60000;then content else other_content"></div>
+
+<ng-template #content>
+  <div class="contributer-wrapper">
+    <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
+    <div class="contributer-item-warpper">
+      <div *ngFor="let participant of participants">
+        <div class="contributer">
+          <div class="contributer-image-wrapper">
+            <img [src]="Link.avatar(participant.avatar)"/>
+          </div>
+          <p class="contributer-item-name">{{participant.name}}</p>
+          <div class="details-heder-top-level">
+            <img src="../../assets/resources/images/assets/png/star.png" alt="" class="details-heder-bottom-level">
+            <span class="details-heder-bottom-level-text">{{participant.level}}</span>
+          </div>
         </div>
-        <p class="contributer-item-name">{{participant.name}}</p>
-        <p class="contributer-item-follower">{{participant.bidPrice}}</p>
       </div>
     </div>
-
   </div>
-</div>
+</ng-template>
+
+<ng-template #other_content>
+  <div class="contributer-wrapper">
+    <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
+    <div class="contributer-item-warpper">
+      <div *ngFor="let participant of participants">
+        <div class="contributer">
+          <div class="contributer-image-wrapper">
+            <img [src]="Link.avatar(participant.avatar)"/>
+            <span class="contributer-badge">{{participant.row}}</span>
+          </div>
+          <p class="contributer-item-name">{{participant.name}}</p>
+          <p class="contributer-item-follower">{{participant.bidPrice}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

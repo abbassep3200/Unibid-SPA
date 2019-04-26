@@ -17,6 +17,7 @@ export class AuctionDetailsComponent implements OnInit {
   remainedTime;
   timer;
   timeoutId;
+  auctionTimer;
   joined = false;
   loading = false;
   errorObj = null;
@@ -34,20 +35,30 @@ export class AuctionDetailsComponent implements OnInit {
   }
   ngDoCheck(){
 
-    if (this.auction && !this.timer) {
+    if (this.auction) {
 
-      this.remainedTime = this.ConvertMS(this.auction.remainedTime);
-      this.timer = setInterval(() => {
-        this.auction.remainedTime = this.auction.remainedTime - 1000;
+      if(!this.timer){
         this.remainedTime = this.ConvertMS(this.auction.remainedTime);
-      }, 1000);
+        this.timer = setInterval(() => {
+          this.auction.remainedTime = this.auction.remainedTime - 1000;
+          this.remainedTime = this.ConvertMS(this.auction.remainedTime);
+        }, 1000);
+      }
+
+      if(this.auction.remainedTime > 60000 && !this.auctionTimer){
+        this.auctionTimer = setInterval(() => {
+          console.log('getAuction status');
+          this.auctionSocket.getAuction(this.auction.auctionId);
+        }, 1000);
+      }
 
       if(this.auction.remainedTime <= 60000 && !this.joined){
+        clearInterval(this.auctionTimer);
         this.joined = true;
         this.auctionSocket.join(this.auction.auctionId);
       }
-    }
 
+    }
   }
   ngAfterViewInit(){
     this.auctionSocket.connect.subscribe(result => console.log(result));
@@ -68,6 +79,7 @@ export class AuctionDetailsComponent implements OnInit {
         this.progress.reset();
       }
       this.auctionSocket.getStatus(this.auction.auctionId);
+      this.auctionSocket.getUsers(this.auction.auctionId);
     });
 
     this.auctionSocket.failed.subscribe(result => {

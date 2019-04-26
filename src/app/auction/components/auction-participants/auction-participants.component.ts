@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { BaseAuction } from 'src/app/models/auction/baseAuction.model';
 import { Links } from 'src/app/links.component';
+import { LiveAuctionService } from 'src/app/_services/live-auction.service';
 
 
 @Component({
@@ -14,9 +15,13 @@ export class AuctionParticipantsComponent implements OnInit {
   listRendered = false;
   participants;
 
-  constructor() { }
+  constructor(private auctionSocket:LiveAuctionService) { }
 
   ngOnInit() {
+    this.auctionSocket.users.subscribe(result =>{
+      console.log(result);
+      this.participants = result;
+    });
   }
   ngDoCheck(){
     if(!this.listRendered){
@@ -26,5 +31,6 @@ export class AuctionParticipantsComponent implements OnInit {
       }
     }
   }
+
 
 }
