@@ -19,6 +19,12 @@ import { SliderComponent } from './slider/slider.component';
 import { ShopComponent } from './shop/shop.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ProgressComponent } from './progress/progress.component';
+import { AuctionComponent } from './auction/auction.component';
+import { AuctionHeaderComponent } from './auction/components/auction-header/auction-header.component';
+import { AuctionDetailsComponent } from './auction/components/auction-details/auction-details.component';
+import { AuctionParticipantsComponent } from './auction/components/auction-participants/auction-participants.component';
+import { AuctionSliderComponent } from './auction/components/auction-slider/auction-slider.component';
+import { AuctionFooterComponent } from './auction/components/auction-footer/auction-footer.component';
 
 const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
 
@@ -37,6 +43,12 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resourc
     SliderComponent,
     ShopComponent,
     ProgressComponent,
+    AuctionComponent,
+    AuctionHeaderComponent,
+    AuctionDetailsComponent,
+    AuctionParticipantsComponent,
+    AuctionSliderComponent,
+    AuctionFooterComponent,
   ],
   imports: [
     BrowserModule,
