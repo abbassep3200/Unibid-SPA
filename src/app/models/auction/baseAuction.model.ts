@@ -1,6 +1,7 @@
 import { Charity } from './../charity.model';
 import { Participant } from './participant.model';
 import { Product } from './product.model';
+import { AuctionStatus } from './../auctionStatus.model';
 
 
 export class BaseAuction {
@@ -23,4 +24,5 @@ export class BaseAuction {
   discount: number;
   product:Product;
   started:boolean;
+  status:AuctionStatus;
 }

@@ -71,6 +71,10 @@
   border-radius: 50%;
 }
 
+/*.contributer-badge:first-of-type{
+  background-color:#4caf50;
+}*/
+
 .contributer-item-name {
   font-size: 14px;
   color: #212121;

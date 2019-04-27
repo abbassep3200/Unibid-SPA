@@ -40,8 +40,6 @@ export class AuctionComponent implements OnInit {
             this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
               this.router.navigate(['/']);
           }, 2000);
-
-
         });
 
     });
@@ -49,7 +47,13 @@ export class AuctionComponent implements OnInit {
     this.auctionSocket.auction.subscribe(result=>{
       this.auction = result;
     });
-    
+
+    this.auctionSocket.remained.subscribe(result=>{
+      console.log(result);
+    });
+
+
+
   }
 
 }

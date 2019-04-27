@@ -4,6 +4,7 @@ import { LiveAuctionService } from 'src/app/_services/live-auction.service';
 import { ProgressComponent } from 'src/app/progress/progress.component';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { Links } from 'src/app/links.component';
 
 
 
@@ -21,6 +22,8 @@ export class AuctionDetailsComponent implements OnInit {
   joined = false;
   loading = false;
   errorObj = null;
+  Link = Links;
+
 
   @ViewChild(ProgressComponent ) progress: ProgressComponent ;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
@@ -36,6 +39,9 @@ export class AuctionDetailsComponent implements OnInit {
   ngDoCheck(){
 
     if (this.auction) {
+      if(this.auction.remainedTime <=0){
+        this.loading = true;
+      }
 
       if(!this.timer){
         this.remainedTime = this.ConvertMS(this.auction.remainedTime);
@@ -81,6 +87,19 @@ export class AuctionDetailsComponent implements OnInit {
       this.auctionSocket.getStatus(this.auction.auctionId);
       this.auctionSocket.getUsers(this.auction.auctionId);
     });
+
+    this.auctionSocket.remained.subscribe(result => {
+      console.log('continue');
+      this.auction.remainedTime = parseInt(result);
+      this.loading = false;
+    });
+
+    this.auctionSocket.winner.subscribe(result => {
+      console.log('done');
+      this.auction.status = result;
+      this.loading = false;
+    });
+
 
     this.auctionSocket.failed.subscribe(result => {
       this.errorObj = result;

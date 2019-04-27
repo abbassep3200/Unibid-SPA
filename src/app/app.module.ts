@@ -26,6 +26,7 @@ import { AuctionParticipantsComponent } from './auction/components/auction-parti
 import { AuctionSliderComponent } from './auction/components/auction-slider/auction-slider.component';
 import { AuctionFooterComponent } from './auction/components/auction-footer/auction-footer.component';
 
+// const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
 
 @NgModule({

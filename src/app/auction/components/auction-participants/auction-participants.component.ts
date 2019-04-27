@@ -19,7 +19,6 @@ export class AuctionParticipantsComponent implements OnInit {
 
   ngOnInit() {
     this.auctionSocket.users.subscribe(result =>{
-      console.log(result);
       this.participants = result;
     });
   }
