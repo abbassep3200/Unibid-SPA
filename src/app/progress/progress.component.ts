@@ -11,6 +11,7 @@ export class ProgressComponent implements OnInit {
 
   @Input() current: number;
   @Input() total: number;
+  @Input() fixed: boolean;
   @ViewChildren('progresses') progresses:QueryList<ElementRef>;
 
   timer;
@@ -34,7 +35,7 @@ export class ProgressComponent implements OnInit {
       progressItem.nativeElement.classList.remove('progressItem-empty');
       progressItem.nativeElement.classList.replace('progressItemNone','progressItem');
     });
-    
+
     this.start();
   }
 
@@ -75,7 +76,7 @@ export class ProgressComponent implements OnInit {
         }
       }
 
-      if(this.time>10){
+      if(this.time>10 && !this.fixed){
         this.el.nativeElement.getElementsByClassName('progressItem-empty')[0].remove();
       }
 

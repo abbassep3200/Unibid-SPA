@@ -25,4 +25,5 @@ export class BaseAuction {
   product:Product;
   started:boolean;
   status:AuctionStatus;
+  done:boolean;
 }

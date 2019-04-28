@@ -3,6 +3,7 @@ import { BaseAuction } from 'src/app/models/auction/baseAuction.model';
 import { Links } from 'src/app/links.component';
 import { LiveAuctionService } from 'src/app/_services/live-auction.service';
 
+
 @Component({
   selector: 'app-auction-slider',
   templateUrl: './auction-slider.component.html',

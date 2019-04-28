@@ -1,8 +1,17 @@
-<div *ngIf="auction?.remainedTime > 60000;then content"></div>
-<div *ngIf="auction?.remainedTime <= 60000 && auction?.remainedTime > 0 ;then other_content"></div>
-<div *ngIf="auction?.remainedTime < 0;then another_content"></div>
+<div *ngIf="states.iceAge;then iceAge"></div>
+<div *ngIf="states.holliDay;then holliDay"></div>
+<div *ngIf="states.hotSpot;then hotSpot"></div>
+<div *ngIf="states.feniTto || auction?.done;then feniTto"></div>
+<div class="cfnLoaderWrapper" *ngIf="loading">
+  <div class="cfnLoader"></div>
+</div>
+<div class="cfnError" #errorMessage>
+  <ng-template [ngIf]="errorObj">
+    {{errorObj.error.message}}
+  </ng-template>
+</div>
 
-<ng-template #content>
+<ng-template #iceAge>
 
   <div class="details-auction-wrapper">
     <div class="details-auction-right">
@@ -37,7 +46,7 @@
   <div class="cart-timer-border"></div>
 </ng-template>
 
-<ng-template #other_content>
+<ng-template #holliDay>
   <div class="details-auction-wrapper">
     <div class="details-auction-right">
       <p class="details-auction-right-title">{{auction?.title}}</p>
@@ -55,15 +64,31 @@
       <a (click)="handleBid($event,auction.auctionId)" class="cfnButton cfnButton-primary"> {{auction?.bids}} پیشنهاد </a>
     </div>
   </div>
-  <div *ngIf="auction?.remainedTime < 10000">
-    <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="10" style="margin: 60px 0;"></app-progress>
-  </div>
-  <div *ngIf="auction?.remainedTime >= 10000">
-    <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="tryParseInt(auction?.remainedTime/1000)" style="margin: 60px 0;"></app-progress>
-  </div>
+    <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="tryParseInt(auction?.remainedTime/1000)" [fixed]="true" style="margin: 60px 0;"></app-progress>
 </ng-template>
 
-<ng-template #another_content>
+<ng-template #hotSpot>
+  <div class="details-auction-wrapper">
+    <div class="details-auction-right">
+      <p class="details-auction-right-title">{{auction?.title}}</p>
+      <div class="details-cart-off">
+        <span class="details-cart-off-percent">٪{{auction?.discount}}</span>
+        <div class="details-cart-off-info">
+          <p class="details-cart-off-after">شروع حراجی : {{auction?.basePrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+          <p class="details-cart-off-before">سقف حراجی : {{auction?.maxPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+        </div>
+      </div>
+    </div>
+    <div class="details-auction-left">
+      <p style="font-size: 13px; margin-bottom: 0; text-align: center;">آخرین پیشنهاد : {{auction?.status?.bidPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+
+      <a (click)="handleBid($event,auction.auctionId)" class="cfnButton cfnButton-primary"> {{auction?.bids}} پیشنهاد </a>
+    </div>
+  </div>
+    <app-progress [current]="tryParseInt(auction?.remainedTime/1000)" [total]="10" style="margin: 60px 0;"></app-progress>
+</ng-template>
+
+<ng-template #feniTto>
   <div class="details-auction-wrapper">
     <div class="details-auction-right">
       <p class="details-auction-right-title">{{auction?.title}}</p>
@@ -105,9 +130,3 @@
       </div>
     </div>
 </ng-template>
-
-<div class="cfnError" #errorMessage>
-  <ng-template [ngIf]="errorObj">
-    {{errorObj.error.message}}
-</ng-template>
-</div>

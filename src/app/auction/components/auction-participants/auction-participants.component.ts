@@ -2,6 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { BaseAuction } from 'src/app/models/auction/baseAuction.model';
 import { Links } from 'src/app/links.component';
 import { LiveAuctionService } from 'src/app/_services/live-auction.service';
+import { States } from 'src/app/models/auction/states.model'
 
 
 @Component({
@@ -14,12 +15,16 @@ export class AuctionParticipantsComponent implements OnInit {
   Link = Links;
   listRendered = false;
   participants;
+  states = new States();
 
   constructor(private auctionSocket:LiveAuctionService) { }
 
   ngOnInit() {
     this.auctionSocket.users.subscribe(result =>{
       this.participants = result;
+    });
+    this.auctionSocket.states.subscribe(result=>{
+      this.states = result;
     });
   }
   ngDoCheck(){

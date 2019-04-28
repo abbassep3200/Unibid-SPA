@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { AuctionStatus } from '../models/auctionStatus.model';
 import { Winner } from '../models/winner.model';
+import { State } from '../models/auction/states.model';
 import { LiveUser } from '../models/liveUser.model';
 import { GetError } from '../models/service/getError.model';
 import { SuccessMessage } from '../models/success.message.model';
@@ -24,6 +25,8 @@ export class LiveAuctionService {
   users = this.socket.fromEvent<LiveUser[]>('users');
   auction = this.socket.fromEvent<GetAuction>('auction');
   remained = this.socket.fromEvent<string>('remained');
+  done = this.socket.fromEvent<string>('done');
+  states = this.socket.fromEvent<State>('states');
 
   constructor(private socket: Socket) {
   }

@@ -1,8 +1,8 @@
-<div *ngIf="auction?.remainedTime > 60000;then content"></div>
-<div *ngIf="auction?.remainedTime <= 60000 && auction?.remainedTime > 0 ;then other_content"></div>
-<div *ngIf="auction?.remainedTime < 0;then another_content"></div>
+<div *ngIf="states.iceAge;then iceAge"></div>
+<div *ngIf="states.holliDay || states.hotSpot;then holliDayOrHotSpot"></div>
+<div *ngIf="states.feniTto || auction?.done;then feniTto"></div>
 
-<ng-template #content>
+<ng-template #iceAge>
   <div class="contributer-wrapper">
     <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
     <div class="contributer-item-warpper">
@@ -22,7 +22,7 @@
   </div>
 </ng-template>
 
-<ng-template #other_content>
+<ng-template #holliDayOrHotSpot>
   <div class="contributer-wrapper">
     <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
     <div class="contributer-item-warpper">
@@ -40,7 +40,7 @@
   </div>
 </ng-template>
 
-<ng-template #another_content>
+<ng-template #feniTto>
   <div class="contributer-wrapper">
     <p class="contributer-title">شرکت کنندگان: <span>{{auction?.participants?.length}} / {{auction?.maxMembers}}</span></p>
     <div class="contributer-item-warpper">

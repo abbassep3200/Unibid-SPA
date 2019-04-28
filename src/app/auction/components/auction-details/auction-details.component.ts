@@ -5,7 +5,7 @@ import { ProgressComponent } from 'src/app/progress/progress.component';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Links } from 'src/app/links.component';
-
+import { States } from 'src/app/models/auction/states.model'
 
 
 @Component({
@@ -23,6 +23,7 @@ export class AuctionDetailsComponent implements OnInit {
   loading = false;
   errorObj = null;
   Link = Links;
+  states = new States();
 
 
   @ViewChild(ProgressComponent ) progress: ProgressComponent ;
@@ -35,35 +36,36 @@ export class AuctionDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.states);
   }
   ngDoCheck(){
 
     if (this.auction) {
-      if(this.auction.remainedTime <=0){
-        this.loading = true;
-      }
 
+      // client timer
       if(!this.timer){
         this.remainedTime = this.ConvertMS(this.auction.remainedTime);
         this.timer = setInterval(() => {
-          this.auction.remainedTime = this.auction.remainedTime - 1000;
+          this.auction.remainedTime -= 1000;
           this.remainedTime = this.ConvertMS(this.auction.remainedTime);
         }, 1000);
       }
 
-      if(this.auction.remainedTime > 60000 && !this.auctionTimer){
+      // get live auction status
+      if(this.states.iceAge && !this.auctionTimer){
         this.auctionTimer = setInterval(() => {
           console.log('getAuction status');
           this.auctionSocket.getAuction(this.auction.auctionId);
         }, 1000);
       }
 
-      if(this.auction.remainedTime <= 60000 && !this.joined){
+      // join client to the auctions room
+      if(this.states.holliDay && !this.joined){
         clearInterval(this.auctionTimer);
+        this.loading = true;
         this.joined = true;
         this.auctionSocket.join(this.auction.auctionId);
       }
-
     }
   }
   ngAfterViewInit(){
@@ -72,33 +74,58 @@ export class AuctionDetailsComponent implements OnInit {
     this.auctionSocket.joined.subscribe(result => {
       console.log(result);
       this.auctionSocket.getStatus(this.auction.auctionId);
+      this.loading = false;
     });
 
     this.auctionSocket.bids.subscribe(result => {
       this.auction.bids = parseInt(result);
+      this.loading = false;
     });
 
     this.auctionSocket.accepted.subscribe(result => {
       var remainingTime = parseInt(result);
       this.auction.remainedTime = remainingTime;
-      if (this.auction.remainedTime <= 11000){
+      if (this.states.hotSpot){
         this.progress.reset();
       }
       this.auctionSocket.getStatus(this.auction.auctionId);
       this.auctionSocket.getUsers(this.auction.auctionId);
+      this.loading = false;
     });
 
     this.auctionSocket.remained.subscribe(result => {
+
       console.log('continue');
       this.auction.remainedTime = parseInt(result);
       this.loading = false;
+
     });
 
     this.auctionSocket.winner.subscribe(result => {
+
       console.log('done');
       this.auction.status = result;
       this.loading = false;
+      this.auction.done = true;
+
     });
+
+    this.auctionSocket.done.subscribe(result => {
+      console.log(result);
+      this.loading = false;
+      this.auction.done = true;
+      // this.auctionSocket.disconnect();
+
+    });
+
+    this.auctionSocket.states.subscribe(result=>{
+      this.states = result;
+      if(this.states.feniTto){
+        this.loading=true;
+      }
+      console.log(this.states);
+    });
+
 
 
     this.auctionSocket.failed.subscribe(result => {
@@ -109,8 +136,8 @@ export class AuctionDetailsComponent implements OnInit {
       this.timeoutId = setTimeout(() => {
         this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
         if(result.error.status===401){
-          this.authService.logout();
-          this.router.navigate(['/signin']);
+          // this.authService.logout();
+          // this.router.navigate(['/signin']);
         }
       }, 2000);
     });
