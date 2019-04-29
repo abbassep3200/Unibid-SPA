@@ -1,0 +1,153 @@
+.accountProfile {
+  position: absolute;
+  top: 100px;
+  width: 400px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212121;
+  font-size: 12px;
+  direction: rtl;
+  padding: 15px 0;
+  padding-top: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.accountProfile-profile-header {
+  width: 100%;
+}
+
+.accountProfile-profile-headerTop {
+  display: flex;
+  padding: 30px;
+  padding-bottom: 0;
+  justify-content: space-between;
+}
+
+.accountProfile-profile-headerTop-rank {
+  width: 52px;
+  height: 52px;
+  border: solid 1px #ebebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.accountProfile-profile-headerTop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accountProfile-profile-headerTop-item > p > span {
+  color: #ec407a;
+}
+
+.accountProfile-profile-headerTop-item-image {
+  width: 90px;
+  height: 90px;
+  position: relative;
+}
+
+.accountProfile-profile-headerTop-item-image > img {
+  border-radius: 50%;
+}
+
+
+
+.accountProfile-profile-headerTop-item-image-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top:-5px;
+  right: -5px;
+}
+
+.accountProfile-profile-headerTop-basket {
+  width: 52px;
+  height: 52px;
+  border: solid 1px #ebebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+}
+
+.accountProfile-profile-headerTop-basket > span {
+  width: 24px;
+  height: 24px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+}
+
+.accountProfile-profile-headerBottom > p {
+  text-align: center;
+}
+
+.accountProfile-profile-headerBottom > p:first-of-type {
+  font-size: 16px;
+}
+
+.accountProfile-profile-headerBottom > p:nth-of-type(2) {
+  font-size: 15px;
+  color: #707070;
+}
+
+.accountProfile-profile-headerBottom > p:last-of-type {
+  color: #ec407a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+}
+.accountProfile-profile-headerBottom > p:last-of-type > img {
+  margin-left: 10px;
+}
+
+.accountProfile-profile-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accountProfile-profile-items > li {
+  border-top: solid 1px #ebebeb;
+  padding: 19px 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.accountProfile-profile-items > li > img {
+  margin-right: 15px;
+  margin-left: 7px;
+}
+
+.accountProfile-profile-items > li > img:last-of-type {
+  position: absolute;
+  left: 10px;
+  opacity: 0.5;
+}

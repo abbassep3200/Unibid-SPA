@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-signin',
@@ -16,6 +17,7 @@ export class SigninComponent implements OnInit {
   timeoutId;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
   constructor(private formBuilder: FormBuilder,
+              private location: Location,
               private authenticationService: AuthenticationService,
               private router: Router,
               private renderer: Renderer2) {
@@ -45,7 +47,8 @@ export class SigninComponent implements OnInit {
 
     this.authenticationService.login(this.formFields.username.value, this.formFields.password.value).subscribe(user => {
       localStorage.setItem('currentUser', JSON.stringify(user));
-      this.router.navigate(['/']);
+      this.location.back();
+      // this.router.navigate(['/']);
     },
     error => {
       this.errorObj = error;

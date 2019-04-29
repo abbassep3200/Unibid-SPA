@@ -7,6 +7,8 @@ import { Shop } from '../models/shop/shop.model';
 import { GetSliderAuctions } from '../models/service/sliderAuctions.model';
 import { SearchItems } from '../models/service/searchItems.model';
 import { Links } from '../links.component';
+import { BasicUserInformation } from '../models/user/information/basic.model'
+
 
 @Injectable({ providedIn: 'root' })
 export class MainServices {
@@ -18,8 +20,26 @@ export class MainServices {
   getAuctionUrl = Links.prefix+'/v2/api/auction/';
   participationByCoin = Links.prefix+'/v2/api/auction/coin/registeration';
   participationByGem = Links.prefix+'/v2/api/auction/gem/registeration';
+  getBasicInfoUrl = Links.prefix+'/v2/api/user/basic';
 
   constructor(private http: HttpClient) {
+
+  }
+
+  GetBasicInformation() {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.get<BasicUserInformation>(this.getBasicInfoUrl , httpOptions);
+    } else {
+      return this.http.get<BasicUserInformation>(this.getBasicInfoUrl);
+    }
 
   }
 

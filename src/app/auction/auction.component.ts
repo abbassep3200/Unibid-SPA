@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef,ViewChild,Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MainServices } from 'src/app/_services/main.service';
 import { GetAuction } from 'src/app/models/service/getAuction.model';
@@ -22,9 +22,14 @@ export class AuctionComponent implements OnInit {
     private mainService: MainServices,
     private router:Router,
     private auctionSocket:LiveAuctionService,
-  ) { }
+    private renderer: Renderer2,
+  )
+  {
+  }
 
   ngOnInit() {
+    this.renderer.setStyle(document.getElementsByClassName('wrapper')[0], 'background-color', "#fff");
+
     this.route.params.subscribe(params => {
 
         this.mainService.GetAuction(params['id']).subscribe(result => {

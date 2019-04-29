@@ -25,6 +25,14 @@ import { AuctionDetailsComponent } from './auction/components/auction-details/au
 import { AuctionParticipantsComponent } from './auction/components/auction-participants/auction-participants.component';
 import { AuctionSliderComponent } from './auction/components/auction-slider/auction-slider.component';
 import { AuctionFooterComponent } from './auction/components/auction-footer/auction-footer.component';
+import { ProfileComponent } from './user-navigation/profile/profile.component';
+import { ShoppingCardComponent } from './user-navigation/shopping-card/shopping-card.component';
+import { FinanceComponent } from './user-navigation/finance/finance.component';
+import { AvatarComponent } from './user-navigation/avatar/avatar.component';
+import { ScoreComponent } from './user-navigation/score/score.component';
+import { CheckoutComponent } from './user-navigation/checkout/checkout.component';
+import { LoadingComponent } from './loading/loading.component';
+import { ErrorComponent } from './error/error.component';
 
 // const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
@@ -50,6 +58,14 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resourc
     AuctionParticipantsComponent,
     AuctionSliderComponent,
     AuctionFooterComponent,
+    ProfileComponent,
+    ShoppingCardComponent,
+    FinanceComponent,
+    AvatarComponent,
+    ScoreComponent,
+    CheckoutComponent,
+    LoadingComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

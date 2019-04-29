@@ -1,0 +1,34 @@
+<div class="accountProfile">
+  <div class="accountProfile-profile-header">
+    <div class="accountProfile-profile-headerTop">
+      <div class="accountProfile-profile-headerTop-item">
+        <div class="accountProfile-profile-headerTop-rank"><img src="../../assets/resources/images/assets/png/star.png"/></div>
+        <p>امتیاز : <span>{{userMainInfo?.level}}/{{userMainInfo?.maxLevel}}</span></p>
+      </div>
+      <div class="accountProfile-profile-headerTop-item accountProfile-profile-headerTop-item-image">
+        <div class="accountProfile-profile-headerTop-item-image-pic"><img src="../../assets/resources/images/assets/png/ic-camera-alt-24-px.png"/></div>
+        <img [src]="Link.avatar(userMainInfo?.avatar)" alt="">
+      </div>
+      <div class="accountProfile-headerTop-item">
+        <div class="accountProfile-profile-headerTop-basket"><img src="../../assets/resources/images/assets/png/shape.png"/><span>{{userMainInfo?.orderCount}}</span></div>
+        <p>سبد خرید</p>
+      </div>
+    </div>
+    <div class="accountProfile-profile-headerBottom">
+      <p>{{userMainInfo?.firstName}} {{userMainInfo?.lastName}}</p>
+      <p>{{userMainInfo?.username}}</p>
+      <p><img src="../../assets/resources/images/assets/png/ic-edit-24-px.png"/>ویرایش</p>
+    </div>
+    <ul class="accountProfile-profile-items">
+      <li><img src="../../assets/resources/images/assets/png/ic-history.png"/>تاریخچه خرید<img src="../../assets/resources/images/assets/png/arrow.png"/></li>
+      <li><img src="../../assets/resources/images/assets/png/group-102.png"/>{{userMainInfo?.mobile}}<img src="../../assets/resources/images/assets/png/arrow.png"/></li>
+      <li><img src="../../assets/resources/images/assets/png/group-103.png"/>{{userMainInfo?.email}}<img src="../../assets/resources/images/assets/png/arrow.png"/></li>
+      <li><img src="../../assets/resources/images/assets/png/group-92.png"/>اعتبار مالی<img src="../../assets/resources/images/assets/png/arrow.png"/></li>
+      <li><img src="../../assets/resources/images/assets/png/group-105.png"/>پیام‌ها<img src="../../assets/resources/images/assets/png/arrow.png"/></li>
+      <li><img src="../../assets/resources/images/assets/png/setting.png"/>تنظیمات<img src="../../assets/resources/images/assets/png/arrow.png"/></li>
+    </ul>
+  </div>
+</div>
+
+<app-error></app-error>
+<app-loading><app-loading>
