@@ -1,10 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { ShopComponent } from './shop/shop.component';
-import { AuctionComponent } from './auction/auction.component';
-import { DefaultComponent } from './default/default.component';
-import { VerificationComponent } from './auth/verification/verification.component';
+import { SigninComponent } from './components/auth/signin/signin.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { AuctionComponent } from './components/auction/auction.component';
+import { DefaultComponent } from './components/default/default.component';
+import { VerificationComponent } from './components/auth/verification/verification.component';
 
 const appRoutes: Routes = [
   {
