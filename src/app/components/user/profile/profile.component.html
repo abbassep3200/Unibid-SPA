@@ -1,7 +1,7 @@
 <div class="accountProfile">
   <div class="accountProfile-profile-header">
     <div class="accountProfile-profile-headerTop">
-      <div class="accountProfile-profile-headerTop-item">
+      <div class="accountProfile-profile-headerTop-item" (click)="toggleScore()">
         <div class="accountProfile-profile-headerTop-rank"><img src="assets/resources/images/assets/png/star.png"/></div>
         <p>امتیاز : <span>{{userMainInfo?.level}}/{{userMainInfo?.maxLevel}}</span></p>
       </div>
@@ -9,7 +9,7 @@
         <div class="accountProfile-profile-headerTop-item-image-pic" (click)="toggleAvatar()"><img src="assets/resources/images/assets/png/ic-camera-alt-24-px.png"/></div>
         <img [src]="Link.avatar(userMainInfo?.avatar)" alt="">
       </div>
-      <div class="accountProfile-headerTop-item">
+      <div class="accountProfile-headerTop-item" (click)="toggleShoppingCard()">
         <div class="accountProfile-profile-headerTop-basket"><img src="assets/resources/images/assets/png/shape.png"/><span>{{userMainInfo?.orderCount}}</span></div>
         <p>سبد خرید</p>
       </div>
@@ -20,7 +20,7 @@
       <p><img src="assets/resources/images/assets/png/ic-edit-24-px.png"/>ویرایش</p>
     </div>
     <ul class="accountProfile-profile-items">
-      <li><img src="assets/resources/images/assets/png/ic-history.png"/>تاریخچه خرید<img src="assets/resources/images/assets/png/arrow.png"/></li>
+      <li (click)="toggleFinance()"><img src="assets/resources/images/assets/png/ic-history.png"/>تاریخچه خرید<img src="assets/resources/images/assets/png/arrow.png"/></li>
       <li><img src="assets/resources/images/assets/png/group-102.png"/>{{userMainInfo?.mobile}}<img src="assets/resources/images/assets/png/arrow.png"/></li>
       <li><img src="assets/resources/images/assets/png/group-103.png"/>{{userMainInfo?.email}}<img src="assets/resources/images/assets/png/arrow.png"/></li>
       <li><img src="assets/resources/images/assets/png/group-92.png"/>اعتبار مالی<img src="assets/resources/images/assets/png/arrow.png"/></li>

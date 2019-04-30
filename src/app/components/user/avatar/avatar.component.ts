@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, QueryList, ElementRef,ViewChildren } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { SharingService } from 'src/app/services/sharing.service';
+import { LiveUserService } from 'src/app/services/live-user.service';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ErrorComponent } from 'src/app/components/error/error.component';
 import { Avatar } from 'src/app/models/user/avatar.model'
@@ -20,10 +21,17 @@ export class AvatarComponent implements OnInit {
   @ViewChildren('avatarItems') avatarItems:QueryList<ElementRef>;
   makeChanges = false;
   selected = new Avatar();
+  userSyncTimer;
+  firstTime;
 
-  constructor(private userService:UserService,private shared:SharingService) { }
+  constructor(private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
 
   ngOnInit() {
+
+    // this.userSyncTimer = setInterval(() => {
+    //   this.liveUser.getAvatars();
+    // }, 1000);
+
     this.userService.GetAvatars().subscribe(result => {
       this.avatars = result;
       console.log(result);
@@ -35,6 +43,11 @@ export class AvatarComponent implements OnInit {
     });
 
   }
+  ngAfterViewInit(){
+    this.liveUser.avatars.subscribe(result=>{
+      this.avatars = result;
+    });
+  }
 
   ngAfterViewChecked(){
     if(this.avatarItems && !this.makeChanges){
@@ -44,11 +57,13 @@ export class AvatarComponent implements OnInit {
         this.makeChanges = true;
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
         this.avatarItems.toArray()[i].nativeElement.classList.add(rand);
+
       }
     }
   }
 
   selectAvatar(event,Id){
+    this.firstTime = true;
     for(var i = 0 ; i < this.avatarItems.length; i++)
     {
       if(this.avatars[i].avatarId!=Id){

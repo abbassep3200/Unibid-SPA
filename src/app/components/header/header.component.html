@@ -24,6 +24,9 @@
   <div class="header-content-loginInfo" dir="ltr" *ngIf="isLoggedIn === true">
     <app-profile *ngIf="this.shared.toggleMenu.profile"></app-profile>
     <app-avatar *ngIf="this.shared.toggleMenu.avatar"></app-avatar>
+    <app-finance *ngIf="this.shared.toggleMenu.finance"></app-finance>
+    <app-shopping-card *ngIf="this.shared.toggleMenu.shoppingCart"></app-shopping-card>
+    <app-score *ngIf="this.shared.toggleMenu.score"></app-score>
 
     <div class="header-content-loginInfo-pic" (click)="toggleProfileMenu()">
         <img [src]="Link.avatar(userInfo?.avatar)" alt="" class="">

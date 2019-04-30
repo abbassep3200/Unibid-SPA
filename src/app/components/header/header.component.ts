@@ -88,6 +88,7 @@ export class HeaderComponent implements OnInit {
 
   toggleProfileMenu(){
     this.shared.toggleMenu.profile = !this.shared.toggleMenu.profile;
+    this.shared.toggleMenu.profileReset();
   }
 
   headerClicked(eventData){

@@ -5,9 +5,11 @@
 </div> -->
 <p>انتخاب آواتار</p>
 <div class="selectAvatar-content">
-  <!-- <span #avatarItems *ngFor="let avatar of avatars" class="selecAvatar-item" [ngClass]="{'selectAvatar-item-active':avatar.selected}" (click)="selectAvatar($event, avatar.avatarId)"> -->
-  <span #avatarItems *ngFor="let avatar of avatars" class="selecAvatar-item" (click)="selectAvatar($event, avatar.avatarId)">
+  <span #avatarItems *ngFor="let avatar of avatars" class="selecAvatar-item" [ngClass]="{'selectAvatar-item-active':avatar.selected && !firstTime}" (click)="selectAvatar($event, avatar.avatarId)">
+  <!-- <span #avatarItems *ngFor="let avatar of avatars" class="selecAvatar-item" (click)="selectAvatar($event, avatar.avatarId)"> -->
     <img [src]="Link.avatar(avatar.image)" alt="" />
+    <img *ngIf="avatar.owned" class="avatar-owned" src="assets/resources/images/assets/svg/tick.svg">
+
   </span>
 </div>
   <div class="selectAvatar-footer">

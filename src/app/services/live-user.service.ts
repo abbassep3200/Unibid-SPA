@@ -4,6 +4,7 @@ import { GetError } from '../models/service/getError.model';
 import { SuccessMessage } from '../models/success.message.model';
 import { BasicUserInformation } from 'src/app/models/user/information/basic.model'
 import { MainUserInformation } from 'src/app/models/user/information/main.model'
+import { Avatar } from 'src/app/models/user/avatar.model'
 
 
 
@@ -16,6 +17,7 @@ export class LiveUserService {
   leaved = this.socket.fromEvent<string>('userLeaved');
   status = this.socket.fromEvent<BasicUserInformation>('userStatus');
   profileStatus = this.socket.fromEvent<MainUserInformation>('profileStatus');
+  avatars = this.socket.fromEvent<Avatar[]>('avatars');
   failed = this.socket.fromEvent<GetError>('userFailed');
   succeed = this.socket.fromEvent<SuccessMessage>('userSucceed');
 
@@ -43,6 +45,14 @@ export class LiveUserService {
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
       this.socket.emit('userStatus',{'authorization':token});
+    }
+  }
+
+  getAvatars(){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('getAvatars',{'authorization':token});
     }
   }
 

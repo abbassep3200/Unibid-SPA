@@ -149,3 +149,14 @@
 .semiYellowBackground {
   background-color: rgba(255,196,61, 0.3);
 }
+
+
+.avatar-owned {
+  position: absolute;
+  display: flex;
+  top: 85px;
+  width: 15px;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 0;
+}

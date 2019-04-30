@@ -6,6 +6,24 @@ export class ToggleMenu {
     this.shoppingCart = false;
     this.information = false;
     this.search = false;
+    this.score = false;
+  }
+  public reset (){
+    this.profile = false;
+    this.avatar = false;
+    this.finance = false;
+    this.shoppingCart = false;
+    this.information = false;
+    this.search = false;
+    this.score = false;
+  }
+  public profileReset (){
+    this.avatar = false;
+    this.finance = false;
+    this.shoppingCart = false;
+    this.information = false;
+    this.search = false;
+    this.score = false;
   }
   profile: boolean;
   avatar: boolean;
@@ -13,4 +31,6 @@ export class ToggleMenu {
   shoppingCart: boolean;
   information: boolean;
   search: boolean;
+  score: boolean;
+
 }

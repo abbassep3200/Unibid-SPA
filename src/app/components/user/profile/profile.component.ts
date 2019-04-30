@@ -46,7 +46,23 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleAvatar(){
+    this.shared.toggleMenu.reset();
     this.shared.toggleMenu.avatar = true;
+  }
+
+  toggleFinance(){
+    this.shared.toggleMenu.reset();
+    this.shared.toggleMenu.finance = true;
+  }
+
+  toggleShoppingCard(){
+    this.shared.toggleMenu.reset();
+    this.shared.toggleMenu.shoppingCart = true;
+  }
+
+  toggleScore(){
+    this.shared.toggleMenu.reset();
+    this.shared.toggleMenu.score = true;
   }
 
 }

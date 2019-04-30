@@ -1,0 +1,87 @@
+.accountProfile {
+  position: absolute;
+  top: 100px;
+  width: 400px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212121;
+  font-size: 12px;
+  direction: rtl;
+  padding: 15px 0;
+  padding-top: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.accountProfile > p {
+  align-self: stretch;
+}
+
+.accountProfile-title {
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+  padding: 15px;
+  position: relative;
+}
+
+.accountProfile-title > img {
+  position: absolute;
+  right: 10px;
+  top: 13px;
+}
+
+.accountProfile-title > span {
+  position: absolute;
+  left: 10px;
+  top: 18px;
+  color: #ec407a;
+}
+
+.accountProfile-yourScoreWrapper {
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.accountProfile-yourScoreItem {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ebebeb;
+  padding: 15px;
+  margin: 0 -15px;
+}
+
+.accountProfile-yourScoreItem-active {
+  background-color: #fef5f8;
+}
+
+.accountProfile-yourScoreItem-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.accountProfile-yourScoreItem-info-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.accountProfile-yourScoreItem-info-score {
+  color: #ec407a;
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.accountProfile-yourScoreItem-info-score > img {
+  margin-left: 7px;
+}
