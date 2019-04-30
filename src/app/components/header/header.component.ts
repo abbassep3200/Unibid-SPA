@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SearchItems } from 'src/app/models/service/searchItems.model';
 import { MainServices } from 'src/app/services/main.service';
 import { SharingService } from 'src/app/services/sharing.service';
+import { LiveUserService } from 'src/app/services/live-user.service';
 import { Links } from 'src/app/links.component';
 import { BasicUserInformation } from 'src/app/models/user/information/basic.model'
 
@@ -18,8 +19,13 @@ export class HeaderComponent implements OnInit {
   Link = Links;
   toggleProfile = false;
   userInfo:BasicUserInformation;
+  userSyncTimer;
+  joined;
 
-  constructor(private service: MainServices,private shared: SharingService) {
+  constructor(
+    private service: MainServices,
+    private shared: SharingService,
+    private liveUser:LiveUserService) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       this.isLoggedIn = true;
@@ -42,6 +48,32 @@ export class HeaderComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.userSyncTimer = setInterval(() => {
+      this.liveUser.getStatus();
+    }, 1000);
+  }
+
+  ngDoCheck(){
+    // this.auction.started = new StartedAuction();
+    if(!this.joined){
+      this.joined = true;
+      this.liveUser.join();
+    }
+
+  }
+
+  ngAfterViewInit(){
+    this.liveUser.connect.subscribe(result => console.log(result));
+
+    this.liveUser.status.subscribe(result => {
+      this.userInfo = result;
+    });
+  }
+
+  ngOnDestroy() {
+    this.liveUser.leave();
+    this.liveUser.disconnect();
+    clearInterval(this.userSyncTimer);
   }
 
   searchBoxBehaviour(event) {

@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { GetError } from '../models/service/getError.model';
 import { SuccessMessage } from '../models/success.message.model';
+import { BasicUserInformation } from 'src/app/models/user/information/basic.model'
+import { MainUserInformation } from 'src/app/models/user/information/main.model'
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LiveUserService {
-  connect = this.socket.fromEvent<string>('connect');
-  joined = this.socket.fromEvent<string>('joined');
-  leaved = this.socket.fromEvent<string>('leaved');
-  failed = this.socket.fromEvent<GetError>('failed');
-  succeed = this.socket.fromEvent<SuccessMessage>('succeed');
+  connect = this.socket.fromEvent<string>('userConnect');
+  joined = this.socket.fromEvent<string>('userJoined');
+  leaved = this.socket.fromEvent<string>('userLeaved');
+  status = this.socket.fromEvent<BasicUserInformation>('userStatus');
+  profileStatus = this.socket.fromEvent<MainUserInformation>('profileStatus');
+  failed = this.socket.fromEvent<GetError>('userFailed');
+  succeed = this.socket.fromEvent<SuccessMessage>('userSucceed');
 
   constructor(private socket: Socket) {
   }
@@ -21,7 +26,7 @@ export class LiveUserService {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
-      this.socket.emit('leave',{'authorization':token});
+      this.socket.emit('leaveUser',{'authorization':token});
     }
   }
 
@@ -29,7 +34,23 @@ export class LiveUserService {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
-      this.socket.emit('join',{'authorization':token});
+      this.socket.emit('joinUser',{'authorization':token});
+    }
+  }
+
+  getStatus(){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('userStatus',{'authorization':token});
+    }
+  }
+
+  getProfileStatus(){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('userProfileStatus',{'authorization':token});
     }
   }
 
