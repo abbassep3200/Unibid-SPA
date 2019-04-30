@@ -25,12 +25,12 @@ import { AuctionDetailsComponent } from './components/auction/components/auction
 import { AuctionParticipantsComponent } from './components/auction/components/auction-participants/auction-participants.component';
 import { AuctionSliderComponent } from './components/auction/components/auction-slider/auction-slider.component';
 import { AuctionFooterComponent } from './components/auction/components/auction-footer/auction-footer.component';
-import { ProfileComponent } from './components/user-navigation/profile/profile.component';
-import { ShoppingCardComponent } from './components/user-navigation/shopping-card/shopping-card.component';
-import { FinanceComponent } from './components/user-navigation/finance/finance.component';
-import { AvatarComponent } from './components/user-navigation/avatar/avatar.component';
-import { ScoreComponent } from './components/user-navigation/score/score.component';
-import { CheckoutComponent } from './components/user-navigation/checkout/checkout.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
+import { ShoppingCardComponent } from './components/user/shopping-card/shopping-card.component';
+import { FinanceComponent } from './components/user/finance/finance.component';
+import { AvatarComponent } from './components/user/avatar/avatar.component';
+import { ScoreComponent } from './components/user/score/score.component';
+import { CheckoutComponent } from './components/user/checkout/checkout.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
 

@@ -24,7 +24,9 @@ export class ErrorComponent implements OnInit {
   }
 
   show(error,time=2000,navigate=null){
+    console.log('error');
       this.errorObj = error;
+      this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeOut');
       this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => {
@@ -32,11 +34,11 @@ export class ErrorComponent implements OnInit {
         if(error.status==401){
           this.authService.logout();
           this.router.navigate(['/signin']);
-          return;
         }
         if(navigate){
           this.router.navigate([navigate]);
         }
       }, time);
+
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SearchItems } from 'src/app/models/service/searchItems.model';
 import { MainServices } from 'src/app/services/main.service';
+import { SharingService } from 'src/app/services/sharing.service';
 import { Links } from 'src/app/links.component';
 import { BasicUserInformation } from 'src/app/models/user/information/basic.model'
 
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   toggleProfile = false;
   userInfo:BasicUserInformation;
 
-  constructor(private service: MainServices) {
+  constructor(private service: MainServices,private shared: SharingService) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       this.isLoggedIn = true;
@@ -34,6 +35,8 @@ export class HeaderComponent implements OnInit {
       this.userInfo = result;
     },
     error => {
+      localStorage.removeItem('currentUser');
+      this.isLoggedIn = false;
     });
 
    }
@@ -50,8 +53,15 @@ export class HeaderComponent implements OnInit {
     this.txtSearch.nativeElement.focus();
     this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
   }
+
   toggleProfileMenu(){
-    this.toggleProfile = !this.toggleProfile;
+    this.shared.toggleMenu.profile = !this.shared.toggleMenu.profile;
   }
+
+  headerClicked(eventData){
+    // console.log(eventData.target);
+    // console.log('header clicked');
+  }
+
 
 }

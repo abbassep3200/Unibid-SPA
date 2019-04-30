@@ -10,7 +10,7 @@
         <img src="assets/resources/images/assets/svg/question.svg" class="question">
     </div>
   </div>
-  <div class="header-content">
+  <div class="header-content" (click)="headerClicked($event)">
     <img src="assets/resources/images/assets/png/logo.png" class="logo">
   <div class="cfnSearch">
     <input type="search" (click)="searchBoxBehaviour($event)" #txtSearch  class="cfnSearch-input" autocomplete="false"  placeholder="کالای مورد نظر خود را جستجو کنید...">
@@ -22,7 +22,8 @@
     <img src="assets/resources/images/assets/svg/magnifying-glass-3.svg" class="cfnSearch-submit magnifying-glass-3">
   </div>
   <div class="header-content-loginInfo" dir="ltr" *ngIf="isLoggedIn === true">
-    <app-profile *ngIf="toggleProfile"></app-profile>
+    <app-profile *ngIf="this.shared.toggleMenu.profile"></app-profile>
+    <app-avatar *ngIf="this.shared.toggleMenu.avatar"></app-avatar>
 
     <div class="header-content-loginInfo-pic" (click)="toggleProfileMenu()">
         <img [src]="Link.avatar(userInfo?.avatar)" alt="" class="">
