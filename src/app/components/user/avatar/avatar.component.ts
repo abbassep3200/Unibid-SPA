@@ -77,6 +77,7 @@ export class AvatarComponent implements OnInit {
 
   goBack(){
     this.shared.toggleMenu.avatar = false;
+    this.shared.toggleMenu.profile = true;
   }
 
   confirmAvatar(eventData){

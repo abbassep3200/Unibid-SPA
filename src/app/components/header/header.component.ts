@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   userInfo:BasicUserInformation;
   userSyncTimer;
   joined;
+  username;
 
   constructor(
     private service: MainServices,
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
     this.service.GetBasicInformation().subscribe(result => {
       this.userInfo = result;
+      this.username = this.userInfo.username;
     },
     error => {
       localStorage.removeItem('currentUser');

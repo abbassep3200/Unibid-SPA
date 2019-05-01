@@ -4,6 +4,8 @@ import { GetError } from '../models/service/getError.model';
 import { SuccessMessage } from '../models/success.message.model';
 import { BasicUserInformation } from 'src/app/models/user/information/basic.model'
 import { MainUserInformation } from 'src/app/models/user/information/main.model'
+import { Cart } from 'src/app/models/user/information/cart.model'
+import { Score } from 'src/app/models/user/information/score.model'
 import { Avatar } from 'src/app/models/user/avatar.model'
 
 
@@ -17,6 +19,8 @@ export class LiveUserService {
   leaved = this.socket.fromEvent<string>('userLeaved');
   status = this.socket.fromEvent<BasicUserInformation>('userStatus');
   profileStatus = this.socket.fromEvent<MainUserInformation>('profileStatus');
+  carts = this.socket.fromEvent<Cart[]>('carts');
+  scores = this.socket.fromEvent<Score[]>('scores');
   avatars = this.socket.fromEvent<Avatar[]>('avatars');
   failed = this.socket.fromEvent<GetError>('userFailed');
   succeed = this.socket.fromEvent<SuccessMessage>('userSucceed');
@@ -61,6 +65,22 @@ export class LiveUserService {
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
       this.socket.emit('userProfileStatus',{'authorization':token});
+    }
+  }
+
+  getCarts(){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('userCarts',{'authorization':token});
+    }
+  }
+
+  getScores(){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('userScores',{'authorization':token});
     }
   }
 
