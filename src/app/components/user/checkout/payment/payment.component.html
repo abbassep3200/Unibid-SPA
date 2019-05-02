@@ -1,5 +1,5 @@
 <div class="accountProfile">
-  <p class="accountProfile-title">اطلاعات حساب کاربری<img src="assets/resources/images/assets/png/001-down-arrow-copy-5.png"/></p>
+  <p class="accountProfile-title">اطلاعات حساب کاربری<img src="assets/resources/images/assets/png/001-down-arrow-copy-5.png" (click)="goBack()"/></p>
   <div class="accountProfile-shippingSteps">
     <div>
       <div>
@@ -23,23 +23,22 @@
       </div>
     </div>
   </div>
-  <div class="accountProfile-priceWrapper">
+  <div class="accountProfile-priceWrapper" *ngFor="let cart of carts">
     <div class="accountProfile-priceItem">
-      <p class="accountProfile-priceItem-title">هدفون بی سیم بیتس مدل Studio</p>
-      <p class="accountProfile-priceItem-before">قیمت: ۱۵۸,۰۰۰ تومان</p>
-      <p class="accountProfile-priceItem-after">تخفیف: ۲۵,۰۰۰ تومان</p>
-    </div>
-    <div class="accountProfile-priceItem">
-      <p class="accountProfile-priceItem-title">دوچرخه کوهستان کراس مدل 2019</p>
-      <p class="accountProfile-priceItem-before">قیمت: ۲۰۰,۰۰۰ تومان</p>
-      <p class="accountProfile-priceItem-after">تخفیف: ۹۰,۰۰۰ تومان</p>
+      <p class="accountProfile-priceItem-title">{{cart.title}}</p>
+      <p class="accountProfile-priceItem-before">قیمت : {{cart.price | currency : ' ' : 'symbol' : '1.0-0'}} تومان </p>
+      <p class="accountProfile-priceItem-after">تخفیف : {{cart.discount | currency : ' ' : 'symbol' : '1.0-0'}} تومان</p>
     </div>
     <div class="accountProfile-priceTotal">
       <span>قیمت نهایی</span>
-      <span>۳۵۸,۰۰۰,۰۰۰ تومان</span>
+      <span>{{totalPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </span>
     </div>
   </div>
   <p class="accountProfile-footer-title">روش پرداخت</p>
-  <a class="cfnButton cfnButton-empty">کیف پول<img src="resources/images/assets/png/arrowDown.png"/></a>
+  <a class="cfnButton cfnButton-empty">کیف پول<img src="assets/resources/images/assets/png/arrowDown.png"/></a>
   <a style="width:160px;" class="cfnButton cfnButton-primary">پرداخت</a>
 </div>
+
+<app-error></app-error>
+<app-success></app-success>
+<app-loading><app-loading>
