@@ -30,11 +30,13 @@ import { ShoppingCardComponent } from './components/user/shopping-card/shopping-
 import { FinanceComponent } from './components/user/finance/finance.component';
 import { AvatarComponent } from './components/user/avatar/avatar.component';
 import { ScoreComponent } from './components/user/score/score.component';
-import { CheckoutComponent } from './components/user/checkout/checkout.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SuccessComponent } from './components/success/success.component';
 import { EditUserComponent } from './components/user/edit/edit.component';
+import { ShipmentPreviewComponent } from './components/user/checkout/shipment/preview/shipment-preview.component';
+import { ShipmentEditComponent } from './components/user/checkout/shipment/edit/shipment-edit.component';
+import { PaymentComponent } from './components/user/checkout/payment/payment.component';
 
 // const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
@@ -65,11 +67,13 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resourc
     FinanceComponent,
     AvatarComponent,
     ScoreComponent,
-    CheckoutComponent,
     LoadingComponent,
     ErrorComponent,
     SuccessComponent,
     EditUserComponent,
+    ShipmentPreviewComponent,
+    ShipmentEditComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

@@ -72,4 +72,9 @@ export class ShoppingCardComponent implements OnInit {
     });
   }
 
+  togglePreview(){
+    this.shared.toggleMenu.reset();
+    this.shared.toggleMenu.preview = true;
+  }
+
 }

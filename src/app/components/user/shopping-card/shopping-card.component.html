@@ -23,7 +23,7 @@
     <span>قیمت نهایی:</span>
     <span>{{totalPrice | currency : ' ' : 'symbol' : '1.0-0'}} تومان </span>
   </div>
-  <a style="width:160px;" class="cfnButton cfnButton-primary">پرداخت نهایی</a>
+  <a style="width:160px;" class="cfnButton cfnButton-primary" (click)="togglePreview()">پرداخت</a>
 </div>
 <app-error></app-error>
 <app-success></app-success>

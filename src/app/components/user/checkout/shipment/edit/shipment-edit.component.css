@@ -186,6 +186,7 @@
   padding: 0 20px;
   box-sizing: border-box;
   padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .accountProfile-address  .cfnButton-empty,
@@ -199,7 +200,7 @@
 }
 
 .accountProfile-address .cfnText,
-.accountProfile-profile-editProfile  .cfnText {
+.accountProfile-profile-editProfile .cfnText {
   text-align: center;
   color: #212121;
   font-size: 14px;
@@ -221,14 +222,14 @@
   max-width: 100%;
 }
 
-.accountProfile-address > div,
-.accountProfile-profile-editProfile > form  > div {
+.accountProfile-address > form > div,
+.accountProfile-profile-editProfile > form > div {
   position: relative;
   margin-bottom: 25px;
 }
 
-.accountProfile-address > div > .cfnText,
-.accountProfile-profile-editProfile > form > div > .cfnText{
+.accountProfile-address > form > div > .cfnText,
+.accountProfile-profile-editProfile > form >div > .cfnText{
   margin: 0;
 }
 

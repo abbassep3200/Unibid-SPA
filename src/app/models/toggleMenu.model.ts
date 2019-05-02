@@ -8,6 +8,9 @@ export class ToggleMenu {
     this.information = false;
     this.search = false;
     this.score = false;
+    this.preview = false;
+    this.address = false;
+    this.payment = false;
   }
   public reset (){
     this.profile = false;
@@ -18,6 +21,9 @@ export class ToggleMenu {
     this.information = false;
     this.search = false;
     this.score = false;
+    this.preview = false;
+    this.address = false;
+    this.payment = false;
   }
   public profileReset (){
     this.avatar = false;
@@ -27,6 +33,11 @@ export class ToggleMenu {
     this.information = false;
     this.search = false;
     this.score = false;
+    this.preview = false;
+    this.address = false;
+    this.payment = false;
+
+
   }
   profile: boolean;
   avatar: boolean;
@@ -36,5 +47,7 @@ export class ToggleMenu {
   information: boolean;
   search: boolean;
   score: boolean;
-
+  preview : boolean;
+  address : boolean;
+  payment : boolean;
 }
