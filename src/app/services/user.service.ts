@@ -6,6 +6,8 @@ import { MainUserInformation } from '../models/user/information/main.model'
 import { Cart } from '../models/user/information/cart.model'
 import { Score } from '../models/user/information/score.model'
 import { Avatar } from '../models/user/avatar.model'
+import { EditUserInformation } from 'src/app/models/user/information/edit.model'
+
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -13,6 +15,7 @@ export class UserService {
   getAvatarsUrl = Links.prefix+'/v2/api/user/avatars';
   getCartUrl = Links.prefix+'/v2/api/user/carts';
   getScoreUrl = Links.prefix+'/v2/api/user/scores';
+  getProfileUrl = Links.prefix+'/v2/api/user/profile';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +32,40 @@ export class UserService {
       return this.http.get<MainUserInformation>(this.getMainInfoUrl , httpOptions);
     } else {
       return this.http.get<MainUserInformation>(this.getMainInfoUrl);
+    }
+
+  }
+
+  GetEditableInformation() {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.get<EditUserInformation>(this.getProfileUrl , httpOptions);
+    } else {
+      return this.http.get<EditUserInformation>(this.getProfileUrl);
+    }
+
+  }
+
+  SetEditableInformation(editObject) {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.post(this.getProfileUrl ,editObject, httpOptions);
+    } else {
+      return this.http.post(this.getProfileUrl,editObject);
     }
 
   }

@@ -17,7 +17,7 @@
     <div class="accountProfile-profile-headerBottom">
       <p>{{userMainInfo?.firstName}} {{userMainInfo?.lastName}}</p>
       <p>{{userMainInfo?.username}}</p>
-      <p><img src="assets/resources/images/assets/png/ic-edit-24-px.png"/>ویرایش</p>
+      <p><img src="assets/resources/images/assets/png/ic-edit-24-px.png" (click)="toggleEditProfile()" />ویرایش</p>
     </div>
     <ul class="accountProfile-profile-items">
       <li (click)="toggleFinance()"><img src="assets/resources/images/assets/png/ic-history.png"/>تاریخچه خرید<img src="assets/resources/images/assets/png/arrow.png"/></li>

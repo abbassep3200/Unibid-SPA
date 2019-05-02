@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
     this.loading.show();
 
     this.userService.GetMainInformation().subscribe(result => {
-      console.log(result)
       this.userMainInfo = result;
       this.loading.hide();
     },
@@ -63,6 +62,11 @@ export class ProfileComponent implements OnInit {
   toggleScore(){
     this.shared.toggleMenu.reset();
     this.shared.toggleMenu.score = true;
+  }
+
+  toggleEditProfile(){
+    this.shared.toggleMenu.reset();
+    this.shared.toggleMenu.edit = true;
   }
 
 }

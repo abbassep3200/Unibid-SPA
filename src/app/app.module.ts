@@ -34,6 +34,7 @@ import { CheckoutComponent } from './components/user/checkout/checkout.component
 import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SuccessComponent } from './components/success/success.component';
+import { EditUserComponent } from './components/user/edit/edit.component';
 
 // const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
@@ -68,6 +69,7 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resourc
     LoadingComponent,
     ErrorComponent,
     SuccessComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

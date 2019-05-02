@@ -27,6 +27,7 @@
     <app-finance *ngIf="this.shared.toggleMenu.finance"></app-finance>
     <app-shopping-card *ngIf="this.shared.toggleMenu.shoppingCart"></app-shopping-card>
     <app-score *ngIf="this.shared.toggleMenu.score" [username]="username"></app-score>
+    <app-edit-user *ngIf="this.shared.toggleMenu.edit"></app-edit-user>
 
     <div class="header-content-loginInfo-pic" (click)="toggleProfileMenu()">
         <img [src]="Link.avatar(userInfo?.avatar)" alt="" class="">

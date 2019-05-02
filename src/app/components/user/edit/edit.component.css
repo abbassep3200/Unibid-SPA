@@ -199,7 +199,7 @@
 }
 
 .accountProfile-address .cfnText,
-.accountProfile-profile-editProfile .cfnText {
+.accountProfile-profile-editProfile  .cfnText {
   text-align: center;
   color: #212121;
   font-size: 14px;
@@ -207,10 +207,10 @@
 
 .cfnTextSign {
   position: absolute;
-  left: 15px;
+  left: 30px;
   font-size: 20px;
   color: #959595;
-  top: 50%;
+  top: 42%;
   transform: translateY(-50%);
   border-right: 1px solid #ebebeb;
   display: inline-block;
