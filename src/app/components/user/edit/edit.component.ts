@@ -41,7 +41,6 @@ export class EditUserComponent implements OnInit {
 
     this.loading.show();
     this.userService.GetEditableInformation().subscribe(result =>{
-      console.log(result);
       this.editables = result;
       this.registerForm = this.formBuilder.group({
         fullName: [this.editables.fullName],

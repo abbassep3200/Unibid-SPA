@@ -1,6 +1,6 @@
 .cfnError {
   background-color: #f8d7da;
-  position: fixed;
+  position: absolute;
   padding: 1rem 1.25rem;
   border: 1px solid #f5c6cb;
   color:#721c24;

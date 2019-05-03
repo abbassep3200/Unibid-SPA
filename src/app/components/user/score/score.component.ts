@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { ErrorComponent } from 'src/app/components/error/error.component';
 import { SharingService } from 'src/app/services/sharing.service'
 import { LiveUserService } from 'src/app/services/live-user.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,7 +17,8 @@ export class ScoreComponent implements OnInit {
   scores : Score[];
   Link = Links;
   @Input() username: string;
-
+  @ViewChild(LoadingComponent) loading: LoadingComponent ;
+  @ViewChild(ErrorComponent) error: ErrorComponent ;
   constructor(private el: ElementRef, private shared:SharingService,private liveUser:LiveUserService,private userService:UserService) { }
 
   ngOnInit() {
@@ -24,8 +27,10 @@ export class ScoreComponent implements OnInit {
     this.liveUser.scores.subscribe(result => {
       this.scores = result;
     });
+    this.loading.show();
     this.userService.GetScores().subscribe(result=>{
       this.scores = result;
+      this.loading.hide();
     });
   }
 

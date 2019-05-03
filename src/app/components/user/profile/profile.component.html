@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="accountProfile-profile-headerBottom">
-      <p>{{userMainInfo?.firstName}} {{userMainInfo?.lastName}}</p>
+      <p>{{userMainInfo?.fullName}}</p>
       <p>{{userMainInfo?.username}}</p>
       <p><img src="assets/resources/images/assets/png/ic-edit-24-px.png" (click)="toggleEditProfile()" />ویرایش</p>
     </div>
@@ -27,8 +27,7 @@
       <li><img src="assets/resources/images/assets/png/group-105.png"/>پیام‌ها<img src="assets/resources/images/assets/png/arrow.png"/></li>
       <li><img src="assets/resources/images/assets/png/setting.png"/>تنظیمات<img src="assets/resources/images/assets/png/arrow.png"/></li>
     </ul>
+    <app-loading></app-loading>
+    <app-error></app-error>
   </div>
 </div>
-
-<app-error></app-error>
-<app-loading><app-loading>

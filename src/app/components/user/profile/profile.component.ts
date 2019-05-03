@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
       this.error.show(error,2000,'/signin');
     });
   }
-  
+
   ngAfterViewInit(){
     this.liveUser.profileStatus.subscribe(result=>{
       this.userMainInfo = result;

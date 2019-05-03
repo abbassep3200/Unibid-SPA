@@ -1,9 +1,9 @@
 .cfnSuccess {
-  background-color: #0fd65dcf;
-  position: fixed;
+  background-color: #ff77c8;
+  position: absolute;
   padding: 1rem 1.25rem;
-  border: 1px solid #c6f5cb;
-  color:#1c2472;
+  border: 1px solid #ffffff;
+  color:#ffffff;
   left: 0;
   right: 0;
   font-size: 125%;
