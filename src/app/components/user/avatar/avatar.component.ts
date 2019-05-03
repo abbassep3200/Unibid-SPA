@@ -76,16 +76,23 @@ export class AvatarComponent implements OnInit {
 
   goBack(){
     this.shared.lastClass = "myCfnAnimation-slideleft";
-    this.shared.toggleMenu.profile = true;
-    this.shared.toggleMenu.avatar = false;
+    this.el.nativeElement.getElementsByClassName('AvatarContainer')[0].classList.add('myCfnAnimation-slideright-none');
+    setTimeout(()=>{
+      this.shared.toggleMenu.profile = true;
+      this.shared.toggleMenu.avatar = false;
+    },200);
+
   }
 
   confirmAvatar(eventData){
     eventData.preventDefault();
     this.loading.show();
     this.userService.SaveAvatar({"avatarId":this.selected.avatarId}).subscribe(result=>{
-      this.loading.hide();
-      this.success.show(result,3000);
+      this.success.show(result,1500)
+      .then(()=>{
+        this.loading.hide();
+        this.goBack();
+      });
     },
     error => {
       this.loading.hide();

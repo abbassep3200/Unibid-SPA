@@ -23,13 +23,17 @@ export class SuccessComponent implements OnInit {
   ngOnInit() {
   }
 
-  show(object,time=2000){
-      this.successObj = object;
-      this.successMessageElem.nativeElement.classList.remove('cfnAnimation-fadeOut');
-      this.successMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      clearTimeout(this.timeoutId);
-      this.timeoutId = setTimeout(() => {
-        this.successMessageElem.nativeElement.classList.add('cfnAnimation-fadeOut');
-      }, time);
-    }
+    show(object,time=2000): Promise<void> {
+      return new Promise((resolve, reject) => {
+        this.successObj = object;
+        this.successMessageElem.nativeElement.classList.remove('cfnAnimation-fadeOut');
+        this.successMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
+        clearTimeout(this.timeoutId);
+        this.timeoutId = setTimeout(() => {
+          this.successMessageElem.nativeElement.classList.add('cfnAnimation-fadeOut');
+          resolve();
+        }, time);
+      })
+  }
+  
 }

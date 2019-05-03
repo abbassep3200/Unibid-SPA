@@ -36,7 +36,10 @@ export class ScoreComponent implements OnInit {
 
   goBack(){
     this.shared.lastClass = "myCfnAnimation-slideup";
-    this.shared.toggleMenu.profile = true;
-    this.shared.toggleMenu.score = false;
+    this.el.nativeElement.getElementsByClassName('ScoresContainer')[0].classList.add('myCfnAnimation-slidedown-none');
+    setTimeout(()=>{
+      this.shared.toggleMenu.profile = true;
+      this.shared.toggleMenu.score = false;
+    },200);
   }
 }

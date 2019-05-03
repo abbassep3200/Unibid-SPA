@@ -74,9 +74,11 @@ export class ShipmentEditComponent implements OnInit {
     }
 
     this.userService.SetShipmentInformation(obj).subscribe(result => {
-      this.loading.hide();
-      this.success.show(result,3000);
-      this.goBack();
+      this.success.show(result,1500)
+      .then(()=>{
+        this.loading.hide();
+        this.goBack();
+      });
     },
     error => {
       this.loading.hide();

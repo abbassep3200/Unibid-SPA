@@ -58,8 +58,11 @@ export class EditUserComponent implements OnInit {
   }
   goBack(){
     this.shared.lastClass = "myCfnAnimation-slideleft";
-    this.shared.toggleMenu.edit = false;
-    this.shared.toggleMenu.profile = true;
+    this.el.nativeElement.getElementsByClassName('editProfileContainer')[0].classList.add('myCfnAnimation-slideright-none');
+    setTimeout(()=>{
+      this.shared.toggleMenu.edit = false;
+      this.shared.toggleMenu.profile = true;
+    },200);
   }
 
   SaveProfile(eventDate) {
@@ -81,8 +84,12 @@ export class EditUserComponent implements OnInit {
     }
 
     this.userService.SetEditableInformation(obj).subscribe(result => {
-      this.loading.hide();
-      this.success.show(result,3000);
+
+      this.success.show(result,1500).
+      then(()=>{
+        this.loading.hide();
+        this.goBack();
+      });
     },
     error => {
       this.loading.hide();
