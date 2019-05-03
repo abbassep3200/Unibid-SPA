@@ -1,7 +1,7 @@
 <div class="account-container">
   <span class="account-logo">یونی‌بید</span>
   <p class="account-regularText">ورود به حراجی</p>
-  <span class="account-pic"></span>
+  <span class="account-pic"><img [src]="userAvatar" alt="" /></span>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <input class="cfnText" [ngClass]="{'inputInvalid': this.submitted && this.formFields.username.errors}" formControlName="username" type="text" placeholder="نام کاربری">
@@ -11,7 +11,7 @@
   <div class="account-forget">
     <input type="checkbox" id="chkRemember">
     <label for="chkRemember">مرا به خاطر بسپار</label>
-    <a href="" class="account-forget-text">رمز عبور خود را فراموش کرده‌اید؟</a>
+    <a href="" routerLink="/forgot" class="account-forget-text">رمز عبور خود را فراموش کرده‌اید؟</a>
   </div>
   <div class="account-register">
     <span>هنوز ثبت نام نکرده اید؟</span>

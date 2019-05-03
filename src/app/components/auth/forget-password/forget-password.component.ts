@@ -1,24 +1,28 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { ErrorComponent } from 'src/app/components/error/error.component';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Links } from 'src/app/links.component';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  selector: 'app-forget-password',
+  templateUrl: './forget-password.component.html',
+  styleUrls: ['./forget-password.component.css']
 })
-export class SigninComponent implements OnInit {
+export class ForgetPasswordComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
   submitted = false;
   errorObj = '';
   Link = Links;
+  progress;
   userAvatar;
   timeoutId;
-  @ViewChild('errorMessage') errorMessageElem: ElementRef;
+  @ViewChild(LoadingComponent) loading: LoadingComponent ;
+  @ViewChild(ErrorComponent) error: ErrorComponent ;
+
   constructor(private formBuilder: FormBuilder,
               private location: Location,
               private authenticationService: AuthenticationService,
@@ -32,15 +36,11 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      forgotField: ['', Validators.required]
     });
     const wrapperElem: HTMLElement = document.getElementById('mainWrapper');
     this.renderer.setStyle(wrapperElem, 'justify-content', 'center');
     this.renderer.setStyle(wrapperElem, 'align-items', 'center');
-    this.authenticationService.getAvatar().subscribe(result=>{
-      this.userAvatar = this.Link.avatar(result);
-    });
   }
 
   onSubmit() {
@@ -49,24 +49,14 @@ export class SigninComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.loading.show();
 
-    this.authenticationService.login(this.formFields.username.value, this.formFields.password.value).subscribe(user => {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.location.back();
-      // this.router.navigate(['/']);
+    this.authenticationService.forgotPassword({"forgotField":this.formFields.forgotField.value}).subscribe(result => {
+      this.router.navigate(['/signin']);
     },
     error => {
-      this.errorObj = error;
-      this.loading = false;
-      if (error.error.reason === 'verification') {
-        this.router.navigate(['/verification']);
-      }
-      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      clearTimeout(this.timeoutId);
-      this.timeoutId = setTimeout(() => {
-        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-      }, 5000);
+      this.loading.hide();
+      this.error.show(error,3000,null)
     });
   }
 

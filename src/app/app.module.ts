@@ -37,6 +37,7 @@ import { EditUserComponent } from './components/user/edit/edit.component';
 import { ShipmentPreviewComponent } from './components/user/checkout/shipment/preview/shipment-preview.component';
 import { ShipmentEditComponent } from './components/user/checkout/shipment/edit/shipment-edit.component';
 import { PaymentComponent } from './components/user/checkout/payment/payment.component';
+import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
 
 // const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
@@ -74,6 +75,7 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resourc
     ShipmentPreviewComponent,
     ShipmentEditComponent,
     PaymentComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,10 +11,12 @@ import { Links } from '../links.component';
 export class AuthenticationService {
     // private currentUserSubject: BehaviorSubject<User>;
     // public currentUser: Observable<User>;
-    loginUrl = Links.prefix+'/v2/api/auth/login';
-    registerUrl = Links.prefix+'/v2/api/auth/register';
-    logoutUrl = Links.prefix+'/v2/api/auth/logout';
-    verificationUrl = Links.prefix+'/v2/api/auth/verify';
+    avatarUrl = Links.prefix+'v2/api/auth/avatar';
+    loginUrl = Links.prefix+'v2/api/auth/login';
+    registerUrl = Links.prefix+'v2/api/auth/register';
+    logoutUrl = Links.prefix+'v2/api/auth/logout';
+    forgotUrl = Links.prefix+'v2/api/auth/password/forgot';
+    verificationUrl = Links.prefix+'v2/api/auth/verify';
 
     constructor(private http: HttpClient) {
         // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -24,6 +26,14 @@ export class AuthenticationService {
     // public get currentUserValue(): User {
     //     return this.currentUserSubject.value;
     // }
+
+    getAvatar(){
+      return this.http.get(this.avatarUrl);
+    }
+
+    forgotPassword(forgotObj) {
+        return this.http.post(this.forgotUrl,forgotObj);
+    }
 
     login(username: string, password: string) {
         return this.http.post(this.loginUrl, { username, password });

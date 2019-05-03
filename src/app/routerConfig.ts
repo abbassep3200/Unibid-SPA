@@ -5,6 +5,7 @@ import { ShopComponent } from './components/shop/shop.component';
 import { AuctionComponent } from './components/auction/auction.component';
 import { DefaultComponent } from './components/default/default.component';
 import { VerificationComponent } from './components/auth/verification/verification.component';
+import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
 
 const appRoutes: Routes = [
   {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
   {
       path: 'signup',
       component: SignupComponent
+  },
+  {
+      path: 'forgot',
+      component: ForgetPasswordComponent
   },
   {
     path: '',
