@@ -19,7 +19,10 @@
   overflow: hidden;
 }
 
-.accountProfile > p {
+.accountProfile > div {
+  width: 400px;
+}
+.accountProfile > div > p {
   align-self: stretch;
 }
 

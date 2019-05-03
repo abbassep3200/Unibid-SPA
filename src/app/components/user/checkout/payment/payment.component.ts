@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ErrorComponent } from 'src/app/components/error/error.component';
 import { SuccessComponent } from 'src/app/components/success/success.component';
@@ -21,10 +21,13 @@ export class PaymentComponent implements OnInit {
   userSyncTimer;
   carts:Cart[];
   totalPrice = 0;
-  constructor(private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
+  constructor(private el: ElementRef, private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
 
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('paymentContainer')[0].classList.add(this.shared.basketClass);
+
+
     this.userSyncTimer = setInterval(() => {
       this.liveUser.getCarts();
     }, 1000);
@@ -58,6 +61,7 @@ export class PaymentComponent implements OnInit {
   }
 
   goBack(){
+    this.shared.basketClass = "myCfnAnimation-slideleft";
     this.shared.toggleMenu.payment = false;
     this.shared.toggleMenu.preview = true;
   }

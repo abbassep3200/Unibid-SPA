@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ErrorComponent } from 'src/app/components/error/error.component';
 import { SuccessComponent } from 'src/app/components/success/success.component';
@@ -18,9 +18,11 @@ export class ShipmentPreviewComponent implements OnInit {
   @ViewChild(SuccessComponent) success: SuccessComponent ;
   address:Address;
   Link = Links;
-  constructor(private userService:UserService,private shared:SharingService) { }
+  constructor(private el: ElementRef,private userService:UserService,private shared:SharingService) { }
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('shipmentContainer')[0].classList.add(this.shared.basketClass);
+
     this.loading.show();
     this.userService.GetAddress().subscribe(result=>{
       this.loading.hide();
@@ -33,17 +35,20 @@ export class ShipmentPreviewComponent implements OnInit {
   }
 
   goBack(){
+    this.shared.basketClass = "myCfnAnimation-slideleft";
     this.shared.toggleMenu.preview = false;
     this.shared.toggleMenu.shoppingCart = true;
   }
 
   goToNext(){
+    this.shared.basketClass = "myCfnAnimation-slideright";
     this.shared.toggleMenu.preview = false;
     this.shared.toggleMenu.payment = true;
   }
 
   editAddress(eventData){
     eventData.preventDefault();
+    this.shared.basketClass = "myCfnAnimation-slideright";
     this.shared.toggleMenu.preview = false;
     this.shared.toggleMenu.address = true;
   }

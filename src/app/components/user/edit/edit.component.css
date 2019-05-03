@@ -19,7 +19,11 @@
   overflow: hidden;
 }
 
-.accountProfile > p {
+.editProfileContainer {
+  width: 400px;
+}
+
+.accountProfile > div > p {
   align-self: stretch;
 }
 

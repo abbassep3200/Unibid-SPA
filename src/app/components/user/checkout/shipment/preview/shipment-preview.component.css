@@ -18,8 +18,17 @@
   box-sizing: border-box;
   overflow: hidden;
 }
+.shipmentContainer {
+  width: 400px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212121;
+  font-size: 12px;
+}
 
-.accountProfile > p {
+.accountProfile > div > p {
   align-self: stretch;
 }
 
@@ -126,13 +135,13 @@
   text-decoration: none;
 }
 
-.accountProfile .cfnButton-empty {
+.accountProfile > div .cfnButton-empty {
   position: relative;
   margin-top: 17px;
   width: 90%;
 }
 
-.accountProfile .cfnButton-empty > img{
+.accountProfile > div  .cfnButton-empty > img{
   left: 20px;
   position: absolute;
 }

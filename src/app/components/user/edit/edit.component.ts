@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { SharingService } from 'src/app/services/sharing.service';
@@ -25,9 +25,11 @@ export class EditUserComponent implements OnInit {
   @ViewChild(ErrorComponent) error: ErrorComponent ;
   @ViewChild(SuccessComponent) success: SuccessComponent ;
 
-  constructor(private shared:SharingService,private userService:UserService,private formBuilder: FormBuilder) { }
+  constructor(private el: ElementRef, private shared:SharingService,private userService:UserService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('editProfileContainer')[0].classList.add('myCfnAnimation-slideright');
+
 
     this.registerForm = this.formBuilder.group({
       fullName: [''],
@@ -56,6 +58,7 @@ export class EditUserComponent implements OnInit {
     });
   }
   goBack(){
+    this.shared.lastClass = "myCfnAnimation-slideleft";
     this.shared.toggleMenu.edit = false;
     this.shared.toggleMenu.profile = true;
   }

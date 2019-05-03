@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { LiveUserService } from 'src/app/services/live-user.service';
@@ -22,10 +22,13 @@ export class ShoppingCardComponent implements OnInit {
   userSyncTimer;
   carts:Cart[];
   totalPrice = 0;
-  constructor(private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
+  constructor(private el: ElementRef, private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
 
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('profileContainer')[0].classList.add(this.shared.basketClass);
+
+
     this.userSyncTimer = setInterval(() => {
       this.liveUser.getCarts();
     }, 1000);
@@ -58,8 +61,10 @@ export class ShoppingCardComponent implements OnInit {
   }
 
   goBack(){
-    this.shared.toggleMenu.shoppingCart = false;
+    this.shared.lastClass = "myCfnAnimation-slideup";
+    this.shared.basketClass = "myCfnAnimation-slideright";
     this.shared.toggleMenu.profile = true;
+    this.shared.toggleMenu.shoppingCart = false;
   }
 
   deleteOrder(eventData,orderId){
@@ -75,6 +80,7 @@ export class ShoppingCardComponent implements OnInit {
 
   togglePreview(){
     this.shared.toggleMenu.reset();
+    this.shared.basketClass = "myCfnAnimation-slideright";
     this.shared.toggleMenu.preview = true;
   }
 

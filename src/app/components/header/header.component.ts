@@ -91,6 +91,7 @@ export class HeaderComponent implements OnInit {
   toggleProfileMenu(){
     this.shared.toggleMenu.profile = !this.shared.toggleMenu.profile;
     this.shared.toggleMenu.profileReset();
+    this.shared.lastClass = "myCfnAnimation-fadeIn";
   }
 
   headerClicked(eventData){

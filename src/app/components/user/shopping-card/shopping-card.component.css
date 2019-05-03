@@ -19,7 +19,35 @@
   overflow: hidden;
 }
 
-.accountProfile > p {
+.profileContainer {
+  width: 400px;
+}
+.shipping-profile-button {
+  justify-content: center;
+  display: flex;
+}
+.shipping-profile-button > a {
+  width: 168px;
+}
+
+/*.profileContainer {
+  width: 400px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-color: #ffffff;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212121;
+  font-size: 12px;
+  direction: rtl;
+  padding: 15px 0;
+  padding-top: 0;
+}*/
+
+
+.accountProfile > div > p {
   align-self: stretch;
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { SharingService } from 'src/app/services/sharing.service'
 import { LiveUserService } from 'src/app/services/live-user.service';
 import { UserService } from 'src/app/services/user.service';
@@ -16,9 +16,11 @@ export class ScoreComponent implements OnInit {
   Link = Links;
   @Input() username: string;
 
-  constructor(private shared:SharingService,private liveUser:LiveUserService,private userService:UserService) { }
+  constructor(private el: ElementRef, private shared:SharingService,private liveUser:LiveUserService,private userService:UserService) { }
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('ScoresContainer')[0].classList.add('myCfnAnimation-slidedown');
+
     this.liveUser.scores.subscribe(result => {
       this.scores = result;
     });
@@ -28,7 +30,8 @@ export class ScoreComponent implements OnInit {
   }
 
   goBack(){
-    this.shared.toggleMenu.score = false;
+    this.shared.lastClass = "myCfnAnimation-slideup";
     this.shared.toggleMenu.profile = true;
+    this.shared.toggleMenu.score = false;
   }
 }

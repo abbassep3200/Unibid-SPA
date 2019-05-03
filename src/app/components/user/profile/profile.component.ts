@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ErrorComponent } from 'src/app/components/error/error.component';
 import { UserService } from 'src/app/services/user.service';
@@ -20,9 +20,11 @@ export class ProfileComponent implements OnInit {
   Link = Links;
   userSyncTimer;
 
-  constructor(private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
-
+  constructor(private el: ElementRef,private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) {
+  }
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('accountProfile-profile-header')[0].classList.add(this.shared.lastClass);
+
     this.userSyncTimer = setInterval(() => {
       this.liveUser.getProfileStatus();
     }, 1000);
@@ -37,7 +39,7 @@ export class ProfileComponent implements OnInit {
       this.error.show(error,2000,'/signin');
     });
   }
-
+  
   ngAfterViewInit(){
     this.liveUser.profileStatus.subscribe(result=>{
       this.userMainInfo = result;
@@ -56,6 +58,7 @@ export class ProfileComponent implements OnInit {
 
   toggleShoppingCard(){
     this.shared.toggleMenu.reset();
+    this.shared.basketClass = "myCfnAnimation-slideup";
     this.shared.toggleMenu.shoppingCart = true;
   }
 
@@ -68,5 +71,6 @@ export class ProfileComponent implements OnInit {
     this.shared.toggleMenu.reset();
     this.shared.toggleMenu.edit = true;
   }
+
 
 }

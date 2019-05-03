@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, QueryList, ElementRef,ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ElementRef, ViewChildren } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { LiveUserService } from 'src/app/services/live-user.service';
@@ -24,9 +24,11 @@ export class AvatarComponent implements OnInit {
   userSyncTimer;
   firstTime;
 
-  constructor(private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
+  constructor(private el: ElementRef, private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('AvatarContainer')[0].classList.add('myCfnAnimation-slideright');
+
 
     // this.userSyncTimer = setInterval(() => {
     //   this.liveUser.getAvatars();
@@ -76,8 +78,9 @@ export class AvatarComponent implements OnInit {
   }
 
   goBack(){
-    this.shared.toggleMenu.avatar = false;
+    this.shared.lastClass = "myCfnAnimation-slideleft";
     this.shared.toggleMenu.profile = true;
+    this.shared.toggleMenu.avatar = false;
   }
 
   confirmAvatar(eventData){

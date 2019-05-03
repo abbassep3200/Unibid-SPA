@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ErrorComponent } from 'src/app/components/error/error.component';
@@ -21,9 +21,10 @@ export class ShipmentEditComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   shipmentInfo:ShipmentInformation;
-  constructor(private shared:SharingService,private userService:UserService,private formBuilder: FormBuilder) { }
+  constructor(private el: ElementRef, private shared:SharingService,private userService:UserService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.el.nativeElement.getElementsByClassName('shipmentEditContainer')[0].classList.add(this.shared.basketClass);
 
     this.registerForm = this.formBuilder.group({
       fullName: [''],
@@ -87,10 +88,12 @@ export class ShipmentEditComponent implements OnInit {
     return this.registerForm.controls;
   }
   goBack(){
+    this.shared.basketClass = "myCfnAnimation-slideleft";
     this.shared.toggleMenu.address = false;
     this.shared.toggleMenu.preview = true;
   }
   goToNext(){
+    this.shared.basketClass = "myCfnAnimation-slideright";
     this.shared.toggleMenu.address = false;
     this.shared.toggleMenu.payment = true;
   }
