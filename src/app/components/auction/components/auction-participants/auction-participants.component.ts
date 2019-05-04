@@ -17,7 +17,7 @@ export class AuctionParticipantsComponent implements OnInit {
   participants;
   states = new States();
 
-  constructor(private auctionSocket:LiveAuctionService) { }
+  constructor(private auctionSocket:LiveAuctionService) {this.auctionSocket.connectToServer();}
 
   ngOnInit() {
     this.auctionSocket.users.subscribe(result =>{

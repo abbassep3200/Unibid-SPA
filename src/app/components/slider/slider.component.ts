@@ -22,17 +22,25 @@ export class SliderComponent implements OnInit {
     });
   }
 
-  config: SwiperOptions = {
-    autoplay: 3000, // Autoplay option having value in milliseconds
-    initialSlide: 1, // Slide Index Starting from 0
-    // slidesPerView: 1, // Slides Visible in Single View Default is 1
-    nextButton: '.swiper-button-next', // Class for next button
-    prevButton: '.swiper-button-prev', // Class for prev button
-    spaceBetween: 30, // Space between each Item,
-    slidesPerView: 'auto',
-    centeredSlides: true,
+  // config: SwiperOptions = {
+  //   autoplay: 3000, // Autoplay option having value in milliseconds
+  //   initialSlide: 1, // Slide Index Starting from 0
+  //   // slidesPerView: 1, // Slides Visible in Single View Default is 1
+  //   nextButton: '.swiper-button-next', // Class for next button
+  //   prevButton: '.swiper-button-prev', // Class for prev button
+  //   spaceBetween: 30, // Space between each Item,
+  //   slidesPerView: 'auto',
+  //   centeredSlides: true,
+  //
+  // };
 
-  };
+  // config: SwiperOptions = {
+  //   navigation: {
+  //         nextEl: '.swiper-button-next',
+  //         prevEl: '.swiper-button-prev',
+  //         spaceBetween: 30
+  //       },
+  // };
 
   toggleClick(eventData) {
     this.toggleHeart = !this.toggleHeart;

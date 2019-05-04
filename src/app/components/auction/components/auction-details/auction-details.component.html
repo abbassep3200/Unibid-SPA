@@ -2,14 +2,6 @@
 <div *ngIf="states.holliDay;then holliDay"></div>
 <div *ngIf="states.hotSpot;then hotSpot"></div>
 <div *ngIf="states.feniTto || auction?.done;then feniTto"></div>
-<div class="cfnLoaderWrapper" *ngIf="loading">
-  <div class="cfnLoader"></div>
-</div>
-<div class="cfnError" #errorMessage>
-  <ng-template [ngIf]="errorObj">
-    {{errorObj.error.message}}
-  </ng-template>
-</div>
 
 <ng-template #iceAge>
 
@@ -130,3 +122,7 @@
       </div>
     </div>
 </ng-template>
+
+<app-error></app-error>
+<app-success></app-success>
+<app-loading></app-loading>

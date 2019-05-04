@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SharingService } from 'src/app/services/sharing.service';
+import { LiveAuctionService } from 'src/app/services/live-auction.service';
 
 @Component({
   selector: 'app-default',
@@ -8,7 +9,7 @@ import { SharingService } from 'src/app/services/sharing.service';
 })
 export class DefaultComponent implements OnInit {
 
-  constructor(private renderer: Renderer2,private shared:SharingService) {
+  constructor(private renderer: Renderer2,public shared:SharingService,private auctionSocket:LiveAuctionService) {
   }
 
   ngOnInit() {

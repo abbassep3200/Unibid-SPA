@@ -29,6 +29,11 @@ export class LiveAuctionService {
   states = this.socket.fromEvent<States>('states');
 
   constructor(private socket: Socket) {
+    console.log('socket constructor');
+  }
+
+  connectToServer(){
+    this.socket.connect();
   }
 
   leave(auctionId){

@@ -21,7 +21,7 @@ export class ShopComponent implements OnInit {
   @ViewChild('shopWrapper') shopWrapperElem: ElementRef;
 
 
-  constructor(private mainService: MainServices,private shared:SharingService) { }
+  constructor(private mainService: MainServices,public shared:SharingService) { }
 
   ngOnInit() {
     this.mainService.GetShop().subscribe(result => {

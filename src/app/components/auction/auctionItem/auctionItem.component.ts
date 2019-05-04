@@ -49,9 +49,7 @@ export class AuctionItemComponent implements OnInit {
     private auctionSocket:LiveAuctionService,
     private shared:SharingService,
   )
-  {
-
-  }
+  {this.auctionSocket.connectToServer();}
 
   ngOnInit() {
     // this.auctionSocket.connect();
