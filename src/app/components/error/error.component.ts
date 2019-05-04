@@ -23,8 +23,8 @@ export class ErrorComponent implements OnInit {
   ngOnInit() {
   }
 
-  show(error,time=2000,navigate=null){
-    console.log('error');
+  show(error,time=2000,navigate=null): Promise<void> {
+    return new Promise((resolve, reject) => {
       this.errorObj = error;
       this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeOut');
       this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
@@ -38,7 +38,8 @@ export class ErrorComponent implements OnInit {
         if(navigate){
           this.router.navigate([navigate]);
         }
+        resolve();
       }, time);
-
-    }
+    })
+  }
 }

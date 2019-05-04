@@ -10,6 +10,8 @@
 }
 
 .shop-wrapper {
+    top: 0;
+    left: 0;
     position: absolute;
     z-index: 1000000;
     padding-top: 42px;

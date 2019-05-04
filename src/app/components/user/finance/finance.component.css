@@ -19,7 +19,13 @@
   overflow: hidden;
 }
 
-.accountProfile > p {
+.financeContainer {
+  width: 400px;
+  padding: 15px 0;
+  padding-top: 0;
+}
+
+.accountProfile > div > p {
   align-self: stretch;
 }
 
@@ -35,141 +41,6 @@
   position: absolute;
   right: 10px;
   top: 13px;
-}
-
-.accountProfile-title > span {
-  position: absolute;
-  left: 10px;
-  top: 18px;
-  color: #ec407a;
-}
-
-.accountProfile-shippingSteps {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  border-top: 1px solid #ebebeb;
-  border-bottom: 1px solid #ebebeb;
-  margin: 0 -10px;
-  padding: 15px 0;
-
-}
-
-.accountProfile-shippingSteps > div {
-  display: flex;
-  align-items: center;
-}
-
-.accountProfile-shippingSteps > div > div{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #ec407a;
-}
-
-.accountProfile-shippingSteps-line {
-  width: 48px;
-  height: 2px;
-  background-color:  #ec407a;
-  margin: 0 7px;
-  margin-bottom: 23px;
-}
-
-.accountProfile-shippingSteps-check {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 1px solid #ec407a;
-  margin-bottom: 10px;
-}
-
-.accountProfile-shippingSteps-check-checked {
-  background-color: #ec407a;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 115%;
-}
-
-.accountProfile-shippingSteps-check-checked::before {
-  content: '\2713';
-}
-
-.accountProfile-shippingSteps-disabled {
-  pointer-events: none;
-  opacity: 0.2;
-  filter:grayscale(100%);
-}
-
-.accountProfile-location {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  font-size: 13px;
-  border-bottom: 1px solid #ebebeb;
-  margin-bottom: 15px;
-}
-
-.accountProfile-location > img {
-  margin-left: 12px;
-  margin-bottom: 15px;
-}
-
-.accountProfile-location p {
-  line-height: 1.7em;
-}
-
-.accountProfile-location a {
-  color: #ec407a;
-  text-decoration: none;
-}
-
-.accountProfile .cfnButton-empty {
-  position: relative;
-  margin-top: 17px;
-  width: 90%;
-}
-
-.accountProfile .cfnButton-empty > img{
-  left: 20px;
-  position: absolute;
-}
-
-.accountProfile-priceWrapper {
-  width: 100%;
-}
-
-.accountProfile-priceItem {
-  border-bottom: 1px solid #ebebeb;
-  padding: 15px;
-}
-
-.accountProfile-priceItem-title {
-  font-size: 16px;
-}
-
-.accountProfile-priceItem-after {
-  color: #ec407a;
-  font-size: 12px;
-}
-
-.accountProfile-priceItem-before {
-  color: #707070;
-  font-size: 12px;
-}
-
-.accountProfile-priceTotal {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  padding: 15px;
-  border-bottom: 1px solid #ebebeb;
-}
-
-.accountProfile-priceTotal > span:last-of-type {
-  font-size: 16px;
 }
 
 .accountProfile-footer-tittle {
@@ -203,22 +74,6 @@
   text-align: center;
   color: #212121;
   font-size: 14px;
-}
-
-.cfnTextSign {
-  position: absolute;
-  left: 15px;
-  font-size: 20px;
-  color: #959595;
-  top: 50%;
-  transform: translateY(-50%);
-  border-right: 1px solid #ebebeb;
-  display: inline-block;
-  padding-right: 10px;
-}
-
-.cfnTextSign > img {
-  max-width: 100%;
 }
 
 .accountProfile-address > div,

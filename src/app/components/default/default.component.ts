@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { SharingService } from 'src/app/services/sharing.service';
 
 @Component({
   selector: 'app-default',
@@ -7,7 +8,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2,private shared:SharingService) {
   }
 
   ngOnInit() {

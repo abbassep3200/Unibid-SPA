@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MainServices } from 'src/app/services/main.service';
+import { SharingService } from 'src/app/services/sharing.service';
 import { Shop } from 'src/app/models/shop/shop.model';
 import { Buy } from 'src/app/models/shop/buy.model';
 import { Links } from 'src/app/links.component';
@@ -20,7 +21,7 @@ export class ShopComponent implements OnInit {
   @ViewChild('shopWrapper') shopWrapperElem: ElementRef;
 
 
-  constructor(private mainService: MainServices) { }
+  constructor(private mainService: MainServices,private shared:SharingService) { }
 
   ngOnInit() {
     this.mainService.GetShop().subscribe(result => {

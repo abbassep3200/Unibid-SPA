@@ -57,8 +57,6 @@ export class AuctionComponent implements OnInit {
       console.log(result);
     });
 
-
-
   }
 
 }

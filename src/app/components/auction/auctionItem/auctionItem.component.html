@@ -21,6 +21,9 @@
               </div>
             </div>
           </div>
+          <app-error></app-error>
+          <app-success></app-success>
+          <app-loading></app-loading>
         </div>
       </div>
 
@@ -43,6 +46,9 @@
               </div>
 
               <a class="cfnButton cfnButton-primary" (click)="registerByGem($event,auction.auctionId,GetParticipation.details.planId)">تایید</a>
+              <app-error></app-error>
+              <app-success></app-success>
+              <app-loading></app-loading>
             </div>
         </div>
       </div>
@@ -62,6 +68,9 @@
                 <p class="hoveredAuctionContent-title">{{GetParticipation.details.coinsNeeded}} سکه</p>
                 <p class="hoveredAuctionContent-parag"> تعداد {{GetParticipation.details.coinsNeeded}} سکه جهت شرکت شما در {{GetParticipation.details.auction}} کسر شد.</p>
                 </div>
+                <app-error></app-error>
+                <app-success></app-success>
+                <app-loading></app-loading>
               </div>
         </div>
       </div>
@@ -82,7 +91,9 @@
                 <p class="hoveredAuctionContent-parag">شما {{auction.plan.coins}} سکه جهت شرکت در {{auction.title}} پرداخت کرده اید.</p>
                 </div>
                 <a routerLink = "/auction/{{auction.auctionId}}" class="cfnButton cfnButton-primary" >ورود به حراجی</a>
-
+                <app-error></app-error>
+                <app-success></app-success>
+                <app-loading></app-loading>
               </div>
         </div>
       </div>
@@ -132,7 +143,9 @@
          <span>شرکت کنندگان: {{auction.participants.count }} از {{auction.maxMembers}}</span>
        </div>
      </div>
-
+     <app-error></app-error>
+     <app-success></app-success>
+     <app-loading></app-loading>
     </div>
   </div>
 
@@ -170,15 +183,10 @@
           <span>نفر اول</span>
        </div>
      </div>
+
+     <app-error></app-error>
+     <app-success></app-success>
+     <app-loading></app-loading>
    </div>
-</div>
 
-<div class="cfnLoaderWrapper" *ngIf="loading">
-  <div class="cfnLoader"></div>
-</div>
-
-<div class="cfnError" #errorMessage>
-  <ng-template [ngIf]="errorObj">
-    {{errorObj.error.message}}
-</ng-template>
 </div>

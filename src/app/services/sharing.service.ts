@@ -6,5 +6,6 @@ export class SharingService {
   toggleMenu = new ToggleMenu();
   lastClass = "myCfnAnimation-fadeIn";
   basketClass = "myCfnAnimation-slideright";
+  shop = false;
   constructor() {}
 }

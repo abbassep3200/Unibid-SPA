@@ -19,9 +19,9 @@ export class AvatarComponent implements OnInit {
   @ViewChild(LoadingComponent) loading: LoadingComponent ;
   @ViewChild(ErrorComponent) error: ErrorComponent ;
   @ViewChild(SuccessComponent) success: SuccessComponent ;
+  @ViewChildren('avatarItems') avatarItems:QueryList<ElementRef>;
 
   Link = Links;
-  @ViewChildren('avatarItems') avatarItems:QueryList<ElementRef>;
   makeChanges = false;
   selected = new Avatar();
   userSyncTimer;

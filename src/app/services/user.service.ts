@@ -9,6 +9,7 @@ import { Avatar } from '../models/user/avatar.model'
 import { EditUserInformation } from 'src/app/models/user/information/edit.model'
 import { ShipmentInformation } from 'src/app/models/user/information/shipment.model'
 import { Address } from 'src/app/models/user/information/address.model'
+import { Payment } from 'src/app/models/user/information/payment.model'
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,6 +21,7 @@ export class UserService {
   getProfileUrl = Links.prefix+'/v2/api/user/profile';
   getAddressUrl = Links.prefix+'/v2/api/user/address';
   getShipmentUrl = Links.prefix+'/v2/api/user/shipment';
+  getPaymentUrl = Links.prefix+'/v2/api/user/payment';
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +55,23 @@ export class UserService {
       return this.http.get<ShipmentInformation>(this.getShipmentUrl , httpOptions);
     } else {
       return this.http.get<ShipmentInformation>(this.getShipmentUrl);
+    }
+
+  }
+
+  GetPaymentInformation() {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.get<Payment[]>(this.getPaymentUrl , httpOptions);
+    } else {
+      return this.http.get<Payment[]>(this.getPaymentUrl);
     }
 
   }

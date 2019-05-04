@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryList} from '@angular/core';
 import { MainServices } from 'src/app/services/main.service';
+import { SharingService } from 'src/app/services/sharing.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Auction } from 'src/app/models/auction.model';
 import { Links } from 'src/app/links.component';
@@ -8,6 +9,9 @@ import { GetParticipation } from 'src/app/models/getParticipation.model';
 import { LiveAuctionService } from 'src/app/services/live-auction.service';
 import { ProgressComponent } from 'src/app/components/progress/progress.component';
 import { AuctionStatus } from 'src/app/models/auctionStatus.model';
+import { LoadingComponent } from 'src/app/components/loading/loading.component'
+import { ErrorComponent } from 'src/app/components/error/error.component'
+import { SuccessComponent } from 'src/app/components/success/success.component'
 
 @Component({
   selector: 'app-auctionItem',
@@ -19,8 +23,6 @@ export class AuctionItemComponent implements OnInit {
   toggleHeart = false;
   showRegisterAuction = false;
   hideRegisterAuction = false;
-  loading = false;
-  errorObj = null;
   coinState = 'pallet';
   GetParticipation = GetParticipation;
   participated = false;
@@ -33,6 +35,9 @@ export class AuctionItemComponent implements OnInit {
   @Input() auction: Auction;
   @ViewChild('errorMessage') errorMessageElem: ElementRef;
   @ViewChild(ProgressComponent ) progress: ProgressComponent ;
+  @ViewChild(ErrorComponent ) error: ErrorComponent ;
+  @ViewChild(SuccessComponent ) success: SuccessComponent ;
+  @ViewChild(LoadingComponent ) loading: LoadingComponent ;
 
   currentTime = Math.floor(Math.random() * (10 - 4)) + 4;
   totalSegments = 10 ;
@@ -42,6 +47,7 @@ export class AuctionItemComponent implements OnInit {
     private authService:AuthenticationService,
     private router: Router,
     private auctionSocket:LiveAuctionService,
+    private shared:SharingService,
   )
   {
 
@@ -105,13 +111,8 @@ export class AuctionItemComponent implements OnInit {
     });
 
     this.auctionSocket.failed.subscribe(result => {
-      this.errorObj = result;
-      this.loading = false;
-      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      clearTimeout(this.timeoutId);
-      this.timeoutId = setTimeout(() => {
-        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-      }, 2000);
+      this.loading.hide();
+      this.error.show(result,2000,null);
     });
 
   }
@@ -130,24 +131,14 @@ export class AuctionItemComponent implements OnInit {
 
   toggleClick(eventData, auctionId) {
 
-      this.loading = true;
+      this.loading.show();
       this.service.likeAuction({auctionId:auctionId}).subscribe(result => {
         this.toggleHeart = !this.toggleHeart;
-        this.loading = false;
+        this.loading.hide();
       },
       error => {
-
-        this.errorObj = error;
-        this.loading = false;
-        this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-        clearTimeout(this.timeoutId);
-        this.timeoutId = setTimeout(() => {
-          if(error.status==401){
-            this.authService.logout();
-            this.router.navigate(['/signin']);
-          }
-          this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-        }, 2000);
+        this.loading.hide();
+        this.error.show(error,2000,null);
       });
       eventData.stopPropagation();
     }
@@ -187,9 +178,9 @@ export class AuctionItemComponent implements OnInit {
   }
 
   registerByCoin(eventData,auctionId,planId){
-    this.loading = true;
+    this.loading.show();
     this.service.registerByCoin({auctionId:auctionId,planId:planId}).subscribe(result => {
-      this.loading = false;
+      this.loading.hide();
       this.GetParticipation = <any>result;
       this.coinState = 'confirmed';
       this.participated = true;
@@ -199,18 +190,8 @@ export class AuctionItemComponent implements OnInit {
         this.GetParticipation = error.error;
         this.coinState = 'gems';
       }
-
-      this.errorObj = error;
-      this.loading = false;
-      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      clearTimeout(this.timeoutId);
-      this.timeoutId = setTimeout(() => {
-        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-        if(error.status==401){
-          this.authService.logout();
-          this.router.navigate(['/signin']);
-        }
-      }, 2000);
+      this.loading.hide();
+      this.error.show(error,2000,null);
     });
     eventData.stopPropagation();
   }
@@ -218,9 +199,9 @@ export class AuctionItemComponent implements OnInit {
   registerByGem(eventData,auctionId,planId){
     eventData.stopPropagation();
 
-    this.loading = true;
+    this.loading.show();
     this.service.registerByGem({auctionId:auctionId,planId:planId}).subscribe(result => {
-      this.loading = false;
+      this.loading.hide();
       this.GetParticipation = <any>result;
       this.coinState = 'confirmed';
       this.participated = true;
@@ -231,17 +212,16 @@ export class AuctionItemComponent implements OnInit {
         this.coinState = 'gems';
       }
 
-      this.errorObj = error;
-      this.loading = false;
-      this.errorMessageElem.nativeElement.classList.add('cfnAnimation-fadeIn');
-      clearTimeout(this.timeoutId);
-      this.timeoutId = setTimeout(() => {
-        this.errorMessageElem.nativeElement.classList.remove('cfnAnimation-fadeIn');
-        if(error.status===401){
-          this.authService.logout();
-          this.router.navigate(['/signin']);
-        }
-      }, 2000);
+      this.loading.hide();
+
+      if(error.error.reason=="redirectShop"){
+        this.error.show(error,2000,null)
+        .then(()=>{
+          this.shared.shop = true;
+        });
+      }else{
+        this.error.show(error,2000,null);
+      }
     });
 
   }
