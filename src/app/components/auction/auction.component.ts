@@ -27,7 +27,7 @@ export class AuctionComponent implements OnInit {
     private router:Router,
     private auctionSocket:LiveAuctionService,
     private renderer: Renderer2,
-    private shared:SharingService,
+    public shared:SharingService,
   )
   {this.auctionSocket.connectToServer();}
 

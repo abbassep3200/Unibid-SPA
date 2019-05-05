@@ -2,6 +2,7 @@ import { Charity } from './../charity.model';
 import { Participant } from './participant.model';
 import { Product } from './product.model';
 import { AuctionStatus } from './../auctionStatus.model';
+import { ExtraBids } from './extrabids.model';
 
 
 export class BaseAuction {
@@ -26,4 +27,5 @@ export class BaseAuction {
   started:boolean;
   status:AuctionStatus;
   done:boolean;
+  extraBids:ExtraBids;
 }

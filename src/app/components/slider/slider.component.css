@@ -9,6 +9,8 @@
 
 .swiper-slide {
   max-width: calc(100vw - 190px);
+  /*width: 300px!important;
+  height: 300px!important;*/
 }
 
 .swiper-button-next,

@@ -21,8 +21,26 @@ export class MainServices {
   participationByCoin = Links.prefix+'/v2/api/auction/coin/registeration';
   participationByGem = Links.prefix+'/v2/api/auction/gem/registeration';
   getBasicInfoUrl = Links.prefix+'/v2/api/user/basic';
+  HandleExtraBidUrl = Links.prefix+'/v2/api/auction/extrabids';
 
   constructor(private http: HttpClient) {
+
+  }
+
+  HandleExtraBid(auctionObj) {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.post(this.HandleExtraBidUrl, auctionObj , httpOptions);
+    } else {
+      return this.http.post(this.HandleExtraBidUrl, auctionObj);
+    }
 
   }
 
