@@ -52,6 +52,14 @@ export class LiveAuctionService {
     this.socket.emit('getStatus',{'auctionId':auctionId});
   }
 
+  getStates(auctionId){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      this.socket.emit('getStates',{'auctionId':auctionId,'authorization':token});
+    }
+  }
+
   getAuction(auctionId){
     this.socket.emit('getAuction',{'auctionId':auctionId});
   }

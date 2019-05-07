@@ -24,10 +24,11 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit() {
     this.el.nativeElement.getElementsByClassName('accountProfile-profile-header')[0].classList.add(this.shared.lastClass);
+    this.liveUser.getProfileStatus();
 
     this.userSyncTimer = setInterval(() => {
       this.liveUser.getProfileStatus();
-    }, 1000);
+    }, 10000);
 
     this.loading.show();
 

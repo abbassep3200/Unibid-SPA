@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userSyncTimer = setInterval(() => {
       this.liveUser.getStatus();
-    }, 1000);
+    }, 10000);
   }
 
   ngDoCheck(){
@@ -89,6 +89,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleProfileMenu(){
+    this.liveUser.getStatus();
     this.shared.toggleMenu.profile = !this.shared.toggleMenu.profile;
     this.shared.toggleMenu.profileReset();
     this.shared.lastClass = "myCfnAnimation-fadeIn";

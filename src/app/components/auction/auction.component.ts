@@ -50,6 +50,7 @@ export class AuctionComponent implements OnInit {
       this.auction = result;
     });
 
+
     this.auctionSocket.remained.subscribe(result=>{
       console.log(result);
     });

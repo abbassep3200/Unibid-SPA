@@ -25,7 +25,13 @@ export class EditUserComponent implements OnInit {
   @ViewChild(ErrorComponent) error: ErrorComponent ;
   @ViewChild(SuccessComponent) success: SuccessComponent ;
 
-  constructor(private el: ElementRef, private shared:SharingService,private userService:UserService,private formBuilder: FormBuilder) { }
+  constructor(
+    private el: ElementRef,
+    private shared:SharingService,
+    private userService:UserService,
+    private formBuilder: FormBuilder,
+    private liveUser:LiveUserService,
+  ) { }
 
   ngOnInit() {
     this.el.nativeElement.getElementsByClassName('editProfileContainer')[0].classList.add('myCfnAnimation-slideright');
@@ -57,6 +63,7 @@ export class EditUserComponent implements OnInit {
     });
   }
   goBack(){
+    this.liveUser.getProfileStatus();
     this.shared.lastClass = "myCfnAnimation-slideleft";
     this.el.nativeElement.getElementsByClassName('editProfileContainer')[0].classList.add('myCfnAnimation-slideright-none');
     setTimeout(()=>{
@@ -66,6 +73,8 @@ export class EditUserComponent implements OnInit {
   }
 
   SaveProfile(eventDate) {
+    this.liveUser.getProfileStatus();
+    this.liveUser.getStatus();
     eventDate.preventDefault();
     this.submitted = true;
     if (this.registerForm.invalid) {

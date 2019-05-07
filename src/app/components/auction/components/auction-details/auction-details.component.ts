@@ -34,6 +34,7 @@ export class AuctionDetailsComponent implements OnInit {
   done = false;
   autobid = false;
   extraBidsShowed = false;
+  getStates = false;
 
   constructor(
     private auctionSocket:LiveAuctionService,
@@ -52,10 +53,23 @@ export class AuctionDetailsComponent implements OnInit {
         }
       }
     },100);
+
+    this.auctionTimer = setInterval(() => {
+      console.log('getAuction status');
+      this.auctionSocket.getAuction(this.auction.auctionId);
+      if(!this.states.iceAge){
+        clearInterval(this.auctionTimer);
+      }
+    }, 10000);
   }
   ngDoCheck(){
 
     if (this.auction) {
+
+      if (!this.getStates){
+        this.auctionSocket.getStates(this.auction.auctionId);
+        this.getStates = true;
+      }
 
       // client timer
       if(!this.timer && !this.done){
@@ -68,12 +82,7 @@ export class AuctionDetailsComponent implements OnInit {
       }
 
       // get live auction status
-      if(this.states.iceAge && !this.auctionTimer){
-        this.auctionTimer = setInterval(() => {
-          console.log('getAuction status');
-          this.auctionSocket.getAuction(this.auction.auctionId);
-        }, 1000);
-      }
+
 
       // join client to the auctions room
       if(this.states.holliDay && !this.joined){

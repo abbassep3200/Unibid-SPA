@@ -85,6 +85,8 @@ export class AvatarComponent implements OnInit {
   }
 
   confirmAvatar(eventData){
+    this.liveUser.getProfileStatus();
+    this.liveUser.getStatus();
     eventData.preventDefault();
     this.loading.show();
     this.userService.SaveAvatar({"avatarId":this.selected.avatarId}).subscribe(result=>{
