@@ -1,0 +1,112 @@
+import { Component, OnInit, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { SearchItems } from 'src/app/models/service/searchItems.model';
+import { MainServices } from 'src/app/services/main.service';
+import { SharingService } from 'src/app/services/sharing.service';
+import { Links } from 'src/app/links.component';
+
+@Component({
+  selector: 'app-search-box',
+  templateUrl: './search-box.component.html',
+  styleUrls: ['./search-box.component.css']
+})
+export class SearchBoxComponent implements OnInit {
+  searchItems: SearchItems;
+  @ViewChild('searchToolbarSuggestion') searchToolbarSuggestion: ElementRef;
+  @ViewChild('txtSearch') txtSearch: ElementRef;
+  @ViewChildren('searchItemElements') searchItemElements:QueryList<ElementRef>;
+  Link = Links;
+
+  constructor(
+    private service: MainServices,
+    private shared: SharingService,
+  ) { }
+
+  ngOnInit() {
+    this.service.GetSearchItems().subscribe(result => {
+      this.searchItems = result;
+      this.shared.search.max = this.searchItems.categories.length;
+    },
+    error => {
+    });
+  }
+
+  searchBoxBehaviour(event) {
+    if(this.shared.search.currentText==''){
+      this.resetSearchItems();
+      this.shared.search.max = this.searchItems.categories.length;
+      this.searchToolbarSuggestion.nativeElement.classList.add('search-toolbar-suggestion-show');
+    }else{
+      this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
+    }
+  }
+
+  searchItemClick(eventData) {
+    this.txtSearch.nativeElement.value = eventData.target.textContent;
+    this.txtSearch.nativeElement.focus();
+    this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
+  }
+
+  searchItemLostFocus(eventData){
+    this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
+  }
+
+  onKeydown(eventData){
+
+    switch(eventData.key){
+      case "ArrowUp":{
+        console.log('up');
+        this.shared.search.dec();
+        this.shared.search.setText(this.searchItems.categories[this.shared.search.currentIndex].title)
+        this.hoverSelected(this.shared.search.currentIndex);
+        this.moveCursorToEnd(this.txtSearch.nativeElement);
+        break;
+      };
+      case "Enter":{
+        this.submitSearch();
+        break;
+      };
+      case "ArrowDown":{
+        this.shared.search.inc();
+        this.shared.search.setText(this.searchItems.categories[this.shared.search.currentIndex].title)
+        this.hoverSelected(this.shared.search.currentIndex);
+        break;
+      };
+    }
+
+  }
+
+  hoverSelected(index){
+    this.searchItemElements.forEach(searchItem => {
+      searchItem.nativeElement.classList.remove('search-toolbar-list-selected');
+    });
+    this.searchItemElements.toArray()[index].nativeElement.classList.add('search-toolbar-list-selected');
+  }
+  resetSearchItems(){
+    this.shared.search.reset();
+
+    this.searchItemElements.forEach(searchItem => {
+      searchItem.nativeElement.classList.remove('search-toolbar-list-selected');
+    });
+
+  }
+
+  onSearchChanges(value){
+    this.shared.search.setText(value);
+  }
+
+  moveCursorToEnd(el) {
+    if (typeof el.selectionStart == "number") {
+        el.selectionStart = el.selectionEnd = el.value.length;
+    } else if (typeof el.createTextRange != "undefined") {
+        el.focus();
+        var range = el.createTextRange();
+        range.collapse(false);
+        range.select();
+    }
+  }
+
+  submitSearch(){
+    console.log('submitSearch');
+  }
+
+}

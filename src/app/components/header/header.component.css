@@ -132,6 +132,11 @@ header {
   font-size: 13px;
   display: flex;
   align-items: center;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
 }
 
 .header-content-unauthorized > span {
