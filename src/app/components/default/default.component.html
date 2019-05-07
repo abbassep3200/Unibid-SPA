@@ -1,7 +1,8 @@
 <app-header></app-header>
-<app-slider></app-slider>
+<app-slider *ngIf="!this.shared.search.operate"></app-slider>
   <main>
-  <app-auctionList></app-auctionList>
+  <app-auctionList *ngIf="!this.shared.search.operate"></app-auctionList>
+  <app-search *ngIf="this.shared.search.operate"></app-search>
   <app-shop *ngIf="this.shared.shop"></app-shop>
 </main>
   <app-footer></app-footer>

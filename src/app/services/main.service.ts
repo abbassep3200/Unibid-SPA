@@ -22,9 +22,31 @@ export class MainServices {
   participationByGem = Links.prefix+'/v2/api/auction/gem/registeration';
   getBasicInfoUrl = Links.prefix+'/v2/api/user/basic';
   HandleExtraBidUrl = Links.prefix+'/v2/api/auction/extrabids';
+  searchUrl = Links.prefix+'v2/api/search';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
 
+  SearchAuctions(searchObj) {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.get<GetAuctions>(
+        this.searchUrl,
+        { params: searchObj,
+          headers: new HttpHeaders(
+            {
+              Authorization: 'Bearer ' + token
+            }
+          )});
+    } else {
+      return this.http.get<GetAuctions>(this.searchUrl, {params: searchObj} );
+    }
   }
 
   HandleExtraBid(auctionObj) {

@@ -42,8 +42,8 @@ import { ExtraBidComponent } from './components/auction/components/extra-bid/ext
 import { SearchComponent } from './components/search/search.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 
-// const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
-const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
+const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
+// const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
 
 @NgModule({
   declarations: [

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, QueryList, ViewChildren} from '@angular/core';
 import { SearchItems } from 'src/app/models/service/searchItems.model';
 import { MainServices } from 'src/app/services/main.service';
 import { SharingService } from 'src/app/services/sharing.service';
@@ -42,6 +42,8 @@ export class SearchBoxComponent implements OnInit {
 
   searchItemClick(eventData) {
     this.txtSearch.nativeElement.value = eventData.target.textContent;
+    this.shared.search.currentText = eventData.target.textContent;
+    this.shared.search.currentId = this.searchItems.categories.find(item=>item.title.startsWith(this.shared.search.currentText)).categoryId;
     this.txtSearch.nativeElement.focus();
     this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
   }
@@ -57,6 +59,7 @@ export class SearchBoxComponent implements OnInit {
         console.log('up');
         this.shared.search.dec();
         this.shared.search.setText(this.searchItems.categories[this.shared.search.currentIndex].title)
+        this.shared.search.currentId = this.searchItems.categories[this.shared.search.currentIndex].categoryId;
         this.hoverSelected(this.shared.search.currentIndex);
         this.moveCursorToEnd(this.txtSearch.nativeElement);
         break;
@@ -68,6 +71,7 @@ export class SearchBoxComponent implements OnInit {
       case "ArrowDown":{
         this.shared.search.inc();
         this.shared.search.setText(this.searchItems.categories[this.shared.search.currentIndex].title)
+        this.shared.search.currentId = this.searchItems.categories[this.shared.search.currentIndex].categoryId;
         this.hoverSelected(this.shared.search.currentIndex);
         break;
       };
@@ -91,7 +95,7 @@ export class SearchBoxComponent implements OnInit {
   }
 
   onSearchChanges(value){
-    this.shared.search.setText(value);
+    this.shared.search.currentText = value;
   }
 
   moveCursorToEnd(el) {
@@ -106,7 +110,18 @@ export class SearchBoxComponent implements OnInit {
   }
 
   submitSearch(){
-    console.log('submitSearch');
+    
+    this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
+    this.shared.search.operate = true;
+    var selectedTitle = this.searchItems.categories.find(item=>item.categoryId==this.shared.search.currentId);
+    if(selectedTitle && this.shared.search.currentText!=""){
+      this.shared.search.keyword = this.shared.search.currentText.replace(selectedTitle.title,'');
+      this.shared.emitSearchChanged({"text":this.shared.search.keyword.trim(),"categoryId":this.shared.search.currentId});
+
+    }else{
+      this.shared.search.currentText = this.txtSearch.nativeElement.value;
+      this.shared.emitSearchChanged({"text":this.shared.search.currentText});
+    }
   }
 
 }
