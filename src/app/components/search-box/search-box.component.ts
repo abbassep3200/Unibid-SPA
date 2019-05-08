@@ -18,7 +18,7 @@ export class SearchBoxComponent implements OnInit {
 
   constructor(
     private service: MainServices,
-    private shared: SharingService,
+    public shared: SharingService,
   ) { }
 
   ngOnInit() {
@@ -110,7 +110,7 @@ export class SearchBoxComponent implements OnInit {
   }
 
   submitSearch(){
-    
+
     this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
     this.shared.search.operate = true;
     var selectedTitle = this.searchItems.categories.find(item=>item.categoryId==this.shared.search.currentId);

@@ -11,7 +11,7 @@ import { SharingService } from 'src/app/services/sharing.service';
 export class AuctionHeaderComponent implements OnInit {
   @Input() auction: BaseAuction;
   textValue;
-  constructor(private shared:SharingService) {
+  constructor(public shared:SharingService) {
     this.textValue = 5;
   }
 

@@ -21,7 +21,6 @@ export class SearchComponent implements OnInit {
   @ViewChild(SuccessComponent) success: SuccessComponent ;
   constructor(private shared:SharingService,private service:MainServices) {
     this.subscription = this.shared.getSearchChangedEmitter().subscribe(result=>{
-      console.log(result);
       this.searchObj = result;
       this.search();
     });
@@ -29,9 +28,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     if(this.shared.search.currentId!=-1){
-      this.searchObj = {"text":this.shared.search.currentText,"categoryId":this.shared.search.currentId};
+      this.searchObj = {"text":this.shared.search.keyword,"categoryId":this.shared.search.currentId};
     }else{
-      this.searchObj = {"text":this.shared.search.currentText};
+      this.searchObj = {"text":this.shared.search.keyword};
     }
     this.search();
 
