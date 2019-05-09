@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { SharingService } from 'src/app/services/sharing.service';
 import { LiveAuctionService } from 'src/app/services/live-auction.service';
 
@@ -9,6 +9,8 @@ import { LiveAuctionService } from 'src/app/services/live-auction.service';
 })
 export class DefaultComponent implements OnInit {
 
+  @ViewChild('mainWrapper') mainWrapperElem: ElementRef;
+  
   constructor(private renderer: Renderer2,public shared:SharingService,private auctionSocket:LiveAuctionService) {
   }
 

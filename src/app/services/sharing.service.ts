@@ -20,5 +20,6 @@ export class SharingService {
   basketClass = "myCfnAnimation-slideright";
   shop = false;
   extraBid = false;
+  showConfirm = false;
   constructor() {}
 }

@@ -35,7 +35,7 @@
 </div>
 <div class="swiper-slider-footer">
   <div class="swiper-slider-footer-favWrapper">
-    <div class="heart" [ngClass]="{'is_animating': toggleHeart || (toggleHeart && auction.liked)}" (click)="toggleClick($event,slider?.auctionId)"></div>
+    <div class="heart" [ngClass]="{'is_animating': toggleHeart || (toggleHeart && slider.liked)}" (click)="toggleClick($event,slider?.auctionId)"></div>
     <span class="swiper-slider-footer-fav">{{slider?.likeCount}} نفر پسندیدن</span>
     <img style="margin-right: 25px; margin-left: 15px;" src="assets/resources/images/assets/png/share.png">
     <span>اشتراک با دوستان</span>

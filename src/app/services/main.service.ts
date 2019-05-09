@@ -8,6 +8,7 @@ import { GetSliderAuctions } from '../models/service/sliderAuctions.model';
 import { SearchItems } from '../models/service/searchItems.model';
 import { Links } from '../links.component';
 import { BasicUserInformation } from '../models/user/information/basic.model'
+import { Payment } from '../models/payment.model'
 
 
 @Injectable({ providedIn: 'root' })
@@ -23,8 +24,40 @@ export class MainServices {
   getBasicInfoUrl = Links.prefix+'/v2/api/user/basic';
   HandleExtraBidUrl = Links.prefix+'/v2/api/auction/extrabids';
   searchUrl = Links.prefix+'v2/api/search';
+  buyCoinUrl = Links.prefix+'v2/api/buy/coin';
+  paymentGatewayURL = Links.prefix+'v2/api/payment/zarinpal/gateway';
+
 
   constructor(private http: HttpClient) { }
+
+  PaymentGateway(paymentObj) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':`Bearer ${token}`
+        })
+      };
+      return this.http.post(this.paymentGatewayURL ,paymentObj, httpOptions);
+    }else{
+      return this.http.post(this.paymentGatewayURL ,paymentObj);
+    }
+  }
+  BuyCoin(coinObj) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':`Bearer ${token}`
+        })
+      };
+      return this.http.post<Payment>(this.buyCoinUrl ,coinObj, httpOptions);
+    }else{
+      return this.http.post<Payment>(this.buyCoinUrl ,coinObj);
+    }
+  }
 
   SearchAuctions(searchObj) {
 

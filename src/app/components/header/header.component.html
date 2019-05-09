@@ -31,8 +31,8 @@
         <span class="badge">{{userInfo?.orderCount}}</span>
       </div>
       <ul class="header-content-loginInfo-stats">
-        <li><img src="assets/resources/images/assets/svg/Coin.svg" class="coin" (click)="shared.shop=true;"><span>{{userInfo?.coins}}</span></li>
-        <li><img src="assets/resources/images/assets/svg/Gem.svg" class="gem" (click)="shared.shop=true;"><span>{{userInfo?.gems}}</span></li>
+        <li><img src="assets/resources/images/assets/svg/Coin.svg" class="coin" (click)="shop()"><span>{{userInfo?.coins}}</span></li>
+        <li><img src="assets/resources/images/assets/svg/Gem.svg" class="gem" (click)="shop()"><span>{{userInfo?.gems}}</span></li>
         <li><img src="assets/resources/images/assets/svg/Notification.svg" class="notification"><span>{{userInfo?.notifications.length}}</span></li>
       </ul>
 

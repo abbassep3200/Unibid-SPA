@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MainServices } from 'src/app/services/main.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { LiveUserService } from 'src/app/services/live-user.service';
@@ -52,7 +52,10 @@ export class HeaderComponent implements OnInit {
       this.joined = true;
       this.liveUser.join();
     }
+  }
 
+  shop(){
+    this.shared.shop=true;
   }
 
   ngAfterViewInit(){
