@@ -9,16 +9,16 @@ import { Links } from 'src/app/links.component'
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
-  toggleHeart = false;
   sliderAuctions: GetSliderAuctions;
   loading = true;
   Link = Links;
-  
+
   constructor(private mainService: MainServices) { }
 
   ngOnInit() {
     this.mainService.GetSliderAuctions().subscribe(result => {
       this.sliderAuctions = result;
+      console.log(result);
       this.loading = false;
     },
     error => {
@@ -44,10 +44,5 @@ export class SliderComponent implements OnInit {
   //         spaceBetween: 30
   //       },
   // };
-
-  toggleClick(eventData) {
-    this.toggleHeart = !this.toggleHeart;
-    eventData.stopPropagation();
-  }
 
 }

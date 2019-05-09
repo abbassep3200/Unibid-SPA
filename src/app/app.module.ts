@@ -41,6 +41,7 @@ import { ForgetPasswordComponent } from './components/auth/forget-password/forge
 import { ExtraBidComponent } from './components/auction/components/extra-bid/extra-bid.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { SlideComponent } from './components/slider/slide/slide.component';
 
 const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 // const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
@@ -82,6 +83,7 @@ const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource
     ExtraBidComponent,
     SearchComponent,
     SearchBoxComponent,
+    SlideComponent,
   ],
   imports: [
     BrowserModule,

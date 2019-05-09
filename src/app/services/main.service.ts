@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Auction } from '../models/auction.model';
+import { Auction } from '../models/auction/auction.model';
 import { GetAuctions } from '../models/service/getAuctions.model';
 import { GetAuction } from '../models/service/getAuction.model';
 import { Shop } from '../models/shop/shop.model';
@@ -122,9 +122,15 @@ export class MainServices {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const token = JSON.parse(currentUser)['accessToken'];
-      headers.set('Authorization', token);
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.get<GetSliderAuctions>(this.sliderAuctionUrl , httpOptions);
+    }else{
+      return this.http.get<GetSliderAuctions>(this.sliderAuctionUrl);
     }
-    return this.http.get<GetSliderAuctions>(this.sliderAuctionUrl , {headers});
   }
 
   GetSearchItems() {

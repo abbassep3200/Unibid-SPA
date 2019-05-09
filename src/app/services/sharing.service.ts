@@ -1,7 +1,7 @@
 import { Injectable , EventEmitter} from '@angular/core';
 import { ToggleMenu } from 'src/app/models/toggleMenu.model'
 import { Search } from 'src/app/models/search.model'
-import { AutoBid } from 'src/app/models/autobid.model'
+import { AutoBid } from 'src/app/models/auction/autobid.model'
 
 @Injectable({ providedIn: 'root' })
 export class SharingService {

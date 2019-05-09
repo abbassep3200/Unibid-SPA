@@ -4,7 +4,7 @@ export class SliderAuction {
   image: string;
   likeCount: number;
   participants: Participants;
-  id: number;
+  auctionId: number;
   maxMembers: number;
   liked: boolean;
   participated: boolean;
@@ -13,8 +13,4 @@ export class SliderAuction {
   basePrice: number;
   maxPrice: number;
   remainedTime: number;
-  day: number;
-  hour: number;
-  minute: number;
-  seconds: number;
 }

@@ -2,13 +2,13 @@ import { Component, OnInit, Input, ViewChild, ElementRef ,ViewChildren, QueryLis
 import { MainServices } from 'src/app/services/main.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Auction } from 'src/app/models/auction.model';
+import { Auction } from 'src/app/models/auction/auction.model';
 import { Links } from 'src/app/links.component';
 import { Router } from '@angular/router';
-import { GetParticipation } from 'src/app/models/getParticipation.model';
+import { GetParticipation } from 'src/app/models/auction/getParticipation.model';
 import { LiveAuctionService } from 'src/app/services/live-auction.service';
 import { ProgressComponent } from 'src/app/components/progress/progress.component';
-import { AuctionStatus } from 'src/app/models/auctionStatus.model';
+import { AuctionStatus } from 'src/app/models/auction/auctionStatus.model';
 import { LoadingComponent } from 'src/app/components/loading/loading.component'
 import { ErrorComponent } from 'src/app/components/error/error.component'
 import { SuccessComponent } from 'src/app/components/success/success.component'
@@ -33,7 +33,6 @@ export class AuctionItemComponent implements OnInit {
   timeoutId = 0;
 
   @Input() auction: Auction;
-  @ViewChild('errorMessage') errorMessageElem: ElementRef;
   @ViewChild(ProgressComponent ) progress: ProgressComponent ;
   @ViewChild(ErrorComponent ) error: ErrorComponent ;
   @ViewChild(SuccessComponent ) success: SuccessComponent ;

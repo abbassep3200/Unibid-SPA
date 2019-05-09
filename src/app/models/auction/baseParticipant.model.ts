@@ -1,5 +1,5 @@
 
-export class Participant {
+export class BaseParticipant {
   row: number;
   name: string;
   avatar: string;
