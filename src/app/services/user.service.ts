@@ -22,8 +22,43 @@ export class UserService {
   getAddressUrl = Links.prefix+'/v2/api/user/address';
   getShipmentUrl = Links.prefix+'/v2/api/user/shipment';
   getPaymentUrl = Links.prefix+'/v2/api/user/payment';
+  couponUrl = Links.prefix+'/v2/api/user/coupons';
 
   constructor(private http: HttpClient) {}
+
+  CheckCoupon(couponObj) {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.put(this.couponUrl, couponObj, httpOptions);
+    } else {
+      return this.http.put(this.couponUrl, couponObj);
+    }
+
+  }
+
+  ApplyCoupon(couponObj) {
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const token = JSON.parse(currentUser)['accessToken'];
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      };
+      return this.http.post(this.couponUrl, couponObj , httpOptions);
+    } else {
+      return this.http.post(this.couponUrl, couponObj);
+    }
+
+  }
 
   GetMainInformation() {
 

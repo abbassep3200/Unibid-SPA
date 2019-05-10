@@ -1,5 +1,6 @@
 import { Component, OnInit, Input , ElementRef, ViewChild} from '@angular/core';
-import { MainServices } from 'src/app/services/main.service';
+import { PaymentServices } from 'src/app/services/payment.service';
+import { UserService } from 'src/app/services/user.service';
 import { Buy } from 'src/app/models/shop/buy.model';
 import { SharingService } from 'src/app/services/sharing.service';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
@@ -22,7 +23,7 @@ export class ConfirmComponent implements OnInit {
   @ViewChild(SuccessComponent ) success: SuccessComponent ;
   @ViewChild(LoadingComponent ) loading: LoadingComponent ;
 
-  constructor(public shared:SharingService,private service: MainServices) { }
+  constructor(public shared:SharingService,private service: PaymentServices,private userService:UserService,) { }
 
   ngOnInit() {
     const shopWrapper = this.shopWrapperElem.nativeElement as HTMLElement;
@@ -57,15 +58,49 @@ export class ConfirmComponent implements OnInit {
             break;
           };
           case 'gem':{
-            console.log('buy gem');
+            this.loading.show();
+            this.service.BuyGem({"gemId":this.buy.Id}).subscribe(result=>{
+              this.success.show(result,1000).then(()=>{
+                this.service.PaymentGateway({"GUID":result.GUID}).subscribe(pay=>{
+                  console.log(pay);
+                  console.log('redirect to bank');
+                },
+                error=>{
+                  this.loading.hide();
+                  this.error.show(error,3000,null);
+                });
+              });
+            },
+            error =>{
+              this.loading.hide();
+              this.error.show(error,3000,null);
+            });
+
             break;
           };
           case 'chest':{
-            console.log('buy chest');
+            this.loading.show();
+            this.service.BuyChest({"chestId":this.buy.Id}).subscribe(result=>{
+              this.success.show(result,1000).then(()=>{
+                this.service.PaymentGateway({"GUID":result.GUID}).subscribe(pay=>{
+                  console.log(pay);
+                  console.log('redirect to bank');
+                },
+                error=>{
+                  this.loading.hide();
+                  this.error.show(error,3000,null);
+                });
+              });
+            },
+            error =>{
+              this.loading.hide();
+              this.error.show(error,3000,null);
+            });
+
             break;
           };
           case 'avatar':{
-            console.log('buy avatar');
+
             break;
           };
           case 'product':{
@@ -74,6 +109,43 @@ export class ConfirmComponent implements OnInit {
           };
         }
       }
+    }
+  }
+
+  confirm(eventData){
+    eventData.preventDefault();
+    switch(this.buy.type){
+      case 'coin':{
+        break;
+      };
+      case 'gem':{
+
+        break;
+      };
+      case 'chest':{
+
+        break;
+      };
+      case 'avatar':{
+        this.loading.show();
+        this.userService.SaveAvatar({"avatarId":this.buy.Id}).subscribe(result=>{
+          this.success.show(result,2000).then(()=>{
+            this.close();
+          });
+        },
+        error =>{
+          this.loading.hide();
+          this.error.show(error,2000,null).then(()=>{
+            this.close();
+          });
+        });
+
+        break;
+      };
+      case 'product':{
+        console.log('buy product');
+        break;
+      };
     }
   }
 

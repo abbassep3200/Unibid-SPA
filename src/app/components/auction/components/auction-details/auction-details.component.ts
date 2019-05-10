@@ -48,7 +48,7 @@ export class AuctionDetailsComponent implements OnInit {
     console.log(this.states);
     setInterval(()=>{
       if(this.auction && this.shared.autobid.state){
-        if ((this.auction.remainedTime <= this.shared.autobid.deadline * 1000) && !this.auction.done){
+        if ( (this.auction.remainedTime >= -10000) && (this.auction.remainedTime <= this.shared.autobid.deadline * 1000) && !this.auction.done){
           this.auctionSocket.offerBid(this.auction.auctionId);
         }
       }
@@ -153,7 +153,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.auctionSocket.states.subscribe(result=>{
       this.states = result;
       if(this.states.feniTto){
-        this.loading.show();
+        this.loading.hide();
       }
       // console.log(this.states);
     });

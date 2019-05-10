@@ -18,10 +18,12 @@ export class ShoppingCardComponent implements OnInit {
   @ViewChild(LoadingComponent) loading: LoadingComponent ;
   @ViewChild(ErrorComponent) error: ErrorComponent ;
   @ViewChild(SuccessComponent) success: SuccessComponent ;
+
   Link = Links;
   userSyncTimer;
   carts:Cart[];
   totalPrice = 0;
+  
   constructor(private el: ElementRef, private userService:UserService,private shared:SharingService,private liveUser:LiveUserService) { }
 
 

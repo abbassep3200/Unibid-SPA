@@ -3,6 +3,7 @@ import { SearchItems } from 'src/app/models/service/searchItems.model';
 import { MainServices } from 'src/app/services/main.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Links } from 'src/app/links.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-box',
@@ -19,6 +20,7 @@ export class SearchBoxComponent implements OnInit {
   constructor(
     private service: MainServices,
     public shared: SharingService,
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -112,7 +114,8 @@ export class SearchBoxComponent implements OnInit {
   submitSearch(){
 
     this.searchToolbarSuggestion.nativeElement.classList.remove('search-toolbar-suggestion-show');
-    this.shared.search.operate = true;
+    // this.shared.search.operate = true;
+    this.router.navigate(['/search']);
     var selectedTitle = this.searchItems.categories.find(item=>item.categoryId==this.shared.search.currentId);
     if(selectedTitle && this.shared.search.currentText!=""){
       this.shared.search.keyword = this.shared.search.currentText.replace(selectedTitle.title,'');

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Renderer2, ElementRef} from '@angular/core';
 import { MainServices } from 'src/app/services/main.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { GetAuctions } from 'src/app/models/service/getAuctions.model';
@@ -19,7 +19,9 @@ export class SearchComponent implements OnInit {
   @ViewChild(LoadingComponent) loading: LoadingComponent ;
   @ViewChild(ErrorComponent) error: ErrorComponent ;
   @ViewChild(SuccessComponent) success: SuccessComponent ;
-  constructor(private shared:SharingService,private service:MainServices) {
+  @ViewChild('mainWrapper') mainWrapperElem: ElementRef;
+
+  constructor(private shared:SharingService,private service:MainServices,private renderer: Renderer2) {
     this.subscription = this.shared.getSearchChangedEmitter().subscribe(result=>{
       this.searchObj = result;
       this.search();
@@ -27,6 +29,10 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    const wrapperElem: HTMLElement = document.getElementById('mainWrapper');
+    this.renderer.setStyle(wrapperElem, 'justify-content', 'initial');
+    this.renderer.setStyle(wrapperElem, 'align-items', 'initial');
+
     if(this.shared.search.currentId!=-1){
       this.searchObj = {"text":this.shared.search.keyword,"categoryId":this.shared.search.currentId};
     }else{

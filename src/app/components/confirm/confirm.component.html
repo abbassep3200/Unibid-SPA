@@ -28,7 +28,7 @@
         <span class="confirm-trackingTitle">تعداد</span>
         <span class="confirm-trackingTitle" style="color:#212121;">{{buy.price}} الماس </span>
       </div>
-      <a style="width: 80%;" class="cfnButton cfnButton-primary">تایید</a>
+      <a style="width: 80%;" class="cfnButton cfnButton-primary" (click)="confirm($event)">تایید</a>
       <app-error></app-error>
       <app-success></app-success>
       <app-loading></app-loading>

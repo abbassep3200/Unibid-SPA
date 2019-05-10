@@ -5,11 +5,16 @@ import { AuctionComponent } from './components/auction/auction.component';
 import { DefaultComponent } from './components/default/default.component';
 import { VerificationComponent } from './components/auth/verification/verification.component';
 import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
+import { SearchComponent } from './components/search/search.component';
 
 const appRoutes: Routes = [
   {
       path: 'auction/:id',
       component: AuctionComponent
+  },
+  {
+      path: 'search',
+      component: SearchComponent
   },
   {
       path: 'signin',

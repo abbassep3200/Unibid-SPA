@@ -43,9 +43,10 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { SlideComponent } from './components/slider/slide/slide.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { CouponComponent } from './components/coupon/coupon.component';
 
-const config: SocketIoConfig = { url: 'https://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
-// const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
+// const config: SocketIoConfig = { url: 'https://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
+const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ const config: SocketIoConfig = { url: 'https://dev.unibid.ir', options: {resourc
     SearchBoxComponent,
     SlideComponent,
     ConfirmComponent,
+    CouponComponent,
   ],
   imports: [
     BrowserModule,
