@@ -5,7 +5,8 @@
     <app-auction-details *ngIf="!this.shared.search.operate" [auction]="auction"></app-auction-details>
     <app-auction-participants *ngIf="!this.shared.search.operate" [auction]="auction"></app-auction-participants>
     <app-auction-footer *ngIf="!this.shared.search.operate" [auction]="auction"></app-auction-footer>
-    <app-search *ngIf="this.shared.search.operate"></app-search>
+    <app-product-details *ngIf="this.shared.productDetails" [auctionId]="auction?.auctionId" ></app-product-details>
+
     <app-error></app-error>
     <app-success></app-success>
     <app-loading></app-loading>

@@ -8,6 +8,7 @@ import { GetSliderAuctions } from '../models/service/sliderAuctions.model';
 import { SearchItems } from '../models/service/searchItems.model';
 import { Links } from '../links.component';
 import { BasicUserInformation } from '../models/user/information/basic.model'
+import { ProductDetails } from '../models/details/details.model'
 
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +24,7 @@ export class MainServices {
   getBasicInfoUrl = Links.prefix+'/v2/api/user/basic';
   HandleExtraBidUrl = Links.prefix+'/v2/api/auction/extrabids';
   searchUrl = Links.prefix+'v2/api/search';
-
+  productDetailsUrl = Links.prefix+'v2/api/auction/details/';
 
   constructor(private http: HttpClient) { }
 
@@ -48,6 +49,10 @@ export class MainServices {
     } else {
       return this.http.get<GetAuctions>(this.searchUrl, {params: searchObj} );
     }
+  }
+
+  GetProductDetails(auctionId) {
+    return this.http.get<ProductDetails>(this.productDetailsUrl+auctionId);
   }
 
   HandleExtraBid(auctionObj) {

@@ -21,5 +21,6 @@ export class SharingService {
   shop = false;
   extraBid = false;
   showConfirm = false;
+  productDetails = false;
   constructor() {}
 }

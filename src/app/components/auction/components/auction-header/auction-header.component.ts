@@ -25,5 +25,9 @@ export class AuctionHeaderComponent implements OnInit {
   onDeadlineChange(value){
     this.shared.autobid.deadline = value;
   }
+  showProductDetails(){
+    console.log('pd');
+    this.shared.productDetails = true;
+  }
 
 }
