@@ -1,7 +1,7 @@
 export class AutoBid {
   constructor() {
-    this.state = true;
-    this.deadline = 9;
+    this.state = false;
+    this.deadline = 10;
   }
   state: boolean;
   deadline: number;

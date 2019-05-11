@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   @ViewChild(SuccessComponent) success: SuccessComponent ;
   @ViewChild('mainWrapper') mainWrapperElem: ElementRef;
 
-  constructor(private shared:SharingService,private service:MainServices,private renderer: Renderer2) {
+  constructor(public shared:SharingService,private service:MainServices,private renderer: Renderer2) {
     this.subscription = this.shared.getSearchChangedEmitter().subscribe(result=>{
       this.searchObj = result;
       this.search();

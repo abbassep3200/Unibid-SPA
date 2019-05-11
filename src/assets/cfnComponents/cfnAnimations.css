@@ -38,12 +38,24 @@
 }
 
 .cfnAnimation-slideup {
-  animation: slideup .5s ease both;
+  animation: slidedown .5s ease both;
   display: block !important;
 }
 
 .cfnAnimation-slidedown {
-  animation: slidedown .5s ease both;
+  animation: slidedownNone .5s ease both;
+}
+
+@keyframes slidedownNone {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
 }
 
 @keyframes slidedown {

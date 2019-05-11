@@ -3,7 +3,7 @@
     <div class="cart" (click)="RegisterAuctionSlideupClick()">
 
       <div *ngIf="coinState=='pallet' && !auction.participated">
-        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction, 'cfnAnimation-slidedown': hideRegisterAuction}">
           <p class="registerAuctionTitle">
             ثبت نام در حراجی
             <img (click)="RegisterAuctionSlideDownClick($event)" class="registerAuctionTitle-arrowDown" src="assets/resources/images/assets/svg/arrowDown.svg" alt="">
@@ -28,7 +28,7 @@
       </div>
 
       <div *ngIf="coinState=='gems' && !auction.participated">
-        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction, 'cfnAnimation-slidedown': hideRegisterAuction}">
           <div class="hoveredAuction">
               <p class="hoveredAuctionTitle">
                 خرید سکه
@@ -54,7 +54,7 @@
       </div>
 
       <div *ngIf="coinState=='confirmed'">
-        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction, 'cfnAnimation-slidedown': hideRegisterAuction}">
           <div class="hoveredAuction">
               <p class="hoveredAuctionTitle">
                 ثبت نام در حراجی
@@ -76,7 +76,7 @@
       </div>
 
       <div *ngIf="auction.participated">
-        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction == true, 'cfnAnimation-slidedown': hideRegisterAuction == true}">
+        <div class="registerAuction" [ngClass]="{'cfnAnimation-slideup': showRegisterAuction, 'cfnAnimation-slidedown': hideRegisterAuction}">
           <div class="hoveredAuction">
               <p class="hoveredAuctionTitle">
                 شرکت در حراجی
