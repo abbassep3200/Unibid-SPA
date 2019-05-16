@@ -23,4 +23,5 @@ export class SharingService {
   showConfirm = false;
   productDetails = false;
   constructor() {}
+
 }

@@ -1,6 +1,6 @@
 <div #mainWrapper>
   <app-header></app-header>
-  <app-slider *ngIf="!this.shared.search.operate"></app-slider>
+  <app-slider (click)="hideProfileMenu($event)" *ngIf="!this.shared.search.operate"></app-slider>
     <main>
     <app-auctionList *ngIf="!this.shared.search.operate"></app-auctionList>
     <app-search *ngIf="this.shared.search.operate"></app-search>

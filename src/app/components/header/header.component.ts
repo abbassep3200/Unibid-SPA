@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MainServices } from 'src/app/services/main.service';
+import { UserService } from 'src/app/services/user.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { LiveUserService } from 'src/app/services/live-user.service';
 import { Links } from 'src/app/links.component';
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
   username;
 
   constructor(
+    private userService: UserService,
     private service: MainServices,
     private shared: SharingService,
     private liveUser:LiveUserService) {
@@ -77,6 +79,16 @@ export class HeaderComponent implements OnInit {
     this.shared.toggleMenu.profile = !this.shared.toggleMenu.profile;
     this.shared.toggleMenu.profileReset();
     this.shared.lastClass = "myCfnAnimation-fadeIn";
+  }
+
+  hideProfileMenu(eventData){
+
+    if(eventData){
+      console.log(eventData.target.classList[0]);
+      if(eventData.target.classList[0]!="profileSelector"){
+        this.userService.hideProfile();
+      }
+    }
   }
 
   headerClicked(eventData){

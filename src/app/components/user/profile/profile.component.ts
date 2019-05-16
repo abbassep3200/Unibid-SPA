@@ -73,5 +73,9 @@ export class ProfileComponent implements OnInit {
     this.shared.toggleMenu.edit = true;
   }
 
+  profileLostFocus(eventData){
+    console.log('here');
+    this.shared.toggleMenu.reset();
+  }
 
 }

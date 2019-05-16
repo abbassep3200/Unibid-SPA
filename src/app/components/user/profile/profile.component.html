@@ -1,5 +1,5 @@
 <div class="accountProfile">
-  <div class="accountProfile-profile-header">
+  <div class="accountProfile-profile-header" (focusout)="profileLostFocus($event)">
     <div class="accountProfile-profile-headerTop">
       <div class="accountProfile-profile-headerTop-item" (click)="toggleScore()">
         <div class="accountProfile-profile-headerTop-rank"><img src="assets/resources/images/assets/png/star.png"/></div>

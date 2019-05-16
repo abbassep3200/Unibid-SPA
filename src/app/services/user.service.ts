@@ -10,6 +10,7 @@ import { EditUserInformation } from 'src/app/models/user/information/edit.model'
 import { ShipmentInformation } from 'src/app/models/user/information/shipment.model'
 import { Address } from 'src/app/models/user/information/address.model'
 import { Payment } from 'src/app/models/user/information/payment.model'
+import { SharingService } from 'src/app/services/sharing.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -24,7 +25,13 @@ export class UserService {
   getPaymentUrl = Links.prefix+'/v2/api/user/payment';
   couponUrl = Links.prefix+'/v2/api/user/coupons';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private shared:SharingService) {}
+
+  hideProfile(){
+    this.shared.toggleMenu.profile = false;
+    this.shared.toggleMenu.profileReset();
+    this.shared.lastClass = "myCfnAnimation-fadeIn";
+  }
 
   CheckCoupon(couponObj) {
 

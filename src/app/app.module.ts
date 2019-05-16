@@ -47,7 +47,7 @@ import { CouponComponent } from './components/coupon/coupon.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ColorComponent } from './components/color/color.component';
 
-const config: SocketIoConfig = { url: 'https://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
+const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 // const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
 
 @NgModule({
