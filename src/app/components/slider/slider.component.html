@@ -1,8 +1,9 @@
-<swiper [config]="config">
+<div class="swiper-container">
   <div class="swiper-wrapper">
       <app-slide class="swiper-slide"  *ngFor="let item of sliderAuctions?.sliderAuctions" [slider]="item"></app-slide>
   </div>
-  <!-- Add Arrows -->
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
-</swiper>
+  <!-- <app-participate ></app-participate> -->
+
+</div>

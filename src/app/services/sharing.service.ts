@@ -2,6 +2,7 @@ import { Injectable , EventEmitter} from '@angular/core';
 import { ToggleMenu } from 'src/app/models/toggleMenu.model'
 import { Search } from 'src/app/models/search.model'
 import { AutoBid } from 'src/app/models/auction/autobid.model'
+import { Cart } from 'src/app/models/cart.model'
 
 @Injectable({ providedIn: 'root' })
 export class SharingService {
@@ -22,6 +23,8 @@ export class SharingService {
   extraBid = false;
   showConfirm = false;
   productDetails = false;
+  cart;
+
   constructor() {}
 
 }

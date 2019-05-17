@@ -14,7 +14,6 @@ import { VerificationInputKeyupDirective } from './directives/verification-input
 import { routing } from './routerConfig';
 import { AuctionItemComponent } from './components/auction/auctionItem/auctionItem.component';
 import { AuctionListComponent } from './components/auction/auctionList/auctionList.component';
-import { SwiperModule } from 'angular2-useful-swiper';
 import { SliderComponent } from './components/slider/slider.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -46,6 +45,8 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { CouponComponent } from './components/coupon/coupon.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ColorComponent } from './components/color/color.component';
+import { ParticipateComponent } from './components/auction/participate/participate.component';
+import { CartLoadingComponent } from './components/cart-loading/cart-loading.component';
 
 const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource:'A/socket.io', 'force new connection': true} };
 // const config: SocketIoConfig = { url: 'http://127.0.0.1:9001', options: {resource:'A/socket.io', 'force new connection': true} };
@@ -92,13 +93,14 @@ const config: SocketIoConfig = { url: 'http://dev.unibid.ir', options: {resource
     CouponComponent,
     ProductDetailsComponent,
     ColorComponent,
+    ParticipateComponent,
+    CartLoadingComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     routing,
-    SwiperModule,
     SocketIoModule.forRoot(config)
   ],
 providers: [],

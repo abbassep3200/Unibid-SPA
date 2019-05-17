@@ -9,9 +9,10 @@ import { GetParticipation } from 'src/app/models/auction/getParticipation.model'
 import { LiveAuctionService } from 'src/app/services/live-auction.service';
 import { ProgressComponent } from 'src/app/components/progress/progress.component';
 import { AuctionStatus } from 'src/app/models/auction/auctionStatus.model';
-import { LoadingComponent } from 'src/app/components/loading/loading.component'
-import { ErrorComponent } from 'src/app/components/error/error.component'
-import { SuccessComponent } from 'src/app/components/success/success.component'
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { ErrorComponent } from 'src/app/components/error/error.component';
+import { SuccessComponent } from 'src/app/components/success/success.component';
+import { Cart } from 'src/app/models/cart.model';
 
 @Component({
   selector: 'app-auctionItem',
@@ -46,9 +47,12 @@ export class AuctionItemComponent implements OnInit {
     private authService:AuthenticationService,
     private router: Router,
     private auctionSocket:LiveAuctionService,
-    private shared:SharingService,
+    public shared:SharingService,
   )
-  {this.auctionSocket.connectToServer();}
+  {
+    this.auctionSocket.connectToServer();
+    this.shared.cart = new Cart();
+  }
 
   ngOnInit() {
     // this.auctionSocket.connect();
