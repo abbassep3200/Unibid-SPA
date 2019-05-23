@@ -10,6 +10,7 @@
  border-radius: 10px;
  overflow: hidden;
  box-shadow: 0 7px 35px #ccc;
+ height: 640px;
 }
 
 .swiper-button-next,
